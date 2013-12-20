@@ -16,7 +16,7 @@
     {{/if}}
     {{! complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states}}
     <div class="component-widget textinput-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted user {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
-        {{#each _items}}
+        {{#each items}}
         <div class="textinput-item clearfix {{#unless ../_isEnabled}}{{#if _isCorrect}}correct{{else}}incorrect{{/if}}{{/unless}}">
             {{#if prefix}}
             <label class="textinput-item-prefix">{{{prefix}}}</label>
@@ -32,29 +32,28 @@
             <div class="textinput-item-state-icon icon"></div>
         </div>
         {{/each}}
-    </div>
-    
-    {{! if statements set default button labels if unset in json}}
-    <div class="buttons">
-         <a href="#" class="button submit">
-            <h6>
-                {{#if button.submit}}{{{button.submit}}}{{else}}Submit{{/if}}
-            </h6>
-        </a>
-        <a href="#" class="button model">
-            <h6>
-                {{#if button.model}}{{{button.model}}}{{else}}Model Answer{{/if}}
-            </h6>
-        </a>
-        <a href="#" class="button user">
-            <h6>
-                {{#if button.user}}{{{button.user}}}{{else}}My Answer{{/if}}
-            </h6>
-        </a>
-        <a href="#" class="button reset">
-            <h6>
-                {{#if button.reset}}{{{button.reset}}}{{else}}Reset{{/if}}
-            </h6>
-        </a>
+        {{! if statements set default button labels if unset in json}}
+        <div class="buttons">
+             <a href="#" class="button submit">
+                <h6>
+                    {{#if button.submit}}{{{button.submit}}}{{else}}Submit{{/if}}
+                </h6>
+            </a>
+            <a href="#" class="button model">
+                <h6>
+                    {{#if button.model}}{{{button.model}}}{{else}}Model Answer{{/if}}
+                </h6>
+            </a>
+            <a href="#" class="button user">
+                <h6>
+                    {{#if button.user}}{{{button.user}}}{{else}}My Answer{{/if}}
+                </h6>
+            </a>
+            <a href="#" class="button reset">
+                <h6>
+                    {{#if button.reset}}{{{button.reset}}}{{else}}Reset{{/if}}
+                </h6>
+            </a>
+        </div>
     </div>
 </div>

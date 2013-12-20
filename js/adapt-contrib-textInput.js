@@ -9,13 +9,20 @@ define(function (require) {
     var Adapt = require('coreJS/adapt');
     
     var TextInput = QuestionView.extend({
+        events: {
+            "click .textinput-widget .button.submit":"onSubmitClicked",
+            "click .textinput-widget .button.reset":"onResetClicked",
+            "click .textinput-widget .button.model":"onModelAnswerClicked",
+            "click .textinput-widget .button.user":"onUserAnswerClicked"
+        },
         canSubmit:function() {
-            this.$(".textbox").each(function() {
+            var canSubmit = true;
+            this.$(".textinput-item-textbox").each(function() {
                 if($(this).val()=="") {
-                    return false;  
+                    canSubmit = false;
                 }
             });
-            return true;
+            return canSubmit;
         },
         
         checkAnswerIsCorrect: function(possibleAnswers, userAnswer) {
@@ -36,14 +43,14 @@ define(function (require) {
         },
         
         forEachAnswer: function(callback) {
-             _.each(this.model.get('_items'), function(item, index) {
+             _.each(this.model.get('items'), function(item, index) {
                 if(this.model.get('_allowsAnyOrder')) {
-                    this.$(".textbox").each($.proxy(function(index, element) {
+                    this.$(".textinput-item-textbox").each($.proxy(function(index, element) {
                         var userAnswer = $(element).val();
                         callback(this.checkAnswerIsCorrect(item.answers, userAnswer), item);
                     },this));
                 } else {
-                    var userAnswer = this.$(".textbox").eq(index).val();
+                    var userAnswer = this.$(".textinput-item-textbox").eq(index).val();
                     callback(this.checkAnswerIsCorrect(item.answers, userAnswer), item);
                 }
             }, this);
@@ -57,18 +64,18 @@ define(function (require) {
         },
         
         onEnabledChanged: function() {
-            this.$('.textbox').prop('disabled', !this.model.get('_isEnabled'));
+            this.$('.textinput-item-textbox').prop('disabled', !this.model.get('_isEnabled'));
         },
         
         onModelAnswerShown:function () {
-            _.each(this.model.get('_items'), function(item, index){
-                this.$(".textbox").eq(index).val(item.answers[0]);
+            _.each(this.model.get('items'), function(item, index){
+                this.$(".textinput-item-textbox").eq(index).val(item.answers[0]);
             }, this);
         },
         
         onUserAnswerShown:function () {
-            _.each(this.model.get('_items'), function(item, index){
-                this.$(".textbox").eq(index).val(item.userAnswer);
+            _.each(this.model.get('items'), function(item, index){
+                this.$(".textinput-item-textbox").eq(index).val(item.userAnswer);
             }, this);
         },
         
@@ -78,8 +85,8 @@ define(function (require) {
         },
         
         storeUserAnswer: function() {
-            _.each(this.model.get('_items'), function(item, index) {
-                item.userAnswer = this.$('.textbox').eq(index).val();
+            _.each(this.model.get('items'), function(item, index) {
+                item.userAnswer = this.$('.textinput-item-textbox').eq(index).val();
             }, this);
         }
         
