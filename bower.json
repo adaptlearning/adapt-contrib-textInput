@@ -1,12 +1,12 @@
 {
-  "name": "adapt-contrib-componentName",
+  "name": "adapt-contrib-textInput",
   "version": "0.0.1",
-  "homepage": "https://github.com/adaptlearning/adapt-contrib-componentName",
+  "homepage": "https://github.com/adaptlearning/adapt-contrib-textInput",
   "authors": [
-    "Daryl Hedley <darylhedley@hotmail.com>"
+    "Kev Adsett <kev.adsett@gmail.com"
   ],
-  "description": "Please enter a description about your component here. This is what will get shown when registered with the Adapt registry so make it good",
-  "main": "/js/adapt-contrib-componentName.js",
+  "description": "A question component that allows the learner to input text based upon a question stem.",
+  "main": "/js/adapt-contrib-textInput.js",
   "keywords": [
     "adapt-plugin",
     "adapt-component"

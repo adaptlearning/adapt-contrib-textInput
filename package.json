@@ -1,19 +1,19 @@
 {
-  "name": "adapt-contrib-componentName",
+  "name": "adapt-contrib-textInput",
   "version": "0.0.1",
-  "description": "Description of your component",
+  "description": "A question component that allows the learner to input text based upon a question stem",
   "main": "",
   "scripts": {
     "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/adaptlearning/adapt-contrib-componentName.git"
+    "url": "git://github.com/adaptlearning/adapt-contrib-textInput.git"
   },
   "author": "AdaptLearning",
   "license": "GPL v3",
   "bugs": {
-    "url": "https://github.com/adaptlearning/adapt-contrib-componentName/issues"
+    "url": "https://github.com/adaptlearning/adapt-contrib-textInput/issues"
   },
   "devDependencies": {
     "karma": "~0.9",
