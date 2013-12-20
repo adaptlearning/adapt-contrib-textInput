@@ -20,15 +20,15 @@ define(function (require) {
         
         checkAnswerIsCorrect: function(possibleAnswers, userAnswer) {
             var answerIsCorrect = _.contains(possibleAnswers, this.cleanupUserAnswer(userAnswer));
-            if(answerIsCorrect) this.model.set('atLeastOneCorrectSelection', true);
+            if(answerIsCorrect) this.model.set('_hasAtLeastOneCorrectSelection', true);
             return answerIsCorrect;
         },
         
         cleanupUserAnswer: function(userAnswer) {
-            if(this.model.get('allowAnyCase')) {
+            if(this.model.get('_allowsAnyCase')) {
                 userAnswer = userAnswer.toLowerCase();
             }
-            if(this.model.get('allowPunctuation')) {
+            if(this.model.get('_allowsPunctuation')) {
                 var userAnswerClean = userAnswer.replace(/[\.,-\/#!$£%\^&\*;:{}=\-_`~()]/g,"");
                 userAnswer = $.trim(userAnswerClean);
             }
@@ -36,8 +36,8 @@ define(function (require) {
         },
         
         forEachAnswer: function(callback) {
-             _.each(this.model.get('items'), function(item, index) {
-                if(this.model.get('allowAnyOrder')) {
+             _.each(this.model.get('_items'), function(item, index) {
+                if(this.model.get('_allowsAnyOrder')) {
                     this.$(".textbox").each($.proxy(function(index, element) {
                         var userAnswer = $(element).val();
                         callback(this.checkAnswerIsCorrect(item.answers, userAnswer), item);
@@ -57,17 +57,17 @@ define(function (require) {
         },
         
         onEnabledChanged: function() {
-            this.$('.textbox').prop('disabled', !this.model.get('enabled'));
+            this.$('.textbox').prop('disabled', !this.model.get('_isEnabled'));
         },
         
         onModelAnswerShown:function () {
-            _.each(this.model.get('items'), function(item, index){
+            _.each(this.model.get('_items'), function(item, index){
                 this.$(".textbox").eq(index).val(item.answers[0]);
             }, this);
         },
         
         onUserAnswerShown:function () {
-            _.each(this.model.get('items'), function(item, index){
+            _.each(this.model.get('_items'), function(item, index){
                 this.$(".textbox").eq(index).val(item.userAnswer);
             }, this);
         },
@@ -78,13 +78,13 @@ define(function (require) {
         },
         
         storeUserAnswer: function() {
-            _.each(this.model.get('items'), function(item, index) {
+            _.each(this.model.get('_items'), function(item, index) {
                 item.userAnswer = this.$('.textbox').eq(index).val();
             }, this);
         }
         
     });
     
-    Adapt.register("textInput", textInput);
+    Adapt.register("textinput", TextInput);
     
 });

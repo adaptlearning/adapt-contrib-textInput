@@ -1,39 +1,40 @@
 {{! Maintainers - Kev Adsett}}
-<div class="component-inner textInput-inner">
+<div class="component-inner textinput-inner">
     {{#if title}}
-    <div class="component-title textInput-title">
-        <h4 class="component-title-inner textInput-title-inner">
+    <div class="component-title textinput-title">
+        <h4 class="component-title-inner textinput-title-inner">
             {{{title}}}
         </h4>
     </div>
     {{/if}}
     {{#if body}}
-    <div class="component-body textInput-body">
-        <div class="component-body-inner textInput-body-inner">
+    <div class="component-body textinput-body">
+        <div class="component-body-inner textinput-body-inner">
             {{{body}}}
         </div>
     </div>
     {{/if}}
     {{! complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states}}
-    <div class="component-widget textInput-widget {{#unless enabled}} disabled {{#if complete}} complete submitted user {{#if correct}}correct{{/if}} {{/if}} {{/unless}}">
-        {{#each items}}
-        <div class="item item-{{@index}} clearfix {{#unless ../enabled}}{{#if correct}}correct{{else}}incorrect{{/if}}{{/unless}}">
+    <div class="component-widget textinput-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted user {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
+        {{#each _items}}
+        <div class="textinput-item clearfix {{#unless ../_isEnabled}}{{#if _isCorrect}}correct{{else}}incorrect{{/if}}{{/unless}}">
             {{#if prefix}}
-            <label class="prefix"><p>{{{prefix}}}</p></label>
+            <label class="textinput-item-prefix">{{{prefix}}}</label>
             {{/if}}
             {{#if ../enabled}}
-            <input type="text" placeholder="{{../placeholder}}" class="textbox" data-id="input-{{@index}}" value="">
+            <input type="text" placeholder="{{../placeholder}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="">
             {{else}}
-            <input type="text" placeholder="{{../placeholder}}" class="textbox" data-id="input-{{@index}}" value="{{userAnswer}}" disabled="true">
+            <input type="text" placeholder="{{../placeholder}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="{{userAnswer}}" disabled="true">
             {{/if}}
             {{#if suffix}}
-            <label class="suffix"><p>{{{suffix}}}</p></label>
+            <label class="textinput-item-suffix">{{{suffix}}}</label>
             {{/if}}
-            <div class="state icon"></div>
+            <div class="textinput-item-state-icon icon"></div>
         </div>
         {{/each}}
     </div>
     
+    {{! if statements set default button labels if unset in json}}
     <div class="buttons">
          <a href="#" class="button submit">
             <h6>
