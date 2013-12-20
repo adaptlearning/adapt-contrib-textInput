@@ -1,0 +1,59 @@
+{{! Maintainers - Kev Adsett}}
+<div class="component-inner textInput-inner">
+    {{#if title}}
+    <div class="component-title textInput-title">
+        <h4 class="component-title-inner textInput-title-inner">
+            {{{title}}}
+        </h4>
+    </div>
+    {{/if}}
+    {{#if body}}
+    <div class="component-body textInput-body">
+        <div class="component-body-inner textInput-body-inner">
+            {{{body}}}
+        </div>
+    </div>
+    {{/if}}
+    {{! complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states}}
+    <div class="component-widget textInput-widget {{#unless enabled}} disabled {{#if complete}} complete submitted user {{#if correct}}correct{{/if}} {{/if}} {{/unless}}">
+        {{#each items}}
+        <div class="item item-{{@index}} clearfix {{#unless ../enabled}}{{#if correct}}correct{{else}}incorrect{{/if}}{{/unless}}">
+            {{#if prefix}}
+            <label class="prefix"><p>{{{prefix}}}</p></label>
+            {{/if}}
+            {{#if ../enabled}}
+            <input type="text" placeholder="{{../placeholder}}" class="textbox" data-id="input-{{@index}}" value="">
+            {{else}}
+            <input type="text" placeholder="{{../placeholder}}" class="textbox" data-id="input-{{@index}}" value="{{userAnswer}}" disabled="true">
+            {{/if}}
+            {{#if suffix}}
+            <label class="suffix"><p>{{{suffix}}}</p></label>
+            {{/if}}
+            <div class="state icon"></div>
+        </div>
+        {{/each}}
+    </div>
+    
+    <div class="buttons">
+         <a href="#" class="button submit">
+            <h6>
+                {{#if button.submit}}{{{button.submit}}}{{else}}Submit{{/if}}
+            </h6>
+        </a>
+        <a href="#" class="button model">
+            <h6>
+                {{#if button.model}}{{{button.model}}}{{else}}Model Answer{{/if}}
+            </h6>
+        </a>
+        <a href="#" class="button user">
+            <h6>
+                {{#if button.user}}{{{button.user}}}{{else}}My Answer{{/if}}
+            </h6>
+        </a>
+        <a href="#" class="button reset">
+            <h6>
+                {{#if button.reset}}{{{button.reset}}}{{else}}Reset{{/if}}
+            </h6>
+        </a>
+    </div>
+</div>
