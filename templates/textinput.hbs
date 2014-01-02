@@ -1,0 +1,59 @@
+{{! Maintainers - Kev Adsett}}
+<div class="component-inner textinput-inner">
+    {{#if title}}
+    <div class="component-title textinput-title">
+        <h4 class="component-title-inner textinput-title-inner">
+            {{{title}}}
+        </h4>
+    </div>
+    {{/if}}
+    {{#if body}}
+    <div class="component-body textinput-body">
+        <div class="component-body-inner textinput-body-inner">
+            {{{body}}}
+        </div>
+    </div>
+    {{/if}}
+    {{! complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states}}
+    <div class="component-widget textinput-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted user {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
+        {{#each items}}
+        <div class="textinput-item clearfix {{#unless ../_isEnabled}}{{#if _isCorrect}}correct{{else}}incorrect{{/if}}{{/unless}}">
+            {{#if prefix}}
+            <label class="textinput-item-prefix">{{{prefix}}}</label>
+            {{/if}}
+            {{#if ../enabled}}
+            <input type="text" placeholder="{{../placeholder}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="">
+            {{else}}
+            <input type="text" placeholder="{{../placeholder}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="{{userAnswer}}" disabled="true">
+            {{/if}}
+            {{#if suffix}}
+            <label class="textinput-item-suffix">{{{suffix}}}</label>
+            {{/if}}
+            <div class="textinput-item-state-icon icon"></div>
+        </div>
+        {{/each}}
+        {{! if statements set default button labels if unset in json}}
+        <div class="buttons">
+             <a href="#" class="button submit">
+                <h6>
+                    {{#if button.submit}}{{{button.submit}}}{{else}}Submit{{/if}}
+                </h6>
+            </a>
+            <a href="#" class="button model">
+                <h6>
+                    {{#if button.model}}{{{button.model}}}{{else}}Model Answer{{/if}}
+                </h6>
+            </a>
+            <a href="#" class="button user">
+                <h6>
+                    {{#if button.user}}{{{button.user}}}{{else}}My Answer{{/if}}
+                </h6>
+            </a>
+            <a href="#" class="button reset">
+                <h6>
+                    {{#if button.reset}}{{{button.reset}}}{{else}}Reset{{/if}}
+                </h6>
+            </a>
+        </div>
+    </div>
+</div>
