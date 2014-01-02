@@ -1,0 +1,89 @@
+.textinput-component {
+    .textinput-item {
+        background-color: @primary-color;
+        padding: @item-padding;
+        border: 1px solid @secondary-color;
+    }
+    label{
+        background-color: transparent;
+        line-height: 32px;
+        padding: 0px;
+        float: left;
+        text-align: center;
+        cursor: default;
+    }
+    .textinput-item-prefix {
+        width:20%;
+    }
+    .textinput-item-textbox {
+        padding: 0 5px;
+        width: 54%;
+        float: left;
+        height: 26px;
+    }
+    .textinput-item-suffix {
+        width:10%;
+    }
+    
+    .button {
+        outline: none;
+        text-decoration: none;
+        padding: @button-padding;
+        color: @button-text-color;
+        background-color: @button-color;
+        display: none;
+        
+        &.submit {
+            display: inline-block;
+        }
+    }
+    
+    .textinput-widget {
+        &.submitted {
+            .button.submit {
+                display: none;
+            }
+            .button.reset {
+                display: inline-block;
+            }
+        }
+    
+        &.user {
+            .button.model {
+                display: inline-block;
+            }
+        }
+        
+        &.model {
+            .button.user {
+                display: inline-block;
+            }
+        }
+        
+        &.disabled {
+            .button.reset {
+                display: none;
+            }
+            .user.correct .button {
+                display: inline-block;
+                visibility: hidden;
+            }
+        }
+        
+        &.correct {
+            .button {
+                visibility: hidden;
+                display: none;
+            }
+        }
+    }
+}
+    
+.no-touch {
+    .button {
+        &:hover {
+            color: @button-text-hover-color;
+            background-color: @button-hover-color;
+        }
+    }
+}
