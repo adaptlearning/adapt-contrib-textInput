@@ -21,7 +21,7 @@
             {{#if prefix}}
             <label class="textinput-item-prefix">{{{prefix}}}</label>
             {{/if}}
-            {{#if ../enabled}}
+            {{#if ../_isEnabled}}
             <input type="text" placeholder="{{../placeholder}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="">
             {{else}}
             <input type="text" placeholder="{{../placeholder}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="{{userAnswer}}" disabled="true">
