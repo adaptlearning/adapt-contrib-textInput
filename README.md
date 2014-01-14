@@ -15,3 +15,5 @@ Usage
 Once installed, the component can be used to create a text input component that allows the user to write any answer they like in response to initial question text. The author is also able to set a suffix and prefix to the text field should they wish. Multiple 'correct' answers are allowed to be given, for example, to cater for variations in spelling.
 
 For example JSON format, see [example.json](https://github.com/adaptlearning/adapt-contrib-textInput/blob/master/example.json).
+-------
+Once installed, the component can be used to create a text input component that allows the user to write any answer they like in response to initial question text. Note that due to the open-ended nature of this component type, there is no 'correct' answer.
