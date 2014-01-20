@@ -3,6 +3,8 @@
         background-color: @primary-color;
         padding: @item-padding;
         position:relative;
+        border:@border;
+        margin-bottom:2px;
     }
     label{
         background-color: transparent;
@@ -11,6 +13,7 @@
         float: left;
         text-align: center;
         cursor: default;
+        color: @inverted-foreground-color;
     }
     .textinput-item-prefix {
         width:20%;
@@ -32,6 +35,7 @@
         color: @button-text-color;
         background-color: @button-color;
         display: none;
+        margin-top:8px;
         
         &.submit {
             display: inline-block;
