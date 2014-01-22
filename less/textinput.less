@@ -2,7 +2,9 @@
     .textinput-item {
         background-color: @primary-color;
         padding: @item-padding;
-        border: 1px solid @secondary-color;
+        position:relative;
+        border:@border;
+        margin-bottom:2px;
     }
     label{
         background-color: transparent;
@@ -11,6 +13,7 @@
         float: left;
         text-align: center;
         cursor: default;
+        color: @inverted-foreground-color;
     }
     .textinput-item-prefix {
         width:20%;
@@ -32,6 +35,7 @@
         color: @button-text-color;
         background-color: @button-color;
         display: none;
+        margin-top:8px;
         
         &.submit {
             display: inline-block;
@@ -46,17 +50,36 @@
             .button.reset {
                 display: inline-block;
             }
+            .textinput-item {
+                background-color: @item-disabled-color;
+            }
         }
     
         &.user {
             .button.model {
                 display: inline-block;
             }
+            .incorrect {
+                .textinput-incorrect-icon {
+                    display: block;
+                }
+            }
+            .correct {
+                .textinput-correct-icon {
+                    display: block;
+                }
+            }
         }
         
         &.model {
             .button.user {
                 display: inline-block;
+            }
+            .textinput-select-icon {
+                display: none;
+            }
+            .textinput-correct-icon {
+                display: block;
             }
         }
         
@@ -76,6 +99,27 @@
                 display: none;
             }
         }
+    }
+
+    .textinput-item-state {
+        background: none;
+        position: absolute;
+        right: (@icon-size/2);
+        width: @icon-size;
+        height: @icon-size;
+        top: 50%;
+        margin-top: -(@icon-size/2);
+        z-index: 0;
+    }
+
+    .textinput-correct-icon {
+        color: @icon-correct-color;
+        display: none;
+    }
+
+    .textinput-incorrect-icon {
+        color: @icon-incorrect-color;
+        display: none;
     }
 }
     

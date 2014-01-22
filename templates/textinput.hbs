@@ -17,42 +17,45 @@
     {{! complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states}}
     <div class="component-widget textinput-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted user {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
         {{#each items}}
-        <div class="textinput-item clearfix {{#unless ../_isEnabled}}{{#if _isCorrect}}correct{{else}}incorrect{{/if}}{{/unless}}">
+        <div class="textinput-item item clearfix {{#unless ../_isEnabled}}{{#if _isCorrect}}correct{{else}}incorrect{{/if}}{{/unless}}">
             {{#if prefix}}
-            <label class="textinput-item-prefix">{{{prefix}}}</label>
+                <label class="textinput-item-prefix">{{{prefix}}}</label>
             {{/if}}
             {{#if ../_isEnabled}}
-            <input type="text" placeholder="{{../placeholder}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="">
+                <input type="text" placeholder="{{../placeholder}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="">
             {{else}}
-            <input type="text" placeholder="{{../placeholder}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="{{userAnswer}}" disabled="true">
+                <input type="text" placeholder="{{../placeholder}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="{{userAnswer}}" disabled="true">
             {{/if}}
             {{#if suffix}}
-            <label class="textinput-item-suffix">{{{suffix}}}</label>
+                <label class="textinput-item-suffix">{{{suffix}}}</label>
             {{/if}}
-            <div class="textinput-item-state-icon icon"></div>
+            <div class="textinput-item-state">
+                <div class="textinput-icon textinput-correct-icon icon icon-tick"></div>
+                <div class="textinput-icon textinput-incorrect-icon icon icon-cross"></div>
+            </div>
         </div>
         {{/each}}
         {{! if statements set default button labels if unset in json}}
         <div class="buttons">
              <a href="#" class="button submit">
-                <h6>  
+                <span>  
                     {{{buttons.submit}}} 
-                </h6>
+                </span>
             </a>
             <a href="#" class="button reset">
-                <h6>
+                <span>
                     {{{buttons.reset}}} 
-                </h6>
+                </span>
             </a>
             <a href="#" class="button model">
-                <h6> 
+                <span> 
                     {{{buttons.showCorrectAnswer}}} 
-                </h6>
+                </span>
             </a>
             <a href="#" class="button user">
-                <h6>
+                <span>
                     {{{buttons.hideCorrectAnswer}}} 
-                </h6>
+                </span>
             </a>            
         </div>
     </div>
