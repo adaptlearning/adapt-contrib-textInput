@@ -17,7 +17,7 @@
     {{! complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states}}
     <div class="component-widget textinput-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted user {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
         {{#each items}}
-        <div class="textinput-item item clearfix {{#unless ../_isEnabled}}{{#if _isCorrect}}correct{{else}}incorrect{{/if}}{{/unless}}">
+        <div class="textinput-item item clearfix {{#unless ../_isEnabled}}{{#if correct}}correct{{else}}incorrect{{/if}}{{/unless}}">
             {{#if prefix}}
                 <label class="textinput-item-prefix">{{{prefix}}}</label>
             {{/if}}
