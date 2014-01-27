@@ -1,7 +1,7 @@
 /*
 * adapt-contrib-textInput
 * License - http://github.com/adaptlearning/adapt_framework/LICENSE
-* Maintainers - Kev Adsett <kev.adsett@gmail.com>
+* Maintainers - Kev Adsett <kev.adsett@gmail.com>, Daryl Hedley <darylhedley@hotmail.com>
 */
 
 define(function (require) {
@@ -13,8 +13,18 @@ define(function (require) {
             "click .textinput-widget .button.submit":"onSubmitClicked",
             "click .textinput-widget .button.reset":"onResetClicked",
             "click .textinput-widget .button.model":"onModelAnswerClicked",
-            "click .textinput-widget .button.user":"onUserAnswerClicked"
+            "click .textinput-widget .button.user":"onUserAnswerClicked",
+            "blur input":"forceFixedPositionFakeScroll"
         },
+
+        forceFixedPositionFakeScroll: function() {
+            if (Modernizr.touch) {
+                _.defer(function() {
+                    window.scrollTo(document.body.scrollLeft, document.body.scrollTop);
+                });
+            } 
+        },
+
         canSubmit:function() {
             var canSubmit = true;
             this.$(".textinput-item-textbox").each(function() {
