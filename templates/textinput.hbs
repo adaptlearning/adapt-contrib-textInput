@@ -1,19 +1,6 @@
 {{! Maintainers - Kev Adsett}}
 <div class="component-inner textinput-inner">
-    {{#if title}}
-    <div class="component-title textinput-title">
-        <h4 class="component-title-inner textinput-title-inner">
-            {{{title}}}
-        </h4>
-    </div>
-    {{/if}}
-    {{#if body}}
-    <div class="component-body textinput-body">
-        <div class="component-body-inner textinput-body-inner">
-            {{{body}}}
-        </div>
-    </div>
-    {{/if}}
+    {{> component this}}
     {{! complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states}}
     <div class="component-widget textinput-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted user {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
         {{#each items}}
