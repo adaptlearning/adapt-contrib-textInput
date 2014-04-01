@@ -21,7 +21,7 @@
     },
     "_attempts": {
       "type":"number",
-      "required":false,
+      "required":true,
       "default":1
     },
     "buttons": {
@@ -70,7 +70,7 @@
     },
     "items": {
       "type":"array",
-      "required":false,
+      "required":true,
       "items": {
         "type":"object",
         "required":false,
@@ -80,7 +80,7 @@
             "required":false,
             "items": {
               "type":"string",
-              "required":false
+              "required":true
             }
           },
           "prefix": {
@@ -96,7 +96,7 @@
     },
     "placeholder": {
       "type":"string",
-      "required":false
+      "required":true
     }
   }
 }
