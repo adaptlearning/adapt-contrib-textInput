@@ -3,7 +3,7 @@
     {{> component this}}
     {{! complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states}}
     <div class="component-widget textinput-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted user {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
-        {{#each items}}
+        {{#each _items}}
         <div class="textinput-item item clearfix {{#unless ../_isEnabled}}{{#if correct}}correct{{else}}incorrect{{/if}}{{/unless}}">
             {{#if prefix}}
                 <label class="textinput-item-prefix">{{{prefix}}}</label>
@@ -24,26 +24,7 @@
         {{/each}}
         {{! if statements set default button labels if unset in json}}
         <div class="buttons">
-             <a href="#" class="button submit">
-                <span>  
-                    {{{buttons.submit}}} 
-                </span>
-            </a>
-            <a href="#" class="button reset">
-                <span>
-                    {{{buttons.reset}}} 
-                </span>
-            </a>
-            <a href="#" class="button model">
-                <span> 
-                    {{{buttons.showCorrectAnswer}}} 
-                </span>
-            </a>
-            <a href="#" class="button user">
-                <span>
-                    {{{buttons.hideCorrectAnswer}}} 
-                </span>
-            </a>            
+            {{> buttons this}}
         </div>
     </div>
 </div>

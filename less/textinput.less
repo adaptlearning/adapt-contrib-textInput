@@ -28,37 +28,14 @@
         width:10%;
     }
     
-    .button {
-        outline: none;
-        text-decoration: none;
-        padding: @button-padding;
-        color: @button-text-color;
-        background-color: @button-color;
-        display: none;
-        margin-top:8px;
-        
-        &.submit {
-            display: inline-block;
-        }
-    }
-    
     .textinput-widget {
         &.submitted {
-            .button.submit {
-                display: none;
-            }
-            .button.reset {
-                display: inline-block;
-            }
             .textinput-item {
                 background-color: @item-disabled-color;
             }
         }
     
         &.user {
-            .button.model {
-                display: inline-block;
-            }
             .incorrect {
                 .textinput-incorrect-icon {
                     display: block;
@@ -72,31 +49,11 @@
         }
         
         &.model {
-            .button.user {
-                display: inline-block;
-            }
             .textinput-select-icon {
                 display: none;
             }
             .textinput-correct-icon {
                 display: block;
-            }
-        }
-        
-        &.disabled {
-            .button.reset {
-                display: none;
-            }
-            .user.correct .button {
-                display: inline-block;
-                visibility: hidden;
-            }
-        }
-        
-        &.correct {
-            .button {
-                visibility: hidden;
-                display: none;
             }
         }
     }
@@ -120,14 +77,5 @@
     .textinput-incorrect-icon {
         color: @icon-incorrect-color;
         display: none;
-    }
-}
-    
-.no-touch {
-    .button {
-        &:hover {
-            color: @button-text-hover-color;
-            background-color: @button-hover-color;
-        }
     }
 }

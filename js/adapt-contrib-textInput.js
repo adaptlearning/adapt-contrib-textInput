@@ -53,15 +53,15 @@ define(function (require) {
         },
         
         forEachAnswer: function(callback) {
-             _.each(this.model.get('items'), function(item, index) {
+             _.each(this.model.get('_items'), function(item, index) {
                 if(this.model.get('_allowsAnyOrder')) {
                     this.$(".textinput-item-textbox").each($.proxy(function(index, element) {
                         var userAnswer = $(element).val();
-                        callback(this.checkAnswerIsCorrect(item.answers, userAnswer), item);
+                        callback(this.checkAnswerIsCorrect(item._answers, userAnswer), item);
                     },this));
                 } else {
                     var userAnswer = this.$(".textinput-item-textbox").eq(index).val();
-                    callback(this.checkAnswerIsCorrect(item.answers, userAnswer), item);
+                    callback(this.checkAnswerIsCorrect(item._answers, userAnswer), item);
                 }
             }, this);
         },
@@ -78,13 +78,13 @@ define(function (require) {
         },
         
         onModelAnswerShown:function () {
-            _.each(this.model.get('items'), function(item, index){
-                this.$(".textinput-item-textbox").eq(index).val(item.answers[0]);
+            _.each(this.model.get('_items'), function(item, index){
+                this.$(".textinput-item-textbox").eq(index).val(item._answers[0]);
             }, this);
         },
         
         onUserAnswerShown:function () {
-            _.each(this.model.get('items'), function(item, index){
+            _.each(this.model.get('_items'), function(item, index){
                 this.$(".textinput-item-textbox").eq(index).val(item.userAnswer);
             }, this);
         },
@@ -95,7 +95,7 @@ define(function (require) {
         },
         
         storeUserAnswer: function() {
-            _.each(this.model.get('items'), function(item, index) {
+            _.each(this.model.get('_items'), function(item, index) {
                 item.userAnswer = this.$('.textinput-item-textbox').eq(index).val();
             }, this);
         }
