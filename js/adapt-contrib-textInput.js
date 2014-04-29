@@ -14,7 +14,8 @@ define(function (require) {
             "click .textinput-widget .button.reset":"onResetClicked",
             "click .textinput-widget .button.model":"onModelAnswerClicked",
             "click .textinput-widget .button.user":"onUserAnswerClicked",
-            "blur input":"forceFixedPositionFakeScroll"
+            "blur input":"forceFixedPositionFakeScroll",
+            "focus input":"clearValidationError"
         },
 
         forceFixedPositionFakeScroll: function() {
@@ -33,6 +34,18 @@ define(function (require) {
                 }
             });
             return canSubmit;
+        },
+
+        onCannotSubmit: function() {
+            this.showValidationError();
+        },
+
+        showValidationError: function() {
+            this.$(".textinput-item-textbox").addClass("textinput-validation-error");
+        },
+
+        clearValidationError: function() {
+            this.$(".textinput-item-textbox").removeClass("textinput-validation-error");
         },
         
         checkAnswerIsCorrect: function(possibleAnswers, userAnswer) {
