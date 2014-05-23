@@ -46,10 +46,6 @@ Specifies the number of attempts for this question.
 
 The placeholder setting specifies a short hint that describes the expected value of the input field.
 
-####_allowsAnyOrder
-
-To be completed.
-
 ####_allowsAnyCase
 
 Default: `true`

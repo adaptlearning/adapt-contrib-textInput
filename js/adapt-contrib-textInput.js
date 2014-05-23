@@ -67,15 +67,8 @@ define(function (require) {
         
         forEachAnswer: function(callback) {
              _.each(this.model.get('_items'), function(item, index) {
-                if(this.model.get('_allowsAnyOrder')) {
-                    this.$(".textinput-item-textbox").each($.proxy(function(index, element) {
-                        var userAnswer = $(element).val();
-                        callback(this.checkAnswerIsCorrect(item._answers, userAnswer), item);
-                    },this));
-                } else {
-                    var userAnswer = this.$(".textinput-item-textbox").eq(index).val();
-                    callback(this.checkAnswerIsCorrect(item._answers, userAnswer), item);
-                }
+                var userAnswer = this.$(".textinput-item-textbox").eq(index).val();
+                callback(this.checkAnswerIsCorrect(item._answers, userAnswer), item);
             }, this);
         },
         
