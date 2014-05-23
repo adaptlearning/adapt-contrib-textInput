@@ -1,25 +1,12 @@
 {{! Maintainers - Kev Adsett}}
 <div class="component-inner textinput-inner">
-    {{#if title}}
-    <div class="component-title textinput-title">
-        <h4 class="component-title-inner textinput-title-inner">
-            {{{title}}}
-        </h4>
-    </div>
-    {{/if}}
-    {{#if body}}
-    <div class="component-body textinput-body">
-        <div class="component-body-inner textinput-body-inner">
-            {{{body}}}
-        </div>
-    </div>
-    {{/if}}
+    {{> component this}}
     {{! complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states}}
     <div class="component-widget textinput-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted user {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
-        {{#each items}}
-        <div class="textinput-item item clearfix {{#unless ../_isEnabled}}{{#if correct}}correct{{else}}incorrect{{/if}}{{/unless}}">
+        {{#each _items}}
+        <div class="textinput-item component-item component-item-color component-item-border clearfix {{#unless ../_isEnabled}}{{#if correct}}correct{{else}}incorrect{{/if}}{{/unless}}">
             {{#if prefix}}
-                <label class="textinput-item-prefix">{{{prefix}}}</label>
+                <label class="textinput-item-prefix component-item-text-color">{{{prefix}}}</label>
             {{/if}}
             {{#if ../_isEnabled}}
                 <input type="text" placeholder="{{../placeholder}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="">
@@ -27,7 +14,7 @@
                 <input type="text" placeholder="{{../placeholder}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="{{userAnswer}}" disabled="true">
             {{/if}}
             {{#if suffix}}
-                <label class="textinput-item-suffix">{{{suffix}}}</label>
+                <label class="textinput-item-suffix component-item-text-color">{{{suffix}}}</label>
             {{/if}}
             <div class="textinput-item-state">
                 <div class="textinput-icon textinput-correct-icon icon icon-tick"></div>
@@ -37,26 +24,7 @@
         {{/each}}
         {{! if statements set default button labels if unset in json}}
         <div class="buttons">
-             <a href="#" class="button submit">
-                <span>  
-                    {{{buttons.submit}}} 
-                </span>
-            </a>
-            <a href="#" class="button reset">
-                <span>
-                    {{{buttons.reset}}} 
-                </span>
-            </a>
-            <a href="#" class="button model">
-                <span> 
-                    {{{buttons.showCorrectAnswer}}} 
-                </span>
-            </a>
-            <a href="#" class="button user">
-                <span>
-                    {{{buttons.hideCorrectAnswer}}} 
-                </span>
-            </a>            
+            {{> buttons this}}
         </div>
     </div>
 </div>

@@ -14,7 +14,8 @@ define(function (require) {
             "click .textinput-widget .button.reset":"onResetClicked",
             "click .textinput-widget .button.model":"onModelAnswerClicked",
             "click .textinput-widget .button.user":"onUserAnswerClicked",
-            "blur input":"forceFixedPositionFakeScroll"
+            "blur input":"forceFixedPositionFakeScroll",
+            "focus input":"clearValidationError"
         },
 
         forceFixedPositionFakeScroll: function() {
@@ -33,6 +34,18 @@ define(function (require) {
                 }
             });
             return canSubmit;
+        },
+
+        onCannotSubmit: function() {
+            this.showValidationError();
+        },
+
+        showValidationError: function() {
+            this.$(".textinput-item-textbox").addClass("textinput-validation-error");
+        },
+
+        clearValidationError: function() {
+            this.$(".textinput-item-textbox").removeClass("textinput-validation-error");
         },
         
         checkAnswerIsCorrect: function(possibleAnswers, userAnswer) {
@@ -53,16 +66,9 @@ define(function (require) {
         },
         
         forEachAnswer: function(callback) {
-             _.each(this.model.get('items'), function(item, index) {
-                if(this.model.get('_allowsAnyOrder')) {
-                    this.$(".textinput-item-textbox").each($.proxy(function(index, element) {
-                        var userAnswer = $(element).val();
-                        callback(this.checkAnswerIsCorrect(item.answers, userAnswer), item);
-                    },this));
-                } else {
-                    var userAnswer = this.$(".textinput-item-textbox").eq(index).val();
-                    callback(this.checkAnswerIsCorrect(item.answers, userAnswer), item);
-                }
+             _.each(this.model.get('_items'), function(item, index) {
+                var userAnswer = this.$(".textinput-item-textbox").eq(index).val();
+                callback(this.checkAnswerIsCorrect(item._answers, userAnswer), item);
             }, this);
         },
         
@@ -78,13 +84,13 @@ define(function (require) {
         },
         
         onModelAnswerShown:function () {
-            _.each(this.model.get('items'), function(item, index){
-                this.$(".textinput-item-textbox").eq(index).val(item.answers[0]);
+            _.each(this.model.get('_items'), function(item, index){
+                this.$(".textinput-item-textbox").eq(index).val(item._answers[0]);
             }, this);
         },
         
         onUserAnswerShown:function () {
-            _.each(this.model.get('items'), function(item, index){
+            _.each(this.model.get('_items'), function(item, index){
                 this.$(".textinput-item-textbox").eq(index).val(item.userAnswer);
             }, this);
         },
@@ -95,7 +101,7 @@ define(function (require) {
         },
         
         storeUserAnswer: function() {
-            _.each(this.model.get('items'), function(item, index) {
+            _.each(this.model.get('_items'), function(item, index) {
                 item.userAnswer = this.$('.textinput-item-textbox').eq(index).val();
             }, this);
         }
