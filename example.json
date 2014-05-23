@@ -12,7 +12,6 @@
     "_attempts": 1,
     "_questionWeight":10,
     "placeholder": "Enter answer here",
-    "_allowsAnyOrder": false,
     "_allowsAnyCase": true,
     "_allowsPunctuation": true,
     "_buttons":{
