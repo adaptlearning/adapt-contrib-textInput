@@ -48,7 +48,6 @@ define(function(require) {
 
         onQuestionRendered: function() {
             this.setReadyStatus();
-            console.log(this.model)
         },
 
         forceFixedPositionFakeScroll: function() {
