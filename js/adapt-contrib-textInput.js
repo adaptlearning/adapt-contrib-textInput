@@ -14,11 +14,13 @@ define(function(require) {
             "focus input":"clearValidationError"
         },
 
+        // Used by the question to reset the question when revisiting the component
         resetQuestionOnRevisit: function() {
             this.setAllItemsEnabled(false);
             this.resetQuestion();
         },
 
+        // Used by question to setup itself just before rendering
         setupQuestion: function() {
             // Check if items need to be randomised
             if (this.model.get('_isRandom') && this.model.get('_isEnabled')) {
@@ -26,10 +28,12 @@ define(function(require) {
             }
         },
 
+        // Used by question to disable the question during submit and complete stages
         disableQuestion: function() {
             this.setAllItemsEnabled(false);
         },
 
+        // Used by question to enable the question during interactions
         enableQuestion: function() {
             this.setAllItemsEnabled(true);
         },
@@ -46,6 +50,7 @@ define(function(require) {
             }, this);
         },
 
+        // Used by question to setup itself just after rendering
         onQuestionRendered: function() {
             this.setReadyStatus();
         },
@@ -73,6 +78,7 @@ define(function(require) {
             return canSubmit;
         },
 
+        // Blank method for question to fill out when the question cannot be submitted
         onCannotSubmit: function() {
             this.showValidationError();
         },
@@ -81,14 +87,14 @@ define(function(require) {
             this.$(".textinput-item-textbox").addClass("textinput-validation-error");
         },
 
-        // This is important for returning or showing the users answer
-        // This should preserve the state of the users answers
+        //This preserve the state of the users answers for returning or showing the users answer
         storeUserAnswer: function() {
             _.each(this.model.get('_items'), function(item, index) {
                 item.userAnswer = this.$('.textinput-item-textbox').eq(index).val();
             }, this);
         },
 
+        // this return a boolean based upon whether to question is correct or not
         isCorrect: function() {
             var numberOfCorrectAnswers = 0;
             _.each(this.model.get('_items'), function(item, index) {
@@ -123,6 +129,7 @@ define(function(require) {
             return userAnswer;
         },
 
+        // Used to set the score based upon the _questionWeight
         setScore: function() {
             var numberOfCorrectAnswers = this.model.get('_numberOfCorrectAnswers');
             var questionWeight = this.model.get("_questionWeight");
@@ -133,6 +140,8 @@ define(function(require) {
             this.model.set('_score', score);
         },
 
+        // This is important and should give the user feedback on how they answered the question
+        // Normally done through ticks and crosses by adding classes
         showMarking: function() {
             _.each(this.model.get('_items'), function(item, i) {
                 var $item = this.$('.textinput-item').eq(i);
@@ -140,10 +149,12 @@ define(function(require) {
             }, this);
         },
 
+        // Used by the question to determine if the question is incorrect or partly correct
         isPartlyCorrect: function() {
             return this.model.get('_isAtLeastOneCorrectSelection');
         },
 
+        // Used by the question view to reset the stored user answer
         resetUserAnswer: function() {
             _.each(this.model.get('_items'), function(item) {
                 item["_isCorrect"] = false;
@@ -151,11 +162,9 @@ define(function(require) {
             }, this);
         },
 
+        // Used by the question view to reset the look and feel of the component.
+        // This could also include resetting item data
         resetQuestion: function() {
-            this.resetItems();
-        },
-
-        resetItems: function() {
             this.$('.textinput-item-textbox').prop('disabled', !this.model.get('_isEnabled')).val('');
 
             this.model.set({
@@ -163,12 +172,16 @@ define(function(require) {
             });
         },
 
+        // Used by the question to display the correct answer to the user
         showCorrectAnswer: function() {
             _.each(this.model.get('_items'), function(item, index) {
                 this.$(".textinput-item-textbox").eq(index).val(item._answers[0]);
             }, this);
         },
 
+        // Used by the question to display the users answer and
+        // hide the correct answer
+        // Should use the values stored in storeUserAnswer
         hideCorrectAnswer: function() {
             _.each(this.model.get('_items'), function(item, index) {
                 this.$(".textinput-item-textbox").eq(index).val(item.userAnswer);
