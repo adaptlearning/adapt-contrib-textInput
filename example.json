@@ -11,14 +11,14 @@
     "instruction": "",
     "_attempts": 1,
     "_questionWeight":10,
-    "placeholder": "Enter answer here",
+    "_isRandom":false,
     "_allowsAnyCase": true,
     "_allowsPunctuation": true,
     "_buttons":{
-        "submit":"SUBMIT",
-        "reset":"RESET",
-        "showCorrectAnswer":"MODEL ANSWER",
-        "hideCorrectAnswer":"YOUR ANSWER"
+        "submit":"",
+        "reset":"",
+        "showCorrectAnswer":"",
+        "hideCorrectAnswer":""
     },
     "_feedback": {
         "correct": "This feedback will appear if you answered the question correctly.",
@@ -38,7 +38,8 @@
             "_answers": [
                 "2",
                 "two"
-            ]
+            ],
+            "placeholder": "Enter answer here"
         },
         {
             "prefix": "C:",
@@ -46,7 +47,8 @@
             "_answers": [
                 "3",
                 "three"
-            ]
+            ],
+            "placeholder": "Enter answer here"
         },
         {
             "prefix": "D:",
@@ -54,7 +56,8 @@
             "_answers": [
                 "4",
                 "four"
-            ]
+            ],
+            "placeholder": "Enter answer here"
         }
     ]
 }
