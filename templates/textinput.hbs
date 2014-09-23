@@ -1,5 +1,5 @@
 {{! Maintainers - Kev Adsett}}
-<div class="component-inner textinput-inner">
+<div class="component-inner textinput-inner" role="region" aria-label="{{_accessibility._ariaRegions.textInput}}">
     {{> component this}}
     {{! complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states}}
     <div class="component-widget textinput-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted user {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
@@ -9,9 +9,9 @@
                 <label class="textinput-item-prefix component-item-text-color">{{{prefix}}}</label>
             {{/if}}
             {{#if ../_isEnabled}}
-                <input type="text" placeholder="{{../placeholder}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="">
+                <input type="text" placeholder="{{../placeholder}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="" role="textbox">
             {{else}}
-                <input type="text" placeholder="{{../placeholder}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="{{userAnswer}}" disabled="true">
+                <input type="text" placeholder="{{../placeholder}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="{{userAnswer}}" disabled="true" role="textbox">
             {{/if}}
             {{#if suffix}}
                 <label class="textinput-item-suffix component-item-text-color">{{{suffix}}}</label>
@@ -23,7 +23,7 @@
         </div>
         {{/each}}
         {{! if statements set default button labels if unset in json}}
-        <div class="buttons">
+        <div class="buttons"  role="button">
             {{> buttons this}}
         </div>
     </div>
