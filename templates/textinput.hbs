@@ -1,5 +1,5 @@
 {{! Maintainers - Kev Adsett}}
-<div class="component-inner textinput-inner" role="region" aria-label="{{_accessibility._ariaRegions.textInput}}">
+<div class="component-inner textinput-inner" role="region" aria-label="{{_globals._components._textInput.ariaRegion}}">
     {{> component this}}
     {{! complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states}}
     <div class="component-widget textinput-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted user {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
