@@ -19,7 +19,7 @@
       "title": "Attempts",
       "inputType":"Number",
       "validators": ["required", "number"],
-      "help": "How many attempts the learner is allow"
+      "help": "How many attempts the learner is allowed"
     },
     "_questionWeight": {
       "type":"number",
@@ -37,7 +37,7 @@
       "title": "Allow Any Case Answers",
       "inputType": {"type": "Boolean", "options": [false, true]},
       "validators": [],
-      "help": "Set this to 'false' to mark the answer using case-sensitive"
+      "help": "Set this to 'false' to have a case-sensitive check of the user's answer"
     },
     "_allowsPunctuation": {
       "type":"boolean",
@@ -192,7 +192,7 @@
           "default": "",
           "inputType": "QuestionButton",
           "validators": [],
-          "help": "Button label text so show the model answer"
+          "help": "Button label text to show the model answer"
         },
         "hideCorrectAnswer": {
           "type":"string",
@@ -200,7 +200,7 @@
           "default": "",
           "inputType": "QuestionButton",
           "validators": [],
-          "help": "Button label text so hide the model answer"
+          "help": "Button label text to hide the model answer"
         }
       }
     }
