@@ -6,7 +6,7 @@
     margin-bottom: 2px;
 }
 
-label {
+.textinput-item label {
     background-color: transparent;
     line-height: 32px;
     padding: 0px;
@@ -62,25 +62,25 @@ label {
             display: block;
         }
     }
-}
 
-.textinput-item-state {
-    background: none;
-    position: absolute;
-    right: (@icon-size/2);
-    width: @icon-size;
-    height: @icon-size;
-    top: 50%;
-    margin-top: -(@icon-size/2);
-    z-index: 0;
-}
+    .textinput-item-state {
+        background: none;
+        position: absolute;
+        right: (@icon-size/2);
+        width: @icon-size;
+        height: @icon-size;
+        top: 50%;
+        margin-top: -(@icon-size/2);
+        z-index: 0;
+    }
 
-.textinput-correct-icon {
-    color: @icon-correct-color;
-    display: none;
-}
+    .textinput-correct-icon {
+        color: @icon-correct-color;
+        display: none;
+    }
 
-.textinput-incorrect-icon {
-    color: @icon-incorrect-color;
-    display: none;
+    .textinput-incorrect-icon {
+        color: @icon-incorrect-color;
+        display: none;
+    }
 }
