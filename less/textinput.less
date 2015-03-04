@@ -11,6 +11,9 @@
     line-height: 32px;
     padding: 0px;
     float: left;
+    .dir-rtl & {
+        float: right;
+    }
     text-align: center;
     cursor: default;
     color: @item-text-color;
@@ -24,6 +27,9 @@
     padding: 0 5px;
     width: 54%;
     float: left;
+    .dir-rtl & {
+        float: right;
+    }
     height: 26px;
     &.textinput-validation-error {
         border: 2px solid @validation-error-border-color;
@@ -67,6 +73,10 @@
         background: none;
         position: absolute;
         right: (@icon-size/2);
+        .dir-rtl & {
+            right: inherit;
+            left: (@icon-size/2);
+        }
         width: @icon-size;
         height: @icon-size;
         top: 50%;
