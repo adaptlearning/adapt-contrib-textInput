@@ -23,12 +23,6 @@
       "default":1,
       "title": "Number of attempts"
     },
-    "placeholder": {
-      "type":"string",
-      "required":true,
-      "minLength": 1,
-      "title": "Placeholder"
-    },
     "_questionWeight": {
       "type":"number",
       "required":false,
@@ -63,6 +57,12 @@
             "type":"string",
             "required":false,
             "title": "Text area suffix text"
+          },
+          "placeholder": {
+            "type":"string",
+            "required":true,
+            "minLength": 1,
+            "title": "Placeholder"
           }
         }
       }

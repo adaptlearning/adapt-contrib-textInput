@@ -11,7 +11,7 @@
     "instruction": "",
     "_attempts": 1,
     "_questionWeight":10,
-    "placeholder": "Enter answer here",
+    "_isRandom":false,
     "_allowsAnyCase": true,
     "_allowsPunctuation": true,
     "_buttons": {
@@ -57,7 +57,8 @@
             "_answers": [
                 "2",
                 "two"
-            ]
+            ],
+            "placeholder": "Enter answer here"
         },
         {
             "prefix": "C:",
@@ -65,7 +66,8 @@
             "_answers": [
                 "3",
                 "three"
-            ]
+            ],
+            "placeholder": "Enter answer here"
         },
         {
             "prefix": "D:",
@@ -73,7 +75,8 @@
             "_answers": [
                 "4",
                 "four"
-            ]
+            ],
+            "placeholder": "Enter answer here"
         }
     ]
 }
