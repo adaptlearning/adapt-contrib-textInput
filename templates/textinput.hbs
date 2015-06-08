@@ -4,7 +4,7 @@
     {{! complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states}}
     <div class="textinput-widget component-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted show-user-answer {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
         {{#each _items}}
-        <div class="textinput-item component-item component-item-color component-item-border clearfix {{#unless ../_isEnabled}}{{#if correct}}correct{{else}}incorrect{{/if}}{{/unless}}">
+        <div class="textinput-item component-item component-item-color component-item-border clearfix {{#unless ../_isEnabled}}{{#if _isCorrect}}correct{{else}}incorrect{{/if}}{{/unless}}">
             {{#if prefix}}
                 <label class="textinput-item-prefix component-item-text-color" id="{{../_id}}-{{@index}}-aria" for="{{../_id}}-{{@index}}" aria-label="{{{prefix}}}">
                     {{{prefix}}}
