@@ -152,10 +152,10 @@ define(function(require) {
                 userAnswer = userAnswer.toLowerCase();
             }
             if (this.model.get('_allowsPunctuation')) {
-                var userAnswerClean = userAnswer.replace(/[\.,-\/#!$£%\^&\*;:{}=\-_`~()]/g, "");
-                userAnswer = $.trim(userAnswerClean);
+                userAnswer = userAnswer.replace(/[\.,-\/#!$£%\^&\*;:{}=\-_`~()]/g, "");
             }
-            return userAnswer;
+            // removes whitespace from beginning/end (leave any in the middle)
+            return $.trim(userAnswer);
         },
 
         // Used to set the score based upon the _questionWeight
