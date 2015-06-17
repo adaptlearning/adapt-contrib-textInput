@@ -102,6 +102,8 @@ define(function(require) {
             return !_.contains(_.pluck(this.model.get("_items"),"_isCorrect"), false);
         },
 
+        // Allows the learner to give answers into any input, ignoring the order.
+        // (this excludes any inputs which have their own specific answers).
         markGenericAnswers: function() {
             var numberOfCorrectAnswers = 0;
             var correctAnswers = this.model.get('_answers').slice();
@@ -119,6 +121,8 @@ define(function(require) {
             }, this);
         },
 
+        // Marks any items which have answers specific to it
+        // (i.e. item has a _answers array)
         markSpecificAnswers: function() {
             var numberOfCorrectAnswers = 0;
             var numberOfSpecificAnswers = 0;
