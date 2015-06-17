@@ -94,10 +94,36 @@ define(function(require) {
             }, this);
         },
 
-        // this return a boolean based upon whether to question is correct or not
+        // Return a boolean based upon whether question is correct or not
         isCorrect: function() {
+            if(this.model.get('_answers')) this.markGenericAnswers();
+            this.markSpecificAnswers();
+            // do we have any _isCorrect == false?
+            return !_.contains(_.pluck(this.model.get("_items"),"_isCorrect"), false);
+        },
+
+        markGenericAnswers: function() {
             var numberOfCorrectAnswers = 0;
+            var correctAnswers = this.model.get('_answers').slice();
+            _.each(this.model.get('_items'), function(item, itemIndex) {
+                _.each(correctAnswers, function(answerGroup, answerIndex) {
+                    if(this.checkAnswerIsCorrect(answerGroup, item.userAnswer)) {
+                        item._isCorrect = true;
+                        correctAnswers.splice(answerIndex,1);
+                        numberOfCorrectAnswers++;
+                        this.model.set('_numberOfCorrectAnswers', numberOfCorrectAnswers);
+                        this.model.set('_isAtLeastOneCorrectSelection', true);
+                    }
+                }, this);
+                if(!item._isCorrect) item._isCorrect = false;
+            }, this);
+        },
+
+        markSpecificAnswers: function() {
+            var numberOfCorrectAnswers = 0;
+            var numberOfSpecificAnswers = 0;
             _.each(this.model.get('_items'), function(item, index) {
+                if(!item._answers) return;
                 var userAnswer = this.$(".textinput-item-textbox").eq(index).val();
                 if (this.checkAnswerIsCorrect(item["_answers"], userAnswer)) {
                     numberOfCorrectAnswers++;
@@ -107,9 +133,8 @@ define(function(require) {
                 } else {
                     item._isCorrect = false;
                 }
+                numberOfSpecificAnswers++;
             }, this);
-
-            return (numberOfCorrectAnswers === this.model.get('_items').length);
         },
 
         checkAnswerIsCorrect: function(possibleAnswers, userAnswer) {
