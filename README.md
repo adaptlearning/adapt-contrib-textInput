@@ -62,28 +62,32 @@ If set to `true` allows the following punctuation/characters within the answer:
 ) ( ~ ` _ - = } { : ; * & ^ % £ $ ! # - / , .`
 ```
 
+####_answers
+**_Optional_ **
+
+This allows generic answers, which are not dependant on order to be specified, allowing the learner to give the correct answers in any order, and still be marked correct. This attribute expects a 2-dimensional array:
+```
+“_answers”: [
+   [“one”,1],
+   [“two”,2],
+   [“three”,3]   
+]
+```
+
 ####_items
 
 Each item represents one one text input box for this question and contains values for `prefix`, `suffix` and `_answers`.
 
-####prefix
-
-Text entered in this setting will appear before the input area.
-
-####suffix
-
-Text entered in this setting will appear after the input area.
-
-####_answers
-
-Multiple answers can be entered in this setting, for example:
-
+**prefix:** Text entered in this setting will appear before the input area.
+**suffix:** Text entered in this setting will appear after the input area.
+**_answers:** Multiple answers can be entered in this setting, for example:
 ```
-            "_answers": [
-                "2",
-                "two"
-            ]
+   "_answers": [
+      "2",
+      "two"
+   ]
 ```
+This can be combined with the generic answer above.
 
 ##Limitations
  

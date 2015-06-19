@@ -94,10 +94,40 @@ define(function(require) {
             }, this);
         },
 
-        // this return a boolean based upon whether to question is correct or not
+        // Return a boolean based upon whether question is correct or not
         isCorrect: function() {
+            if(this.model.get('_answers')) this.markGenericAnswers();
+            this.markSpecificAnswers();
+            // do we have any _isCorrect == false?
+            return !_.contains(_.pluck(this.model.get("_items"),"_isCorrect"), false);
+        },
+
+        // Allows the learner to give answers into any input, ignoring the order.
+        // (this excludes any inputs which have their own specific answers).
+        markGenericAnswers: function() {
             var numberOfCorrectAnswers = 0;
+            var correctAnswers = this.model.get('_answers').slice();
+            _.each(this.model.get('_items'), function(item, itemIndex) {
+                _.each(correctAnswers, function(answerGroup, answerIndex) {
+                    if(this.checkAnswerIsCorrect(answerGroup, item.userAnswer)) {
+                        item._isCorrect = true;
+                        correctAnswers.splice(answerIndex,1);
+                        numberOfCorrectAnswers++;
+                        this.model.set('_numberOfCorrectAnswers', numberOfCorrectAnswers);
+                        this.model.set('_isAtLeastOneCorrectSelection', true);
+                    }
+                }, this);
+                if(!item._isCorrect) item._isCorrect = false;
+            }, this);
+        },
+
+        // Marks any items which have answers specific to it
+        // (i.e. item has a _answers array)
+        markSpecificAnswers: function() {
+            var numberOfCorrectAnswers = 0;
+            var numberOfSpecificAnswers = 0;
             _.each(this.model.get('_items'), function(item, index) {
+                if(!item._answers) return;
                 var userAnswer = this.$(".textinput-item-textbox").eq(index).val();
                 if (this.checkAnswerIsCorrect(item["_answers"], userAnswer)) {
                     numberOfCorrectAnswers++;
@@ -107,9 +137,8 @@ define(function(require) {
                 } else {
                     item._isCorrect = false;
                 }
+                numberOfSpecificAnswers++;
             }, this);
-
-            return (numberOfCorrectAnswers === this.model.get('_items').length);
         },
 
         checkAnswerIsCorrect: function(possibleAnswers, userAnswer) {
@@ -123,10 +152,10 @@ define(function(require) {
                 userAnswer = userAnswer.toLowerCase();
             }
             if (this.model.get('_allowsPunctuation')) {
-                var userAnswerClean = userAnswer.replace(/[\.,-\/#!$£%\^&\*;:{}=\-_`~()]/g, "");
-                userAnswer = $.trim(userAnswerClean);
+                userAnswer = userAnswer.replace(/[\.,-\/#!$£%\^&\*;:{}=\-_`~()]/g, "");
             }
-            return userAnswer;
+            // removes whitespace from beginning/end (leave any in the middle)
+            return $.trim(userAnswer);
         },
 
         // Used to set the score based upon the _questionWeight
