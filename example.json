@@ -39,6 +39,8 @@
       "remainingAttemptText": "final attempt",
       "disabledAriaLabel": "This button is disabled at the moment"
     },
+    "_answers": [
+    ],
     "_feedback": {
         "correct": "This feedback will appear if you answered the question correctly.",
         "_incorrect": {
