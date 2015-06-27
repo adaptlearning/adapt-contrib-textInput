@@ -2,7 +2,7 @@
 <div class="textinput-inner component-inner" role="region" aria-label="{{_globals._components._textInput.ariaRegion}}" {{#if _globals._components._textInput.ariaRegion}}tabindex="0"{{/if}}>
     {{> component this}}
     {{! complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states}}
-    <div class="textinput-widget component-widget {{#unless _isEnabled}} disabled {{#if _isComplete}} complete submitted show-user-answer {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
+    <div class="textinput-widget component-widget {{#unless _isEnabled}} disabled {{#if _isInteractionComplete}} complete submitted show-user-answer {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
         {{#each _items}}
         <div class="textinput-item component-item component-item-color component-item-border clearfix {{#unless ../_isEnabled}}{{#if _isCorrect}}correct{{else}}incorrect{{/if}}{{/unless}}">
             {{#if prefix}}
