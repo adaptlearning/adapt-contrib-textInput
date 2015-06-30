@@ -11,9 +11,9 @@
                 </label>
             {{/if}}
             {{#if ../_isEnabled}}
-                <input type="text" placeholder="{{{placeholder}}}" class="textinput-item-textbox" data-id="input-{{@index}}" id="{{../_id}}-{{@index}}" aria-labelledby="{{../_id}}-{{@index}}-aria" value="" role="textbox">
+                <input type="text" placeholder="{{{placeholder}}}" class="textinput-item-textbox {{#if prefix}}prefix{{/if}}" data-id="input-{{@index}}" id="{{../_id}}-{{@index}}" aria-labelledby="{{../_id}}-{{@index}}-aria" value="" role="textbox">
             {{else}}
-                <input type="text" placeholder="{{{placeholder}}}" class="textinput-item-textbox" data-id="input-{{@index}}" value="{{userAnswer}}" disabled="true" role="textbox">
+                <input type="text" placeholder="{{{placeholder}}}" class="textinput-item-textbox {{#if prefix}}prefix{{/if}}" data-id="input-{{@index}}" value="{{userAnswer}}" disabled="true" role="textbox">
             {{/if}}
             {{#if suffix}}
                 <label class="textinput-item-suffix component-item-text-color" id="{{../_id}}-{{@index}}-aria" for="{{../_id}}-{{@index}}" aria-label="{{{suffix}}}">
