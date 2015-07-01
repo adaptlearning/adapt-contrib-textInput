@@ -10,6 +10,7 @@
     "body": "If A is 1% and Z is 26%, what are B, C and D?",
     "instruction": "",
     "_attempts": 1,
+    "_shouldDisplayAttempts": false,
     "_questionWeight":10,
     "_isRandom":false,
     "_allowsAnyCase": true,
