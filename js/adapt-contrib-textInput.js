@@ -97,7 +97,7 @@ define(function(require) {
         // Return a boolean based upon whether question is correct or not
         isCorrect: function() {
             if(this.model.get('_answers')) this.markGenericAnswers();
-            this.markSpecificAnswers();
+            else this.markSpecificAnswers();
             // do we have any _isCorrect == false?
             return !_.contains(_.pluck(this.model.get("_items"),"_isCorrect"), false);
         },
@@ -142,11 +142,15 @@ define(function(require) {
         },
 
         checkAnswerIsCorrect: function(possibleAnswers, userAnswer) {
-            var answerIsCorrect = _.contains(possibleAnswers, this.cleanupUserAnswer(userAnswer));
+            var uAnswer = this.cleanupUserAnswer(userAnswer);
+            var matched = _.filter(possibleAnswers, function(cAnswer){
+                return this.cleanupUserAnswer(cAnswer) == uAnswer;
+            }, this);
+            
+            var answerIsCorrect = matched && matched.length > 0;
             if (answerIsCorrect) this.model.set('_hasAtLeastOneCorrectSelection', true);
             return answerIsCorrect;
         },
-
         cleanupUserAnswer: function(userAnswer) {
             if (this.model.get('_allowsAnyCase')) {
                 userAnswer = userAnswer.toLowerCase();
