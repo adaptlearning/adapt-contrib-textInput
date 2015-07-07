@@ -42,9 +42,11 @@ Default: `1`
 
 Specifies the number of attempts for this question.
 
-####placeholder
+####_shouldDisplayAttempts
 
-The placeholder setting specifies a short hint that describes the expected value of the input field.
+Default: `false`
+
+When set to true the number of attempts remaining is shown below the buttons.
 
 ####_allowsAnyCase
 
@@ -67,10 +69,10 @@ If set to `true` allows the following punctuation/characters within the answer:
 
 This allows generic answers, which are not dependant on order to be specified, allowing the learner to give the correct answers in any order, and still be marked correct. This attribute expects a 2-dimensional array:
 ```
-“_answers”: [
-   [“one”,1],
-   [“two”,2],
-   [“three”,3]   
+"_answers": [
+   ["one",1],
+   ["two",2],
+   ["three",3]   
 ]
 ```
 
@@ -80,6 +82,7 @@ Each item represents one one text input box for this question and contains value
 
 **prefix:** Text entered in this setting will appear before the input area.
 **suffix:** Text entered in this setting will appear after the input area.
+**placeholder** The placeholder setting specifies a short hint that describes the expected value of the input field.
 **_answers:** Multiple answers can be entered in this setting, for example:
 ```
    "_answers": [
