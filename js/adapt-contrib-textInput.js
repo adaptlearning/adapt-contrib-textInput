@@ -157,6 +157,8 @@ define(function(require) {
             }
             if (this.model.get('_allowsPunctuation')) {
                 userAnswer = userAnswer.replace(/[\.,-\/#!$£%\^&\*;:{}=\-_`~()]/g, "");
+                //remove any orphan double spaces and replace with single space (B & Q)->(B  Q)->(B Q)
+                userAnswer = userAnswer.replace(/(  +)+/g, " ");
             }
             // removes whitespace from beginning/end (leave any in the middle)
             return $.trim(userAnswer);
