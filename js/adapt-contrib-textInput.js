@@ -178,6 +178,10 @@ define(function(require) {
         showMarking: function() {
             _.each(this.model.get('_items'), function(item, i) {
                 var $item = this.$('.textinput-item').eq(i);
+                //
+                //remove previous marking
+                $item.removeClass('correct').removeClass('incorrect');
+                //
                 $item.addClass(item._isCorrect ? 'correct' : 'incorrect');
             }, this);
         },
