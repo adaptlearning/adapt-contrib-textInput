@@ -213,9 +213,20 @@ define(function(require) {
 
         // Used by the question to display the correct answer to the user
         showCorrectAnswer: function() {
-            _.each(this.model.get('_items'), function(item, index) {
-                this.$(".textinput-item-textbox").eq(index).val(item._answers[0]);
-            }, this);
+            
+            if(this.model.get('_answers'))  {
+                
+                var correctAnswers = this.model.get('_answers').slice();
+                _.each(this.model.get('_items'), function(item, index) {
+                    this.$(".textinput-item-textbox").eq(index).val(correctAnswers[index][0]);
+                }, this);
+                
+            } else {
+                _.each(this.model.get('_items'), function(item, index) {
+                    this.$(".textinput-item-textbox").eq(index).val(item._answers[0]);
+                }, this);
+            }
+            
         },
 
         // Used by the question to display the users answer and
