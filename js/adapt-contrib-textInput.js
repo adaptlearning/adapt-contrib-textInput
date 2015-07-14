@@ -216,7 +216,7 @@ define(function(require) {
             
             if(this.model.get('_answers'))  {
                 
-                var correctAnswers = this.model.get('_answers').slice();
+                var correctAnswers = this.model.get('_answers');
                 _.each(this.model.get('_items'), function(item, index) {
                     this.$(".textinput-item-textbox").eq(index).val(correctAnswers[index][0]);
                 }, this);
