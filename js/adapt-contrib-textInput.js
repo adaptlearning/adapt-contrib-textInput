@@ -252,7 +252,7 @@ define(function(require) {
 
             this.model.set({
                 _isAtLeastOneCorrectSelection: false,
-                _isCorrect: false
+                _isCorrect: undefined
             });
         },
 
