@@ -4,7 +4,7 @@ An Adapt core question component that allows the learner to input text based upo
 
 ##Installation
 
-First, be sure to install the [Adapt Command Line Interface](https://github.com/cajones/adapt-cli), then from the command line run:-
+First, be sure to install the [Adapt Command Line Interface](https://github.com/adaptlearning/adapt-cli), then from the command line run:-
 
         adapt install adapt-contrib-textinput
 
