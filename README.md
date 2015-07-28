@@ -67,30 +67,33 @@ If set to `true` allows the following punctuation/characters within the answer:
 ####_answers
 **_Optional_ **
 
-This allows generic answers, which are not dependant on order to be specified, allowing the learner to give the correct answers in any order, and still be marked correct. This attribute expects a 2-dimensional array:
+This allows for answers which are not dependant on order to be specified, allowing the learner to give the correct answers in any order, and still be marked correct. This attribute expects a 2-dimensional array with the same length as the `_items` array. Each entry can contain all acceptable variations of the correct answer e.g. one, 1, I (roman) etc. Make sure to place as first the answer that will be displayed as correct as "model answer".
+
 ```
 "_answers": [
-   ["one",1],
-   ["two",2],
-   ["three",3]   
+   ["one",1,"I"],
+   ["two",2,"II"],
+   ["three",3,"III"]   
 ]
 ```
 
 ####_items
 
-Each item represents one one text input box for this question and contains values for `prefix`, `suffix` and `_answers`.
+Each item represents one text input box for this question and contains values for `prefix`, `suffix` and `_answers`.
 
 **prefix:** Text entered in this setting will appear before the input area.
 **suffix:** Text entered in this setting will appear after the input area.
 **placeholder** The placeholder setting specifies a short hint that describes the expected value of the input field.
-**_answers:** Multiple answers can be entered in this setting, for example:
+**_answers:** Specify correct answer. This can contain all acceptable variations of the correct answer e.g. one, 1, I (roman) etc. Make sure to place as first the answer that will be displayed as correct as "model answer".
+
 ```
    "_answers": [
       "2",
-      "two"
+      "two",
+      "II"
    ]
 ```
-This can be combined with the generic answer above.
+Note that `_items._answers` are not used when top level `_answers` are used.
 
 ##Limitations
  
