@@ -100,7 +100,7 @@ Note that `_items._answers` are not used when top level `_answers` are used.
 
 ##Limitations
  
-To be completed.
+When top level `_answers` are used then `_isRandom` set to true doesn't have expected results as user can answer in any order.
 
 ##Browser spec
 
