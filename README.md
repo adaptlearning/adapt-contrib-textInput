@@ -79,16 +79,12 @@ This allows for answers which are not dependant on order to be specified, allowi
 
 ####_items
 
-Each item represents one text input box for this question and contains values for `prefix`, `suffix` and `_answers`.
+Each item represents one one text input box for this question and contains values for `prefix`, `suffix` and `_answers`.
 
 **prefix:** Text entered in this setting will appear before the input area.
-
 **suffix:** Text entered in this setting will appear after the input area.
-
 **placeholder** The placeholder setting specifies a short hint that describes the expected value of the input field.
-
-**_answers:** Specify correct answer. This can contain all acceptable variations of the correct answer e.g. one, 1, I (roman) etc. Make sure to place as first the answer that will be displayed as correct ("model") answer.
-
+**_answers:** Multiple answers can be entered in this setting, for example:
 ```
    "_answers": [
       "2",
