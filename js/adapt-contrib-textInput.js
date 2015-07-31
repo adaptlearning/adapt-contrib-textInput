@@ -173,7 +173,6 @@ define(function(require) {
             var numberOfSpecificAnswers = 0;
             _.each(this.model.get('_items'), function(item, index) {
                 if(!item._answers) return;
-                //var userAnswer = this.$(".textinput-item-textbox").eq(index).val();
                 var userAnswer = item.userAnswer || ""; 
                 if (this.checkAnswerIsCorrect(item["_answers"], userAnswer)) {
                     numberOfCorrectAnswers++;
