@@ -4,7 +4,7 @@
 
 <img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/textInput01.gif" alt="text input in action">  
 
-It allows the user to input a free-form answer in response to an initial question. The author may supply multiple correct answers to accommodate, for example, variations in spelling. The author may also supply a suffix and prefix to be added to the text field.
+**Text Input** allows the user to input a free-form answer in response to an initial question. The author may supply multiple correct answers to accommodate, for example, variations in spelling. The author may also supply a suffix and prefix to be added to the text field.
 
 [Visit the **Text Input** wiki](https://github.com/adaptlearning/adapt-contrib-textInput/wiki) for more information about its functionality and for explanations of key properties. 
 
