@@ -1,9 +1,3 @@
-/*
- * adapt-contrib-textInput
- * License - https://github.com/adaptlearning/adapt-contrib-textInput/blob/master/LICENSE
- * Maintainers - Kev Adsett <kev.adsett@gmail.com>, Daryl Hedley <darylhedley@hotmail.com>, Himanshu Rajotia <himanshu.rajotia@credipoint.com>
- */
-
 define(function(require) {
     var QuestionView = require('coreViews/questionView');
     var Adapt = require('coreJS/adapt');
