@@ -44,16 +44,17 @@ define(function(require) {
             var genericAnswers = this.model.get("_answers");
             _.each(this.model.get("_items"), function(item) {
                 var answerIndex = userAnswer[item._index];
-                if (answerIndex > -1) {
-                    item.userAnswer = item._answers[answerIndex];
-                    item._answerIndex = answerIndex;
-                } else if (answerIndex >= genericAnswerIndexOffset) {
+                if (answerIndex >= genericAnswerIndexOffset) {
                     item.userAnswer = genericAnswers[answerIndex - genericAnswerIndexOffset];
+                    item._answerIndex = answerIndex;
+                } else if (answerIndex > -1) {
+                    item.userAnswer = item._answers[answerIndex];
                     item._answerIndex = answerIndex;
                 } else {
                     if (item.userAnswer === undefined) item.userAnswer = "******";
                     item._answerIndex = -1;
                 }
+                if (item.userAnswer instanceof Array) item.userAnswer = item.userAnswer[0];
             });
 
             this.setQuestionAsSubmitted();
@@ -151,12 +152,13 @@ define(function(require) {
         markGenericAnswers: function() {
             var numberOfCorrectAnswers = 0;
             var correctAnswers = this.model.get('_answers').slice();
+            var usedAnswerIndexes = [];
             _.each(this.model.get('_items'), function(item, itemIndex) {
                 _.each(correctAnswers, function(answerGroup, answerIndex) {
                     if(this.checkAnswerIsCorrect(answerGroup, item.userAnswer)) {
+                        if (_.indexOf(usedAnswerIndexes, answerIndex) > -1) return;
                         item._isCorrect = true;
                         item._answerIndex = answerIndex + genericAnswerIndexOffset;
-                        correctAnswers.splice(answerIndex,1);
                         numberOfCorrectAnswers++;
                         this.model.set('_numberOfCorrectAnswers', numberOfCorrectAnswers);
                         this.model.set('_isAtLeastOneCorrectSelection', true);
