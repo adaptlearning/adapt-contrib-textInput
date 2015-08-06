@@ -157,6 +157,7 @@ define(function(require) {
                 _.each(correctAnswers, function(answerGroup, answerIndex) {
                     if(this.checkAnswerIsCorrect(answerGroup, item.userAnswer)) {
                         if (_.indexOf(usedAnswerIndexes, answerIndex) > -1) return;
+                        usedAnswerIndexes.push(answerIndex);
                         item._isCorrect = true;
                         item._answerIndex = answerIndex + genericAnswerIndexOffset;
                         numberOfCorrectAnswers++;
