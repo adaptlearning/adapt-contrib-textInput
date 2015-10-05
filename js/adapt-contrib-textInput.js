@@ -6,7 +6,6 @@ define(function(require) {
 
     var TextInput = QuestionView.extend({
         events: {
-            "blur input":"forceFixedPositionFakeScroll",
             "focus input":"clearValidationError"
         },
 
@@ -89,14 +88,6 @@ define(function(require) {
         // Used by question to setup itself just after rendering
         onQuestionRendered: function() {
             this.setReadyStatus();
-        },
-
-        forceFixedPositionFakeScroll: function() {
-            if (Modernizr.touch) {
-                _.defer(function() {
-                    window.scrollTo(document.body.scrollLeft, document.body.scrollTop);
-                });
-            }
         },
 
         clearValidationError: function() {
