@@ -15,6 +15,7 @@ define(function(require) {
         },
 
         setupQuestion: function() {
+            this.model.set( '_genericAnswerIndexOffset', genericAnswerIndexOffset );
             this.setupItemIndexes();
             this.restoreUserAnswer();
 
