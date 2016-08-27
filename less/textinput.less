@@ -3,7 +3,17 @@
     padding: @item-padding;
     position: relative;
     border: @item-border;
-    margin-bottom: 2px;
+    margin-bottom: @item-margin-bottom;
+
+    .component-full & {
+        padding: 1%;
+    }
+
+    .component-left &,
+    .component-right & {
+        padding: 2%;
+    }
+
 }
 
 .textinput-item label {
@@ -32,9 +42,11 @@
     .dir-rtl & {
         float: right;
     }
-    height: 26px;
+    height: 28px;
+    line-height: 28px;
+
     &.textinput-validation-error {
-        border: 2px solid @validation-error-border-color;
+        border: 2px solid @validation-error;
     }
 }
 
@@ -62,6 +74,14 @@
 }
 
 .textinput-widget {
+
+    &.disabled {
+        .textinput-item {
+            border-color: @item-border-color-disabled;
+            background-color: @item-color-disabled;
+        }
+    }
+
     &.submitted {
         .textinput-item {
             background-color: @item-color-disabled;
@@ -85,7 +105,7 @@
         .textinput-select-icon {
             display: none;
         }
-        .correct .textinput-correct-icon {
+        .textinput-correct-icon {
             display: block;
         }
     }
@@ -106,12 +126,12 @@
     }
 
     .textinput-correct-icon {
-        color: @icon-correct-color;
+        color: @validation-success;
         display: none;
     }
 
     .textinput-incorrect-icon {
-        color: @icon-incorrect-color;
+        color: @validation-error;
         display: none;
     }
 }
