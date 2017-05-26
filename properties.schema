@@ -100,53 +100,50 @@
       "required":true,
       "default": true,
       "title": "Display Model Answer",
-      "inputType": {"type": "Boolean", "options": [true, false]},
+      "inputType": "Checkbox",
       "validators": [],
-      "help": "Select 'true' to allow the user to view the 'model answer' should they answer the question incorrectly"
+      "help": "Allow the user to view the 'model answer' if they answer the question incorrectly?"
     },
     "_canShowFeedback": {
       "type":"boolean",
       "required":true,
       "default": true,
       "title": "Display Feedback",
-      "inputType": {"type": "Boolean", "options": [true, false]},
-      "validators": [],
-      "help": "Select 'true' to allow the user to view feedback on their answer"
+      "inputType": "Checkbox",
+      "validators": []
     },
     "_canShowMarking": {
       "type": "boolean",
       "default": true,
       "title": "Display Marking",
-      "inputType": { "type": "Boolean", "options": [ true, false ] },
-      "validators": [],
-      "help": "Select 'true' to display ticks and crosses on question completion"
+      "inputType": "Checkbox",
+      "validators": []
     },
     "_shouldDisplayAttempts": {
       "type":"boolean",
       "required":false,
       "default": false,
       "title": "Display Attempts",
-      "inputType": {"type": "Boolean", "options": [true, false]},
+      "inputType": "Checkbox",
       "validators": [],
-      "help": "Select 'true' to display the numbers of attempts left"
+      "help": "Display the number of attempts remaining?"
     },
     "_isRandom": {
       "type":"boolean",
       "required":false,
       "default": false,
-      "title": "Randomised Items",
-      "inputType": {"type": "Boolean", "options": [true, false]},
-      "validators": [],
-      "help": "If set to 'true', all items will be randomised"
+      "title": "Randomise Items",
+      "inputType": "Checkbox",
+      "validators": []
     },
     "_recordInteraction": {
       "type":"boolean",
       "required":false,
       "default": true,
       "title": "Record interaction",
-      "inputType": {"type": "Boolean", "options": [true, false]},
+      "inputType": "Checkbox",
       "validators": [],
-      "help": "If set to 'true', the user's answer(s) will be recorded to cmi.interactions on the LMS (where supported)."
+      "help": "Record the user's answer(s) on the LMS via cmi.interactions (where supported)?"
     },
     "_questionWeight": {
       "type":"number",
@@ -161,19 +158,18 @@
       "type":"boolean",
       "required":true,
       "default":false,
-      "title": "Allow Any Case Answers",
-      "inputType": {"type": "Boolean", "options": [false, true]},
+      "title": "Allow 'any case' answers",
+      "inputType": "Checkbox",
       "validators": [],
-      "help": "Set this to 'false' to have a case-sensitive check of the user's answer"
+      "help": "Should the check of the user's answer(s) be case-insensitive or case-sensitive?"
     },
     "_allowsPunctuation": {
       "type":"boolean",
       "required":true,
       "default":false,
       "title": "Allow Punctuation",
-      "inputType": {"type": "Boolean", "options": [false, true]},
-      "validators": [],
-      "help": "Set this to 'true' to allow any punctuation"
+      "inputType": "Checkbox",
+      "validators": []
     },
     "_feedback": {
       "type":"object",
