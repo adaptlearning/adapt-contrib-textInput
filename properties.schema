@@ -1,5 +1,5 @@
 {
-  "type":"object",
+  "type": "object",
   "$schema": "http://json-schema.org/draft-04/schema",
   "id": "http://jsonschema.net",
   "$ref": "http://localhost/plugins/content/component/model.schema",
@@ -13,7 +13,7 @@
       "translatable": true
     }
   },
-  "properties":{
+  "properties": {
     "_supportedLayout": {
       "type": "string",
       "required": true,
@@ -31,21 +31,21 @@
       "translatable": true
     },
     "_items": {
-      "type":"array",
-      "required":true,
+      "type": "array",
+      "required": true,
       "title": "Input Items",
       "items": {
-        "type":"object",
-        "required":false,
-        "properties":{
+        "type": "object",
+        "required": false,
+        "properties": {
           "_answers": {
-            "type":"array",
-            "required":false,
+            "type": "array",
+            "required": false,
             "title": "Answers",
             "items": {
               "type": "string",
               "required": true,
-              "default":"",
+              "default": "",
               "title": "Item",
               "inputType": "Text",
               "validators": ["required"],
@@ -54,9 +54,9 @@
             }
           },
           "prefix": {
-            "type":"string",
-            "required":false,
-            "default":"",
+            "type": "string",
+            "required": false,
+            "default": "",
             "title": "Prefix",
             "inputType": "Text",
             "validators": [],
@@ -64,9 +64,9 @@
             "translatable": true
           },
           "suffix": {
-            "type":"string",
-            "required":false,
-            "default":"",
+            "type": "string",
+            "required": false,
+            "default": "",
             "title": "Suffix",
             "inputType": "Text",
             "validators": [],
@@ -74,9 +74,9 @@
             "translatable": true
           },
           "placeholder": {
-            "type":"string",
-            "required":false,
-            "default":"",
+            "type": "string",
+            "required": false,
+            "default": "",
             "title": "Placeholder",
             "inputType": "Text",
             "validators": [],
@@ -87,17 +87,17 @@
       }
     },
     "_attempts": {
-      "type":"number",
-      "required":true,
-      "default":1,
+      "type": "number",
+      "required": true,
+      "default": 1,
       "title": "Attempts",
-      "inputType":"Number",
+      "inputType": "Number",
       "validators": ["required", "number"],
       "help": "How many attempts the learner is allowed"
     },
     "_canShowModelAnswer": {
-      "type":"boolean",
-      "required":true,
+      "type": "boolean",
+      "required": true,
       "default": true,
       "title": "Display Model Answer",
       "inputType": "Checkbox",
@@ -105,8 +105,8 @@
       "help": "Allow the user to view the 'model answer' if they answer the question incorrectly?"
     },
     "_canShowFeedback": {
-      "type":"boolean",
-      "required":true,
+      "type": "boolean",
+      "required": true,
       "default": true,
       "title": "Display Feedback",
       "inputType": "Checkbox",
@@ -120,8 +120,8 @@
       "validators": []
     },
     "_shouldDisplayAttempts": {
-      "type":"boolean",
-      "required":false,
+      "type": "boolean",
+      "required": false,
       "default": false,
       "title": "Display Attempts",
       "inputType": "Checkbox",
@@ -129,16 +129,16 @@
       "help": "Display the number of attempts remaining?"
     },
     "_isRandom": {
-      "type":"boolean",
-      "required":false,
+      "type": "boolean",
+      "required": false,
       "default": false,
       "title": "Randomise Items",
       "inputType": "Checkbox",
       "validators": []
     },
     "_recordInteraction": {
-      "type":"boolean",
-      "required":false,
+      "type": "boolean",
+      "required": false,
       "default": true,
       "title": "Record interaction",
       "inputType": "Checkbox",
@@ -146,8 +146,8 @@
       "help": "Record the user's answer(s) on the LMS via cmi.interactions (where supported)?"
     },
     "_questionWeight": {
-      "type":"number",
-      "required":false,
+      "type": "number",
+      "required": false,
       "default": 1,
       "title": "Question Weight",
       "inputType": "Number",
@@ -155,29 +155,29 @@
       "help": "How much this question is worth"
     },
     "_allowsAnyCase": {
-      "type":"boolean",
-      "required":true,
-      "default":false,
+      "type": "boolean",
+      "required": true,
+      "default": false,
       "title": "Allow 'any case' answers",
       "inputType": "Checkbox",
       "validators": [],
       "help": "Should the check of the user's answer(s) be case-insensitive or case-sensitive?"
     },
     "_allowsPunctuation": {
-      "type":"boolean",
-      "required":true,
-      "default":false,
+      "type": "boolean",
+      "required": true,
+      "default": false,
       "title": "Allow Punctuation",
       "inputType": "Checkbox",
       "validators": []
     },
     "_feedback": {
-      "type":"object",
+      "type": "object",
       "required": false,
       "title": "Feedback",
-      "properties":{
+      "properties": {
         "correct": {
-          "type":"string",
+          "type": "string",
           "required": false,
           "default": "",
           "title": "Correct",
@@ -187,12 +187,12 @@
           "translatable": true
         },
         "_incorrect": {
-          "type":"object",
+          "type": "object",
           "required": false,
           "title": "Incorrect Feedback",
-          "properties":{
+          "properties": {
             "final": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "Incorrect Final",
@@ -202,7 +202,7 @@
               "translatable": true
             },
             "notFinal": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "Incorrect Not Final",
@@ -214,11 +214,11 @@
           }
         },
         "_partlyCorrect": {
-          "type":"object",
-          "required":false,
-          "properties":{
+          "type": "object",
+          "required": false,
+          "properties": {
             "final": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "Partly Correct Final",
@@ -228,7 +228,7 @@
               "translatable": true
             },
             "notFinal": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "Partly Correct Not Final",
@@ -242,16 +242,16 @@
       }
     },
     "_buttons": {
-      "type":"object",
+      "type": "object",
       "title": "Buttons",
       "required": false,
-      "properties":{
+      "properties": {
         "_submit": {
-          "type":"object",
+          "type": "object",
           "title": "Submit",
-          "properties":{
+          "properties": {
             "buttonText": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -261,7 +261,7 @@
               "translatable": true
             },
             "ariaLabel": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -273,11 +273,11 @@
           }
         },
         "_reset": {
-          "type":"object",
+          "type": "object",
           "title": "Reset",
-          "properties":{
+          "properties": {
             "buttonText": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -287,7 +287,7 @@
               "translatable": true
             },
             "ariaLabel": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -299,11 +299,11 @@
           }
         },
         "_showCorrectAnswer": {
-          "type":"object",
+          "type": "object",
           "title": "Show Correct Answer",
-          "properties":{
+          "properties": {
             "buttonText": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -313,7 +313,7 @@
               "translatable": true
             },
             "ariaLabel": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -325,11 +325,11 @@
           }
         },
         "_hideCorrectAnswer": {
-          "type":"object",
+          "type": "object",
           "title": "Hide Correct Answer",
-          "properties":{
+          "properties": {
             "buttonText": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -339,7 +339,7 @@
               "translatable": true
             },
             "ariaLabel": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -351,11 +351,11 @@
           }
         },
         "_showFeedback": {
-          "type":"object",
+          "type": "object",
           "title": "Show Feedback",
-          "properties":{
+          "properties": {
             "buttonText": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -365,7 +365,7 @@
               "translatable": true
             },
             "ariaLabel": {
-              "type":"string",
+              "type": "string",
               "required": false,
               "default": "",
               "title": "",
@@ -377,7 +377,7 @@
           }
         },
         "remainingAttemptsText": {
-          "type":"string",
+          "type": "string",
           "required": false,
           "default": "",
           "title": "Attempts Remaining Text",
@@ -387,7 +387,7 @@
           "translatable": true
         },
         "remainingAttemptText": {
-          "type":"string",
+          "type": "string",
           "required": false,
           "default": "",
           "title": "Final Attempt Text",
