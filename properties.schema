@@ -183,7 +183,7 @@
           "title": "Correct",
           "inputType": "TextArea",
           "validators": [],
-          "help": "Correct feedback for this question",
+          "help": "Correct answer feedback for this question",
           "translatable": true
         },
         "_incorrect": {
@@ -198,7 +198,7 @@
               "title": "Incorrect Final",
               "inputType": "TextArea",
               "validators": [],
-              "help": "Incorrect feedback for the final attempt",
+              "help": "Incorrect answer feedback for the final attempt",
               "translatable": true
             },
             "notFinal": {
@@ -208,7 +208,7 @@
               "title": "Incorrect Not Final",
               "inputType": "TextArea",
               "validators": [],
-              "help": "Incorrect feedback for any attempt apart from the last attempt",
+              "help": "Incorrect answer feedback for any attempt apart from the last attempt. If you leave this blank, the 'Incorrect Final' feedback will be used instead.",
               "translatable": true
             }
           }
@@ -224,7 +224,7 @@
               "title": "Partly Correct Final",
               "inputType": "TextArea",
               "validators": [],
-              "help": "Partly correct feedback for the final attempt",
+              "help": "Partly correct answer feedback for the final attempt. If you leave this blank, the 'Incorrect Final' feedback will be used instead.",
               "translatable": true
             },
             "notFinal": {
@@ -234,7 +234,7 @@
               "title": "Partly Correct Not Final",
               "inputType": "TextArea",
               "validators": [],
-              "help": "Partly correct feedback for any attempt apart from the last attempt",
+              "help": "Partly correct answer feedback for any attempt apart from the last attempt. If you leave this blank, the 'Partly Correct Final' feedback will be used instead.",
               "translatable": true
             }
           }
