@@ -275,15 +275,15 @@ define(function(require) {
         * Used by tracking extensions to return an object containing the component's specific interactions.
         */
         getInteractionObject: function() {
-            var interactaction = {
+            var interaction = {
                 correctResponsesPattern: []
             };
 
-            interactaction.correctResponsesPattern = _.flatten(this.model.get('_items').map(function(item) {
+            interaction.correctResponsesPattern = _.flatten(this.model.get('_items').map(function(item) {
                 return item._answers;
             }));
 
-            return interactaction;
+            return interaction;
         },
 
         /**
