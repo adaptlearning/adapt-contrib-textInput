@@ -276,7 +276,7 @@ define(function(require) {
         */
         getInteractionObject: function() {
             var interaction = {
-                correctResponsesPattern: []
+                correctResponsesPattern: null
             };
 
             interaction.correctResponsesPattern = _.flatten(this.model.get('_items').map(function(item) {
