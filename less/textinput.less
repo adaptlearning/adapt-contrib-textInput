@@ -36,6 +36,13 @@
     &.textinput-validation-error {
         border: 2px solid @validation-error-border-color;
     }
+    /*
+       Hide 'X' icon for IE11 and Edge 12+
+       Issue:https://github.com/adaptlearning/adapt_framework/issues/1913
+    */
+    &::-ms-clear {
+        display: none;
+    }
 }
 
 .textinput-item {
