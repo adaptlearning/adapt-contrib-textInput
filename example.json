@@ -50,6 +50,7 @@
       }
   ],
   "_feedback": {
+    "title": "Feedback title",
     "correct": "This feedback will appear if you answered the question correctly.",
     "_incorrect": {
       "notFinal": "",
