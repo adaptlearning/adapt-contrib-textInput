@@ -272,6 +272,21 @@ define(function(require) {
         },
 
         /**
+        * Used by tracking extensions to return an object containing the component's specific interactions.
+        */
+        getInteractionObject: function() {
+            var interaction = {
+                correctResponsesPattern: null
+            };
+
+            interaction.correctResponsesPattern = _.flatten(this.model.get('_items').map(function(item) {
+                return item._answers;
+            }));
+
+            return interaction;
+        },
+
+        /**
         * used by adapt-contrib-spoor to get the user's answers in the format required by the cmi.interactions.n.student_response data field
         * returns the user's answers as a string in the format "answer1[,]answer2[,]answer3"
         * the use of [,] as an answer delimiter is from the SCORM 2004 specification for the fill-in interaction type
