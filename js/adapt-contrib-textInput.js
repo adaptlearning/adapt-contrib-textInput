@@ -29,7 +29,7 @@ define(function(require) {
         },
 
         setupItemIndexes: function() {
-            
+
             _.each(this.model.get('_items'), function(item, index) {
 
                 if (item._index === undefined) item._index = index;
@@ -64,7 +64,7 @@ define(function(require) {
             this.setScore();
             this.showMarking();
             this.setupFeedback();
-        },  
+        },
 
         disableQuestion: function() {
             this.setAllItemsEnabled(false);
@@ -166,7 +166,7 @@ define(function(require) {
             var numberOfSpecificAnswers = 0;
             _.each(this.model.get('_items'), function(item, index) {
                 if(!item._answers) return;
-                var userAnswer = item.userAnswer || ""; 
+                var userAnswer = item.userAnswer || "";
                 if (this.checkAnswerIsCorrect(item["_answers"], userAnswer)) {
                     numberOfCorrectAnswers++;
                     item._isCorrect = true;
@@ -186,7 +186,7 @@ define(function(require) {
             var matched = _.filter(possibleAnswers, function(cAnswer){
                 return this.cleanupUserAnswer(cAnswer) == uAnswer;
             }, this);
-            
+
             var answerIsCorrect = matched && matched.length > 0;
             if (answerIsCorrect) this.model.set('_hasAtLeastOneCorrectSelection', true);
             return answerIsCorrect;
@@ -249,20 +249,20 @@ define(function(require) {
         },
 
         showCorrectAnswer: function() {
-            
+
             if(this.model.get('_answers'))  {
-                
+
                 var correctAnswers = this.model.get('_answers');
                 _.each(this.model.get('_items'), function(item, index) {
                     this.$(".textinput-item-textbox").eq(index).val(correctAnswers[index][0]);
                 }, this);
-                
+
             } else {
                 _.each(this.model.get('_items'), function(item, index) {
                     this.$(".textinput-item-textbox").eq(index).val(item._answers[0]);
                 }, this);
             }
-            
+
         },
 
         hideCorrectAnswer: function() {
