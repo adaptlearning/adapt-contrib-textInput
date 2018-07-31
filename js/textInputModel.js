@@ -4,7 +4,7 @@ define([
 
     var TextInputModel = QuestionModel.extend({
 
-    	init: function() {
+        init: function() {
             QuestionModel.prototype.init.call(this);
 
             this.set( '_genericAnswerIndexOffset', TextInputModel.genericAnswerIndexOffset );
@@ -14,7 +14,7 @@ define([
 
         setupQuestionItemIndexes: function() {
             
-            _.each(this.get('_items'), function(item, index) {
+            this.get('_items').forEach(function(item, index) {
 
                 if (item._index === undefined) item._index = index;
                 if (item._answerIndex === undefined) item._answerIndex = -1;
@@ -23,12 +23,12 @@ define([
 
         },
 
-        restoreUserAnswer: function() {
+        restoreUserAnswers: function() {
             if (!this.get("_isSubmitted")) return;
 
             var userAnswer = this.get("_userAnswer");
             var genericAnswers = this.get("_answers");
-            _.each(this.get("_items"), function(item) {
+            this.get("_items").forEach(function(item) {
                 var answerIndex = userAnswer[item._index];
                 if (answerIndex >= TextInputModel.genericAnswerIndexOffset) {
                     item.userAnswer = genericAnswers[answerIndex - TextInputModel.genericAnswerIndexOffset];
@@ -50,24 +50,24 @@ define([
         },
 
         setupRandomisation: function() {
-            if (this.get('_isRandom') && this.get('_isEnabled')) {
-                this.set("_items", _.shuffle(this.get("_items")));
-            }
+            if (!this.get('_isRandom') || !this.get('_isEnabled')) return;
+            
+            this.set("_items", _.shuffle(this.get("_items")));
         },
 
         // Use to check if the user is allowed to submit the question
         canSubmit: function() {
             // can submit if every item has user input
             var canSubmit = _.every(this.get('_items'), function(item) {
-            	return item.userAnswer != "";
+                return item.userAnswer !== "";
             });
 
             return canSubmit;
         },
 
         setItemUserAnswer:function(itemIndex, userAnswer) {
-        	var item = this.get('_items')[itemIndex];
-        	item.userAnswer = userAnswer;
+            var item = this.get('_items')[itemIndex];
+            item.userAnswer = userAnswer;
         },
 
         //This preserve the state of the users answers for returning or showing the users answer
@@ -77,15 +77,18 @@ define([
             this.isCorrect();
 
             var userAnswer = new Array( items.length );
-            _.each(items, function(item, index) {
+            items.forEach(function(item, index) {
                 userAnswer[ item._index ] = item._answerIndex;
             });
             this.set("_userAnswer", userAnswer);
         },
 
         isCorrect: function() {
-            if(this.get('_answers')) this.markGenericAnswers();
-            else this.markSpecificAnswers();
+            if (this.get('_answers')) {
+                this.markGenericAnswers();
+            } else {
+                this.markSpecificAnswers();
+            }
             // do we have any _isCorrect == false?
             return !_.contains(_.pluck(this.get("_items"),"_isCorrect"), false);
         },
@@ -100,17 +103,19 @@ define([
             var numberOfCorrectAnswers = 0;
             var correctAnswers = this.get('_answers').slice();
             var usedAnswerIndexes = [];
-            _.each(this.get('_items'), function(item, itemIndex) {
-                _.each(correctAnswers, function(answerGroup, answerIndex) {
-                    if(this.checkAnswerIsCorrect(answerGroup, item.userAnswer)) {
-                        if (_.indexOf(usedAnswerIndexes, answerIndex) > -1) return;
-                        usedAnswerIndexes.push(answerIndex);
-                        item._isCorrect = true;
-                        item._answerIndex = answerIndex + TextInputModel.genericAnswerIndexOffset;
-                        numberOfCorrectAnswers++;
-                        this.set('_numberOfCorrectAnswers', numberOfCorrectAnswers);
-                        this.set('_isAtLeastOneCorrectSelection', true);
-                    }
+            this.get('_items').forEach(function(item, itemIndex) {
+                correctAnswers.forEach(function(answerGroup, answerIndex) {
+                    if (_.indexOf(usedAnswerIndexes, answerIndex) > -1) return;
+
+                    if (this.checkAnswerIsCorrect(answerGroup, item.userAnswer) == false) return;
+                    
+                    usedAnswerIndexes.push(answerIndex);
+                    item._isCorrect = true;
+                    item._answerIndex = answerIndex + TextInputModel.genericAnswerIndexOffset;
+                    numberOfCorrectAnswers++;
+                    this.set('_numberOfCorrectAnswers', numberOfCorrectAnswers);
+                    this.set('_isAtLeastOneCorrectSelection', true);
+
                 }, this);
                 if(!item._isCorrect) item._isCorrect = false;
             }, this);
@@ -121,8 +126,8 @@ define([
         markSpecificAnswers: function() {
             var numberOfCorrectAnswers = 0;
             var numberOfSpecificAnswers = 0;
-            _.each(this.get('_items'), function(item, index) {
-                if(!item._answers) return;
+            this.get('_items').forEach(function(item, index) {
+                if (!item._answers) return;
                 var userAnswer = item.userAnswer || ""; 
                 if (this.checkAnswerIsCorrect(item["_answers"], userAnswer)) {
                     numberOfCorrectAnswers++;
@@ -140,7 +145,7 @@ define([
 
         checkAnswerIsCorrect: function(possibleAnswers, userAnswer) {
             var uAnswer = this.cleanupUserAnswer(userAnswer);
-            var matched = _.filter(possibleAnswers, function(cAnswer){
+            var matched = possibleAnswers.filter(function(cAnswer) {
                 return this.cleanupUserAnswer(cAnswer) == uAnswer;
             }, this);
             
@@ -174,7 +179,7 @@ define([
         },
 
         resetUserAnswer: function() {
-            _.each(this.get('_items'), function(item) {
+            this.get('_items').forEach(function(item) {
                 item["_isCorrect"] = false;
                 item["userAnswer"] = "";
             }, this);
@@ -196,8 +201,8 @@ define([
             return "fill-in";
         }
     }, {
-    	genericAnswerIndexOffset: 65536
+        genericAnswerIndexOffset: 65536
     });
 
-	return TextInputModel;
+    return TextInputModel;
 });

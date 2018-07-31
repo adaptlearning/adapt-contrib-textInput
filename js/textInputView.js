@@ -4,7 +4,7 @@ define([
 
     var TextInputView = QuestionView.extend({
 
- 		events: {
+        events: {
             "focus input":"clearValidationError",
             "change input":"onInputChanged"
         },
@@ -27,7 +27,7 @@ define([
         },
 
         setAllItemsEnabled: function(isEnabled) {
-            _.each(this.model.get('_items'), function(item, index) {
+            this.model.get('_items').forEach(function(item, index) {
                 var $itemInput = this.$('input').eq(index);
 
                 if (isEnabled) {
@@ -60,7 +60,7 @@ define([
         showMarking: function() {
             if (!this.model.get('_canShowMarking')) return;
 
-            _.each(this.model.get('_items'), function(item, i) {
+            this.model.get('_items').forEach(function(item, i) {
                 var $item = this.$('.textinput-item').eq(i);
                 $item.removeClass('correct incorrect').addClass(item._isCorrect ? 'correct' : 'incorrect');
             }, this);
@@ -78,15 +78,15 @@ define([
 
         showCorrectAnswer: function() {
             
-            if(this.model.get('_answers'))  {
+            if (this.model.get('_answers'))  {
                 
                 var correctAnswers = this.model.get('_answers');
-                _.each(this.model.get('_items'), function(item, index) {
+                this.model.get('_items').forEach(function(item, index) {
                     this.$(".textinput-item-textbox").eq(index).val(correctAnswers[index][0]);
                 }, this);
                 
             } else {
-                _.each(this.model.get('_items'), function(item, index) {
+                this.model.get('_items').forEach(function(item, index) {
                     this.$(".textinput-item-textbox").eq(index).val(item._answers[0]);
                 }, this);
             }
@@ -94,14 +94,14 @@ define([
         },
 
         hideCorrectAnswer: function() {
-            _.each(this.model.get('_items'), function(item, index) {
+            this.model.get('_items').forEach(function(item, index) {
                 this.$(".textinput-item-textbox").eq(index).val(item.userAnswer);
             }, this);
         },
 
         onInputChanged:function(e) {
-        	var $input = $(e.target);
-        	this.model.setItemUserAnswer($input.index(), $input.val());
+            var $input = $(e.target);
+            this.model.setItemUserAnswer($input.index(), $input.val());
         }
     });
 
