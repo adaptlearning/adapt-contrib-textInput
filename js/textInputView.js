@@ -30,11 +30,7 @@ define([
             this.model.get('_items').forEach(function(item, index) {
                 var $itemInput = this.$('input').eq(index);
 
-                if (isEnabled) {
-                    $itemInput.prop('disabled', false);
-                } else {
-                    $itemInput.prop('disabled', true);
-                }
+                $itemInput.prop('disabled', !isEnabled);
             }, this);
         },
 
