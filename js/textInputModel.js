@@ -128,7 +128,6 @@ define([
         // (i.e. item has a _answers array)
         markSpecificAnswers: function() {
             var numberOfCorrectAnswers = 0;
-            var numberOfSpecificAnswers = 0;
             this.get('_items').forEach(function(item, index) {
                 if (!item._answers) return;
 
@@ -147,7 +146,6 @@ define([
                     _isAtLeastOneCorrectSelection: true
                 });
 
-                numberOfSpecificAnswers++;
             }, this);
         },
 
