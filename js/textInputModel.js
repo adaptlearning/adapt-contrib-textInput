@@ -88,7 +88,7 @@ define([
                 this.markSpecificAnswers();
             }
             // do we have any _isCorrect == false?
-            return !_.contains(_.pluck(this.get('_items'),'_isCorrect'), false);
+            return !_.contains(_.pluck(this.get('_items'), '_isCorrect'), false);
         },
 
         isPartlyCorrect: function() {
@@ -128,7 +128,7 @@ define([
         // (i.e. item has a _answers array)
         markSpecificAnswers: function() {
             var numberOfCorrectAnswers = 0;
-            this.get('_items').forEach(function(item, index) {
+            this.get('_items').forEach(function(item) {
                 if (!item._answers) return;
 
                 var userAnswer = item.userAnswer || '';
