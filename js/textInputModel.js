@@ -13,7 +13,7 @@ define([
         },
 
         setupQuestionItemIndexes: function() {
-            
+
             this.get('_items').forEach(function(item, index) {
 
                 if (item._index === undefined) item._index = index;
@@ -51,7 +51,7 @@ define([
 
         setupRandomisation: function() {
             if (!this.get('_isRandom') || !this.get('_isEnabled')) return;
-            
+
             this.set("_items", _.shuffle(this.get("_items")));
         },
 
@@ -108,7 +108,7 @@ define([
                     if (_.indexOf(usedAnswerIndexes, answerIndex) > -1) return;
 
                     if (this.checkAnswerIsCorrect(answerGroup, item.userAnswer) == false) return;
-                    
+
                     usedAnswerIndexes.push(answerIndex);
                     item._isCorrect = true;
                     item._answerIndex = answerIndex + TextInputModel.genericAnswerIndexOffset;
@@ -128,11 +128,11 @@ define([
             var numberOfSpecificAnswers = 0;
             this.get('_items').forEach(function(item, index) {
                 if (!item._answers) return;
-                var userAnswer = item.userAnswer || ""; 
-                if (this.checkAnswerIsCorrect(item["_answers"], userAnswer)) {
+                var userAnswer = item.userAnswer || "";
+                if (this.checkAnswerIsCorrect(item._answers, userAnswer)) {
                     numberOfCorrectAnswers++;
                     item._isCorrect = true;
-                    item._answerIndex = _.indexOf(item["_answers"], this.cleanupUserAnswer(userAnswer));
+                    item._answerIndex = _.indexOf(item._answers, this.cleanupUserAnswer(userAnswer));
                     this.set('_numberOfCorrectAnswers', numberOfCorrectAnswers);
                     this.set('_isAtLeastOneCorrectSelection', true);
                 } else {
@@ -148,7 +148,7 @@ define([
             var matched = possibleAnswers.filter(function(cAnswer) {
                 return this.cleanupUserAnswer(cAnswer) == uAnswer;
             }, this);
-            
+
             var answerIsCorrect = matched && matched.length > 0;
             if (answerIsCorrect) this.set('_hasAtLeastOneCorrectSelection', true);
             return answerIsCorrect;
@@ -180,9 +180,9 @@ define([
 
         resetUserAnswer: function() {
             this.get('_items').forEach(function(item) {
-                item["_isCorrect"] = false;
-                item["userAnswer"] = "";
-            }, this);
+                item._isCorrect = false;
+                item.userAnswer = "";
+            });
         },
 
         /**

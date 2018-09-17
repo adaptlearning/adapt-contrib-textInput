@@ -77,20 +77,20 @@ define([
         },
 
         showCorrectAnswer: function() {
-            
+
             if (this.model.get('_answers'))  {
-                
+
                 var correctAnswers = this.model.get('_answers');
                 this.model.get('_items').forEach(function(item, index) {
                     this.$(".textinput-item-textbox").eq(index).val(correctAnswers[index][0]);
                 }, this);
-                
+
             } else {
                 this.model.get('_items').forEach(function(item, index) {
                     this.$(".textinput-item-textbox").eq(index).val(item._answers[0]);
                 }, this);
             }
-            
+
         },
 
         hideCorrectAnswer: function() {
