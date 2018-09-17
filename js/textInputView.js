@@ -5,8 +5,8 @@ define([
     var TextInputView = QuestionView.extend({
 
         events: {
-            "focus input":"clearValidationError",
-            "change input":"onInputChanged"
+            'focus input': 'clearValidationError',
+            'change input': 'onInputChanged'
         },
 
         resetQuestionOnRevisit: function() {
@@ -39,7 +39,7 @@ define([
         },
 
         clearValidationError: function() {
-            this.$(".textinput-item-textbox").removeClass("textinput-validation-error");
+            this.$('.textinput-item-textbox').removeClass('textinput-validation-error');
         },
 
         // Blank method for question to fill out when the question cannot be submitted
@@ -48,7 +48,7 @@ define([
         },
 
         showValidationError: function() {
-            this.$(".textinput-item-textbox").addClass("textinput-validation-error");
+            this.$('.textinput-item-textbox').addClass('textinput-validation-error');
         },
 
         // This is important and should give the user feedback on how they answered the question
@@ -78,12 +78,12 @@ define([
 
                 var correctAnswers = this.model.get('_answers');
                 this.model.get('_items').forEach(function(item, index) {
-                    this.$(".textinput-item-textbox").eq(index).val(correctAnswers[index][0]);
+                    this.$('.textinput-item-textbox').eq(index).val(correctAnswers[index][0]);
                 }, this);
 
             } else {
                 this.model.get('_items').forEach(function(item, index) {
-                    this.$(".textinput-item-textbox").eq(index).val(item._answers[0]);
+                    this.$('.textinput-item-textbox').eq(index).val(item._answers[0]);
                 }, this);
             }
 
@@ -91,7 +91,7 @@ define([
 
         hideCorrectAnswer: function() {
             this.model.get('_items').forEach(function(item, index) {
-                this.$(".textinput-item-textbox").eq(index).val(item.userAnswer);
+                this.$('.textinput-item-textbox').eq(index).val(item.userAnswer);
             }, this);
         },
 

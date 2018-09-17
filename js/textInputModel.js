@@ -22,11 +22,11 @@ define([
         },
 
         restoreUserAnswers: function() {
-            if (!this.get("_isSubmitted")) return;
+            if (!this.get('_isSubmitted')) return;
 
-            var userAnswer = this.get("_userAnswer");
-            var genericAnswers = this.get("_answers");
-            this.get("_items").forEach(function(item) {
+            var userAnswer = this.get('_userAnswer');
+            var genericAnswers = this.get('_answers');
+            this.get('_items').forEach(function(item) {
                 var answerIndex = userAnswer[item._index];
                 if (answerIndex >= TextInputModel.genericAnswerIndexOffset) {
                     item.userAnswer = genericAnswers[answerIndex - TextInputModel.genericAnswerIndexOffset];
@@ -35,7 +35,7 @@ define([
                     item.userAnswer = item._answers[answerIndex];
                     item._answerIndex = answerIndex;
                 } else {
-                    if (item.userAnswer === undefined) item.userAnswer = "******";
+                    if (item.userAnswer === undefined) item.userAnswer = '******';
                     item._answerIndex = -1;
                 }
                 if (item.userAnswer instanceof Array) item.userAnswer = item.userAnswer[0];
@@ -50,14 +50,14 @@ define([
         setupRandomisation: function() {
             if (!this.get('_isRandom') || !this.get('_isEnabled')) return;
 
-            this.set("_items", _.shuffle(this.get("_items")));
+            this.set('_items', _.shuffle(this.get('_items')));
         },
 
         // Use to check if the user is allowed to submit the question
         canSubmit: function() {
             // can submit if every item has user input
             var canSubmit = _.every(this.get('_items'), function(item) {
-                return item.userAnswer !== "";
+                return item.userAnswer !== '';
             });
 
             return canSubmit;
@@ -78,7 +78,7 @@ define([
             items.forEach(function(item, index) {
                 userAnswer[ item._index ] = item._answerIndex;
             });
-            this.set("_userAnswer", userAnswer);
+            this.set('_userAnswer', userAnswer);
         },
 
         isCorrect: function() {
@@ -88,7 +88,7 @@ define([
                 this.markSpecificAnswers();
             }
             // do we have any _isCorrect == false?
-            return !_.contains(_.pluck(this.get("_items"),"_isCorrect"), false);
+            return !_.contains(_.pluck(this.get('_items'),'_isCorrect'), false);
         },
 
         isPartlyCorrect: function() {
@@ -129,7 +129,7 @@ define([
             var numberOfSpecificAnswers = 0;
             this.get('_items').forEach(function(item, index) {
                 if (!item._answers) return;
-                var userAnswer = item.userAnswer || "";
+                var userAnswer = item.userAnswer || '';
                 if (this.checkAnswerIsCorrect(item._answers, userAnswer)) {
                     item._isCorrect = true;
                     item._answerIndex = _.indexOf(item._answers, this.cleanupUserAnswer(userAnswer));
@@ -161,9 +161,9 @@ define([
                 userAnswer = userAnswer.toLowerCase();
             }
             if (this.get('_allowsPunctuation')) {
-                userAnswer = userAnswer.replace(/[\.,-\/#!$£%\^&\*;:{}=\-_`~()]/g, "");
+                userAnswer = userAnswer.replace(/[\.,-\/#!$£%\^&\*;:{}=\-_`~()]/g, '');
                 //remove any orphan double spaces and replace with single space (B & Q)->(B  Q)->(B Q)
-                userAnswer = userAnswer.replace(/(  +)+/g, " ");
+                userAnswer = userAnswer.replace(/(  +)+/g, ' ');
             }
             // removes whitespace from beginning/end (leave any in the middle)
             return $.trim(userAnswer);
@@ -172,7 +172,7 @@ define([
         // Used to set the score based upon the _questionWeight
         setScore: function() {
             var numberOfCorrectAnswers = this.get('_numberOfCorrectAnswers');
-            var questionWeight = this.get("_questionWeight");
+            var questionWeight = this.get('_questionWeight');
             var itemLength = this.get('_items').length;
 
             var score = questionWeight * numberOfCorrectAnswers / itemLength;
@@ -183,13 +183,13 @@ define([
         resetUserAnswer: function() {
             this.get('_items').forEach(function(item) {
                 item._isCorrect = false;
-                item.userAnswer = "";
+                item.userAnswer = '';
             });
         },
 
         /**
         * used by adapt-contrib-spoor to get the user's answers in the format required by the cmi.interactions.n.student_response data field
-        * returns the user's answers as a string in the format "answer1[,]answer2[,]answer3"
+        * returns the user's answers as a string in the format 'answer1[,]answer2[,]answer3'
         * the use of [,] as an answer delimiter is from the SCORM 2004 specification for the fill-in interaction type
         */
         getResponse: function() {
@@ -200,7 +200,7 @@ define([
         * used by adapt-contrib-spoor to get the type of this question in the format required by the cmi.interactions.n.type data field
         */
         getResponseType: function() {
-            return "fill-in";
+            return 'fill-in';
         }
     }, {
         genericAnswerIndexOffset: 65536
