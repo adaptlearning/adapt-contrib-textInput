@@ -106,10 +106,7 @@ define([
                 correctAnswers.forEach(function(answerGroup, answerIndex) {
                     if (_.indexOf(usedAnswerIndexes, answerIndex) > -1) return;
 
-                    if (this.checkAnswerIsCorrect(answerGroup, item.userAnswer) === false) {
-                        item._isCorrect = false;
-                        return;
-                    }
+                    if (this.checkAnswerIsCorrect(answerGroup, item.userAnswer) == false) return;
 
                     usedAnswerIndexes.push(answerIndex);
                     item._isCorrect = true;
@@ -121,6 +118,7 @@ define([
                     });
 
                 }, this);
+                if(!item._isCorrect) item._isCorrect = false;
             }, this);
         },
 
@@ -130,22 +128,18 @@ define([
             var numberOfCorrectAnswers = 0;
             this.get('_items').forEach(function(item) {
                 if (!item._answers) return;
-
                 var userAnswer = item.userAnswer || '';
-                if (!this.checkAnswerIsCorrect(item._answers, userAnswer)) {
+                if (this.checkAnswerIsCorrect(item._answers, userAnswer)) {
+                    item._isCorrect = true;
+                    item._answerIndex = _.indexOf(item._answers, this.cleanupUserAnswer(userAnswer));
+                    this.set({
+                        _numberOfCorrectAnswers: ++numberOfCorrectAnswers,
+                        _isAtLeastOneCorrectSelection: true
+                    });
+                } else {
                     item._isCorrect = false;
                     item._answerIndex = -1;
-                    return;
                 }
-
-                item._isCorrect = true;
-                item._answerIndex = _.indexOf(item._answers, this.cleanupUserAnswer(userAnswer));
-
-                this.set({
-                    _numberOfCorrectAnswers: ++numberOfCorrectAnswers,
-                    _isAtLeastOneCorrectSelection: true
-                });
-
             }, this);
         },
 
