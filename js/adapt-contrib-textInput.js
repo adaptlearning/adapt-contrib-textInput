@@ -4,7 +4,7 @@ define([
     './textInputModel',
 ], function(Adapt, TextInputView, TextInputModel) {
 
-    return Adapt.register("textinput", {
+    return Adapt.register('textinput', {
         view: TextInputView,
         model: TextInputModel
     });

@@ -95,7 +95,7 @@ define([
             }, this);
         },
 
-        onInputChanged:function(e) {
+        onInputChanged: function(e) {
             var $input = $(e.target);
             this.model.setItemUserAnswer($input.parent('.component-item').index(), $input.val());
         }
