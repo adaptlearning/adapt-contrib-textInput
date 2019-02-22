@@ -95,9 +95,9 @@ define([
       }, this);
     },
 
-    onInputChanged:function(e) {
+    onInputChanged: function(e) {
       var $input = $(e.target);
-      this.model.setItemUserAnswer($input.index('.js-textinput-textbox'), $input.val());
+      this.model.setItemUserAnswer($input.parents('.js-textinput-item').index(), $input.val());
     }
 
   });
