@@ -14,13 +14,11 @@
   }
 
   &__item-textbox-container {
-    position: relative;
     width: inherit;
   }
 
   &__item-textbox {
     width: inherit;
-    padding: @item-padding (@icon-size + (@item-padding * 2)) @item-padding @item-padding;
 
     /*
      * Hide 'X' icon for IE11 and Edge 12+
@@ -28,23 +26,6 @@
      */
     &::-ms-clear {
       display: none;
-    }
-
-    .dir-rtl & {
-      padding-left: @icon-size + (@item-padding * 2);
-      padding-right: @item-padding;
-    }
-  }
-
-  &__item-state {
-    position: absolute;
-    top: 50%;
-    right: @item-padding;
-    .transform(translateY(-50%));
-
-    .dir-rtl & {
-      right: inherit;
-      left: @item-padding;
     }
   }
 
