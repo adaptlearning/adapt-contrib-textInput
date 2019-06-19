@@ -58,7 +58,7 @@ define([
 
       this.model.get('_items').forEach(function(item, i) {
         var $item = this.$('.js-textinput-item').eq(i);
-        $item.removeClass('correct incorrect').addClass(item._isCorrect ? 'is-correct' : 'is-incorrect');
+        $item.removeClass('is-correct is-incorrect').addClass(item._isCorrect ? 'is-correct' : 'is-incorrect');
       }, this);
     },
 
