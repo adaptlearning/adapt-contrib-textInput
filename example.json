@@ -1,4 +1,5 @@
     // Ordered, multiple correct answer variations
+    // --------------------------------------------------
     {
         "_id": "c-05",
         "_parentId": "b-05",
@@ -12,8 +13,8 @@
         "instruction": "",
         "_attempts": 1,
         "_shouldDisplayAttempts": false,
-        "_questionWeight": 1,
         "_isRandom": false,
+        "_questionWeight": 1,
         "_canShowModelAnswer": true,
         "_canShowFeedback": true,
         "_canShowMarking": true,
@@ -22,30 +23,30 @@
         "_allowsPunctuation": true,
         "_items": [
             {
-                "prefix": "B:",
-                "suffix": "%",
                 "_answers": [
                     "2",
                     "two"
                 ],
+                "prefix": "B:",
+                "suffix": "%",
                 "placeholder": "Enter answer here"
             },
             {
-                "prefix": "C:",
-                "suffix": "%",
                 "_answers": [
                     "3",
                     "three"
                 ],
+                "prefix": "C:",
+                "suffix": "%",
                 "placeholder": "Enter answer here"
             },
             {
-                "prefix": "D:",
-                "suffix": "%",
                 "_answers": [
                     "4",
                     "four"
                 ],
+                "prefix": "D:",
+                "suffix": "%",
                 "placeholder": "Enter answer here"
             }
         ],
@@ -60,9 +61,6 @@
                 "notFinal": "",
                 "final": "This feedback will appear if you answered part of the question correctly."
             }
-        },
-        "_pageLevelProgress": {
-            "_isEnabled": true
         },
         "_comment": "You only need to include _buttons if you want to override the button labels that are set in course.json",
         "_buttons": {
@@ -88,25 +86,15 @@
             },
             "remainingAttemptsText": "attempts remaining",
             "remainingAttemptText": "final attempt"
+        },
+        "_pageLevelProgress": {
+            "_isEnabled": true
         }
     }
 
     // Unordered, single correct answer variations
+    // --------------------------------------------------
     {
-        "_id": "c-05",
-        "_parentId": "b-05",
-        "_type": "component",
-        "_component": "textinput",
-        "_classes": "",
-        "_layout": "full",
-        "title": "Greek alphabet",
-        "displayTitle": "Greek alphabet",
-        "body": "Type Greek alphabet in any order (alpha, beta, gamma and delta).",
-        "instruction": "Fill in your answers below.",
-        "_attempts": 1,
-        "_allowsAnyCase": true,
-        "_allowsPunctuation": true,
-        "_questionWeight": 1,
         "_answers": [
             ["alpha"],
             ["beta"],
@@ -134,19 +122,5 @@
                 "suffix": "",
                 "placeholder": "Enter answer here"
             }
-        ],
-        "_feedback": {
-            "correct": "This feedback will appear if you answered the question correctly.",
-            "_incorrect": {
-                "notFinal": "",
-                "final": "This feedback will appear if you answered the question incorrectly."
-            },
-            "_partlyCorrect": {
-                "notFinal": "",
-                "final": "This feedback will appear if you answered part of the question correctly."
-            }
-        },
-        "_pageLevelProgress": {
-            "_isEnabled": true
-        }
+        ]
     }
