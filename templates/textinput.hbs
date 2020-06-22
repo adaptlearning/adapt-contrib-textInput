@@ -18,7 +18,7 @@
 
       {{#if ../_isEnabled}}
       <div class="textinput__item-textbox-container">
-        <input class="textinput__item-textbox js-textinput-textbox" type="text" placeholder="{{{placeholder}}}" data-id="input-{{@index}}" id="{{../_id}}-{{@index}}" aria-labelledby="{{../_id}}-{{@index}}-aria" value="">
+        <input class="textinput__item-textbox js-textinput-textbox" type="text" placeholder="{{{placeholder}}}" data-id="input-{{@index}}" id="{{../_id}}-{{@index}}" {{#if prefix}}aria-labelledby="{{../_id}}-{{@index}}-aria"{{else}}aria-label="{{{placeholder}}}"{{/if}} value="">
 
         <div class="textinput__item-state">
           <div class="textinput__item-icon textinput__item-correct-icon">
