@@ -6,7 +6,8 @@ define([
 
     events: {
       'focus .js-textinput-textbox': 'clearValidationError',
-      'change .js-textinput-textbox': 'onInputChanged'
+      'change .js-textinput-textbox': 'onInputChanged',
+      'keyup .js-textinput-textbox': 'onInputChanged'
     },
 
     resetQuestionOnRevisit: function() {

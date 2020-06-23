@@ -10,6 +10,7 @@ define([
       this.set( '_genericAnswerIndexOffset', TextInputModel.genericAnswerIndexOffset );
 
       this.setupQuestionItemIndexes();
+      this.checkCanSubmit();
     },
 
     setupQuestionItemIndexes: function() {
@@ -66,6 +67,7 @@ define([
     setItemUserAnswer:function(itemIndex, userAnswer) {
       var item = this.get('_items')[itemIndex];
       item.userAnswer = userAnswer;
+      this.checkCanSubmit();
     },
 
     //This preserve the state of the users answers for returning or showing the users answer
