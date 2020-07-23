@@ -57,11 +57,7 @@ define([
     // Use to check if the user is allowed to submit the question
     canSubmit: function() {
       // can submit if every item has user input
-      var canSubmit = _.every(this.get('_items'), function(item) {
-        return item.userAnswer !== '';
-      });
-
-      return canSubmit;
+      return this.get('_items').every(({ userAnswer }) => userAnswer);
     },
 
     setItemUserAnswer:function(itemIndex, userAnswer) {
