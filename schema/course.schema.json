@@ -1,5 +1,5 @@
 {
-  "$anchor": "textInput-course",
+  "$anchor": "textinput-course",
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "type": "object",
   "$merge": {
@@ -12,13 +12,13 @@
           "type": "object",
           "default": {},
           "properties": {
-            "_textInput": {
+            "_textinput": {
               "type": "object",
               "default": {},
               "properties": {
                 "ariaRegion": {
                   "type": "string",
-                  "title": "Aria region",
+                  "title": "ARIA region",
                   "default": "Text input. Type your answer and then submit.",
                   "_adapt": {
                     "translatable": true
