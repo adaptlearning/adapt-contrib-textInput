@@ -98,4 +98,4 @@ export default class TextInputView extends QuestionView {
     this.model.setItemUserAnswer($input.parents('.js-textinput-item').index(), $input.val());
   }
 
-};
+}
