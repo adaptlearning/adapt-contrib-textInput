@@ -74,16 +74,11 @@ export default class TextInputView extends QuestionView {
   }
 
   showCorrectAnswer() {
-    if (this.model.get('_answers'))  {
-      const correctAnswers = this.model.get('_answers');
-      this.model.get('_items').forEach((item, index) => {
-        this.$('.js-textinput-textbox').eq(index).val(correctAnswers[index][0]);
-      });
-      return;
-    }
-    
+    const correctAnswers = this.model.get('_answers');
+
     this.model.get('_items').forEach((item, index) => {
-      this.$('.js-textinput-textbox').eq(index).val(item._answers[0]);
+      const correctAnswer = correctAnswers ? correctAnswers[index][0] : item._answers[0];
+      this.$('.js-textinput-textbox').eq(index).val(correctAnswer);
     });
   }
 

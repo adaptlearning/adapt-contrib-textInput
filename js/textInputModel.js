@@ -1,10 +1,9 @@
 import QuestionModel from 'core/js/models/questionModel';
 
-export default class TextInputModel extends QuestionModel {
+class TextInputModel extends QuestionModel {
 
   init() {
-    this.genericAnswerIndexOffset = 65536;
-    QuestionModel.prototype.init.call(this);
+    super.init();
 
     this.set('_genericAnswerIndexOffset', this.genericAnswerIndexOffset);
 
@@ -13,11 +12,9 @@ export default class TextInputModel extends QuestionModel {
   }
 
   setupQuestionItemIndexes() {
-    this.get('_items').forEach(function(item, index) {
-
+    this.get('_items').forEach((item, index) => {
       if (item._index === undefined) item._index = index;
       if (item._answerIndex === undefined) item._answerIndex = -1;
-
     });
   }
 
@@ -26,7 +23,7 @@ export default class TextInputModel extends QuestionModel {
 
     const userAnswer = this.get('_userAnswer');
     const genericAnswers = this.get('_answers');
-    this.get('_items').forEach(function(item) {
+    this.get('_items').forEach(item => {
       const answerIndex = userAnswer[item._index];
       if (answerIndex >= this.genericAnswerIndexOffset) {
         item.userAnswer = genericAnswers[answerIndex - this.genericAnswerIndexOffset];
@@ -65,16 +62,14 @@ export default class TextInputModel extends QuestionModel {
     this.checkCanSubmit();
   }
 
-  //This preserve the state of the users answers for returning or showing the users answer
+  // This preserve the state of the users answers for returning or showing the users answer
   storeUserAnswer() {
     const items = this.get('_items');
 
     this.isCorrect();
 
-    const userAnswer = new Array( items.length );
-    items.forEach(function(item, index) {
-      userAnswer[ item._index ] = item._answerIndex;
-    });
+    const userAnswer = new Array(items.length);
+    items.forEach(({ _index, _answerIndex }) => (userAnswer[_index] = _answerIndex));
     this.set('_userAnswer', userAnswer);
   }
 
@@ -85,7 +80,7 @@ export default class TextInputModel extends QuestionModel {
       this.markSpecificAnswers();
     }
     // do we have any _isCorrect == false?
-    return !_.contains(_.pluck(this.get('_items'), '_isCorrect'), false);
+    return this.get('_items').some(({ _isCorrect }) => !_isCorrect);
   }
 
   isPartlyCorrect() {
@@ -100,10 +95,10 @@ export default class TextInputModel extends QuestionModel {
     const usedAnswerIndexes = [];
 
     this.get('_items').forEach(item => {
-      correctAnswers.forEach(function(answerGroup, answerIndex) {
-        if (_.indexOf(usedAnswerIndexes, answerIndex) > -1) return;
+      correctAnswers.forEach((answerGroup, answerIndex) => {
+        if (usedAnswerIndexes.includes(answerIndex)) return;
 
-        if (this.checkAnswerIsCorrect(answerGroup, item.userAnswer) == false) return;
+        if (this.checkAnswerIsCorrect(answerGroup, item.userAnswer) === false) return;
 
         usedAnswerIndexes.push(answerIndex);
         item._isCorrect = true;
@@ -114,8 +109,8 @@ export default class TextInputModel extends QuestionModel {
           _isAtLeastOneCorrectSelection: true
         });
 
-      }, this);
-      if(!item._isCorrect) item._isCorrect = false;
+      });
+      if (!item._isCorrect) item._isCorrect = false;
     });
   }
 
@@ -124,30 +119,26 @@ export default class TextInputModel extends QuestionModel {
   markSpecificAnswers() {
     let numberOfCorrectAnswers = 0;
     this.get('_items').forEach(item => {
-      if (!item._answers) return;
+      const answers = item._answers;
+      if (!answers) return;
       const userAnswer = item.userAnswer || '';
-      if (this.checkAnswerIsCorrect(item._answers, userAnswer)) {
-        item._isCorrect = true;
-        item._answerIndex = _.indexOf(item._answers, this.cleanupUserAnswer(userAnswer));
-        this.set({
-          _numberOfCorrectAnswers: ++numberOfCorrectAnswers,
-          _isAtLeastOneCorrectSelection: true
-        });
-      } else {
-        item._isCorrect = false;
-        item._answerIndex = -1;
-      }
+      const isCorrect = this.checkAnswerIsCorrect(answers, userAnswer);
+      item._isCorrect = isCorrect;
+      item._answerIndex = answers.indexOf(this.cleanupUserAnswer(userAnswer));
+      if (!isCorrect) return;
+      this.set({
+        _numberOfCorrectAnswers: ++numberOfCorrectAnswers,
+        _isAtLeastOneCorrectSelection: true
+      });
     });
   }
 
   checkAnswerIsCorrect(possibleAnswers, userAnswer) {
     const uAnswer = this.cleanupUserAnswer(userAnswer);
-    const matched = possibleAnswers.filter(cAnswer => {
-      return this.cleanupUserAnswer(cAnswer) == uAnswer;
-    });
 
-    const answerIsCorrect = matched && matched.length > 0;
-    if (answerIsCorrect) this.set('_hasAtLeastOneCorrectSelection', true);
+    const answerIsCorrect = possibleAnswers.some(cAnswer => {
+      return this.cleanupUserAnswer(cAnswer) === uAnswer;
+    });
     return answerIsCorrect;
   }
 
@@ -157,26 +148,25 @@ export default class TextInputModel extends QuestionModel {
     }
     if (this.get('_allowsPunctuation')) {
       userAnswer = userAnswer.replace(/[\.,-\/#!$£%\^&\*;:{}=\-_`~()]/g, '');
-      //remove any orphan double spaces and replace with single space (B & Q)->(B  Q)->(B Q)
+      // remove any orphan double spaces and replace with single space (B & Q)->(B  Q)->(B Q)
       userAnswer = userAnswer.replace(/(  +)+/g, ' ');
     }
     // removes whitespace from beginning/end (leave any in the middle)
-    return $.trim(userAnswer);
+    return userAnswer.trim();
   }
 
   // Used to set the score based upon the _questionWeight
   setScore() {
-    var numberOfCorrectAnswers = this.get('_numberOfCorrectAnswers');
-    var questionWeight = this.get('_questionWeight');
-    var itemLength = this.get('_items').length;
+    const numberOfCorrectAnswers = this.get('_numberOfCorrectAnswers');
+    const questionWeight = this.get('_questionWeight');
+    const itemLength = this.get('_items').length;
 
-    var score = questionWeight * numberOfCorrectAnswers / itemLength;
-
+    const score = questionWeight * numberOfCorrectAnswers / itemLength;
     this.set('_score', score);
   }
 
   resetUserAnswer() {
-    this.get('_items').forEach(function(item) {
+    this.get('_items').forEach(item => {
       item._isCorrect = false;
       item.userAnswer = '';
     });
@@ -188,7 +178,7 @@ export default class TextInputModel extends QuestionModel {
   * the use of [,] as an answer delimiter is from the SCORM 2004 specification for the fill-in interaction type
   */
   getResponse() {
-    return _.pluck(this.get('_items'), 'userAnswer').join('[,]');
+    return this.get('_items').map(({ userAnswer }) => userAnswer).join('[,]');
   }
 
   /**
@@ -198,4 +188,5 @@ export default class TextInputModel extends QuestionModel {
     return 'fill-in';
   }
 }
-
+TextInputModel.genericAnswerIndexOffset = 65536;
+export default TextInputModel;
