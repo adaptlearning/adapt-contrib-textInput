@@ -5,7 +5,7 @@ class TextInputModel extends QuestionModel {
   init() {
     super.init();
 
-    this.set('_genericAnswerIndexOffset', this.genericAnswerIndexOffset);
+    this.set('_genericAnswerIndexOffset', TextInputModel.genericAnswerIndexOffset);
 
     this.setupQuestionItemIndexes();
     this.checkCanSubmit();
@@ -25,8 +25,8 @@ class TextInputModel extends QuestionModel {
     const genericAnswers = this.get('_answers');
     this.get('_items').forEach(item => {
       const answerIndex = userAnswer[item._index];
-      if (answerIndex >= this.genericAnswerIndexOffset) {
-        item.userAnswer = genericAnswers[answerIndex - this.genericAnswerIndexOffset];
+      if (answerIndex >= TextInputModel.genericAnswerIndexOffset) {
+        item.userAnswer = genericAnswers[answerIndex - TextInputModel.genericAnswerIndexOffset];
         item._answerIndex = answerIndex;
       } else if (answerIndex > -1) {
         item.userAnswer = item._answers[answerIndex];
@@ -62,7 +62,7 @@ class TextInputModel extends QuestionModel {
     this.checkCanSubmit();
   }
 
-  // This preserve the state of the users answers for returning or showing the users answer
+  // Preserves the state for returning or showing the user's answers
   storeUserAnswer() {
     const items = this.get('_items');
 
@@ -102,7 +102,7 @@ class TextInputModel extends QuestionModel {
 
         usedAnswerIndexes.push(answerIndex);
         item._isCorrect = true;
-        item._answerIndex = answerIndex + this.genericAnswerIndexOffset;
+        item._answerIndex = answerIndex + TextInputModel.genericAnswerIndexOffset;
 
         this.set({
           _numberOfCorrectAnswers: ++numberOfCorrectAnswers,
