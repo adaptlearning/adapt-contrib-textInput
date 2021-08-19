@@ -80,7 +80,7 @@ class TextInputModel extends QuestionModel {
       this.markSpecificAnswers();
     }
     // do we have any _isCorrect == false?
-    return this.get('_items').some(({ _isCorrect }) => !_isCorrect);
+    return this.get('_items').every(({ _isCorrect }) => _isCorrect);
   }
 
   isPartlyCorrect() {
@@ -187,6 +187,9 @@ class TextInputModel extends QuestionModel {
   getResponseType() {
     return 'fill-in';
   }
+
 }
+
 TextInputModel.genericAnswerIndexOffset = 65536;
+
 export default TextInputModel;
