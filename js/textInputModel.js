@@ -79,7 +79,6 @@ class TextInputModel extends QuestionModel {
     } else {
       this.markSpecificAnswers();
     }
-    // do we have any _isCorrect == false?
     return this.get('_items').every(({ _isCorrect }) => _isCorrect);
   }
 
