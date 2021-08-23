@@ -1,7 +1,7 @@
 {
   "name": "adapt-contrib-textInput",
-  "version": "4.1.0",
-  "framework": ">=5.7",
+  "version": "4.2.0",
+  "framework": ">=5.8.0",
   "homepage": "https://github.com/adaptlearning/adapt-contrib-textInput",
   "issues": "https://github.com/adaptlearning/adapt_framework/issues/new",
   "component" : "textinput",

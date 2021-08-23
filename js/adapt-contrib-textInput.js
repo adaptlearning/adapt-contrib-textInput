@@ -1,12 +1,8 @@
-define([
-  'core/js/adapt',
-  './textInputView',
-  './textInputModel',
-], function(Adapt, TextInputView, TextInputModel) {
+import Adapt from 'core/js/adapt';
+import TextInputView from './textInputView';
+import TextInputModel from './textInputModel';
 
-  return Adapt.register('textinput', {
-    view: TextInputView,
-    model: TextInputModel
-  });
-
+export default Adapt.register('textinput', {
+  view: TextInputView,
+  model: TextInputModel
 });
