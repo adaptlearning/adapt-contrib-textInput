@@ -3,7 +3,7 @@
   "version": "4.2.0",
   "framework": ">=5.8",
   "homepage": "https://github.com/adaptlearning/adapt-contrib-textInput",
-  "issues": "https://github.com/adaptlearning/adapt_framework/issues/new",
+  "bugs": "https://github.com/adaptlearning/adapt-contrib-textInput/issues",
   "component" : "textinput",
   "targetAttribute": "_textinput",
   "displayName" : "Text Input",
