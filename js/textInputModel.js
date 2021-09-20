@@ -11,6 +11,21 @@ class TextInputModel extends QuestionModel {
     this.checkCanSubmit();
   }
 
+  /**
+   * @param {string} [type] 'hard' resets _isComplete and _isInteractionComplete, 'soft' resets _isInteractionComplete only.
+   * @param {boolean} [canReset] Defaults to this.get('_canReset')
+   * @returns {boolean}
+   */
+  reset(type = 'hard', canReset = this.get('_canReset')) {
+    const wasReset = super.reset(type, canReset);
+    if (!wasReset) return false;
+    this.set({
+      _isAtLeastOneCorrectSelection: false,
+      _isCorrect: undefined
+    });
+    return true;
+  }
+
   setupQuestionItemIndexes() {
     this.get('_items').forEach((item, index) => {
       if (item._index === undefined) item._index = index;
@@ -146,7 +161,7 @@ class TextInputModel extends QuestionModel {
       userAnswer = userAnswer.toLowerCase();
     }
     if (this.get('_allowsPunctuation')) {
-      userAnswer = userAnswer.replace(/[\.,-\/#!$£%\^&\*;:{}=\-_`~()]/g, '');
+      userAnswer = userAnswer.replace(/[.,-/#!$£%^&*;:{}=\-_`~()]/g, '');
       // remove any orphan double spaces and replace with single space (B & Q)->(B  Q)->(B Q)
       userAnswer = userAnswer.replace(/(  +)+/g, ' ');
     }
