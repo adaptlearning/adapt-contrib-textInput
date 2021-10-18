@@ -10,11 +10,6 @@ export default class TextInputView extends QuestionView {
     };
   }
 
-  resetQuestionOnRevisit() {
-    this.setAllItemsEnabled(false);
-    this.resetQuestion();
-  }
-
   setupQuestion() {
     this.model.setupRandomisation();
   }
