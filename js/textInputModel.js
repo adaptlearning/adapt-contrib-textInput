@@ -21,7 +21,7 @@ class TextInputModel extends QuestionModel {
     if (!wasReset) return false;
     this.set({
       _isAtLeastOneCorrectSelection: false,
-      _isCorrect: undefined
+      _isCorrect: null
     });
     return true;
   }
