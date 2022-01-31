@@ -47,49 +47,27 @@ export default function TextInput (props) {
               </div>
             }
 
-            {_isEnabled ?
-              <div className="textinput-item__textbox-container">
-                <input
-                  className="textinput-item__textbox js-textinput-textbox"
-                  type="text"
-                  placeholder={placeholder}
-                  data-id={`${input}-${index}`}
-                  id={`${_id}-${index}`}
-                  aria-labelledby={prefix && `${_id}-${index}-aria`}
-                  aria-label={placeholder}
-                  defaultValue
-                />
-                <div className="textinput-item__state">
-                  <div className="textinput-item__icon textinput-item__correct-icon">
-                    <div className="icon" />
-                  </div>
-                  <div className="textinput-item__icon textinput-item__incorrect-icon">
-                    <div className="icon" />
-                  </div>
+            <div className="textinput-item__textbox-container">
+              <input
+                className="textinput-item__textbox js-textinput-textbox"
+                type="text"
+                placeholder={placeholder}
+                data-id={`${input}-${index}`}
+                id={`${_id}-${index}`}
+                aria-labelledby={prefix && `${_id}-${index}-aria`}
+                aria-label={placeholder}
+                defaultValue={userAnswer}
+                disabled={!_isEnabled}
+              />
+              <div className="textinput-item__state">
+                <div className="textinput-item__icon textinput-item__correct-icon">
+                  <div className="icon" />
+                </div>
+                <div className="textinput-item__icon textinput-item__incorrect-icon">
+                  <div className="icon" />
                 </div>
               </div>
-
-              :
-
-              <div className="textinput-item__textbox-container">
-                <input
-                  className="textinput-item__textbox js-textinput-textbox"
-                  type="text"
-                  placeholder={placeholder}
-                  data-id={`${input}-${index}`}
-                  defaultValue={userAnswer}
-                  disabled="true"
-                />
-                <div className="textinput-item__state">
-                  <div className="textinput-item__icon textinput-item__correct-icon">
-                    <div className="icon" />
-                  </div>
-                  <div className="textinput-item__icon textinput-item__incorrect-icon">
-                    <div className="icon" />
-                  </div>
-                </div>
-              </div>
-            }
+            </div>
 
             {suffix &&
               <div className="textinput-item__suffix-container">
