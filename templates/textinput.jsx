@@ -23,7 +23,7 @@ export default function TextInput (props) {
         'component__widget textinput__widget',
         !_isEnabled && 'is-disabled',
         _isInteractionComplete && 'is-complete is-submitted show-user-answer',
-        _isInteractionComplete && _isCorrect && 'is-correct'
+        _isCorrect && 'is-correct'
       ])}>
 
         {props._items.map(({ prefix, _index, input, placeholder, userAnswer, suffix }, index) =>
