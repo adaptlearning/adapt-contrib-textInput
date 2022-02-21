@@ -3,8 +3,6 @@ import { compile, classes, templates, html } from 'core/js/reactHelpers';
 
 export default function TextInput (props) {
   const {
-    isInteractive,
-    _canShowMarking,
     _isInteractionComplete,
     _id,
     _isEnabled,
