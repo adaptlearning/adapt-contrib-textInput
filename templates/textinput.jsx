@@ -8,10 +8,9 @@ export default function TextInput (props) {
     _isInteractionComplete,
     _id,
     _isEnabled,
-    _isCorrect
+    _isCorrect,
+    _shouldShowMarking
   } = props;
-
-  const shouldShowMarking = isInteractive() && _canShowMarking;
 
   return (
     <div className="component__inner textinput__inner">
@@ -31,8 +30,8 @@ export default function TextInput (props) {
           <div
             className={classes([
               'textinput-item js-textinput-item',
-              shouldShowMarking && _isCorrect && 'is-correct',
-              shouldShowMarking && !_isCorrect && 'is-incorrect'
+              _shouldShowMarking && _isCorrect && 'is-correct',
+              _shouldShowMarking && !_isCorrect && 'is-incorrect'
             ])}
             key={_index}>
             {prefix &&
