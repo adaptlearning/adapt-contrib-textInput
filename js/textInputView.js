@@ -1,6 +1,5 @@
 import QuestionView from 'core/js/views/questionView';
-
-export default class TextInputView extends QuestionView {
+class TextInputView extends QuestionView {
 
   events() {
     return {
@@ -89,3 +88,7 @@ export default class TextInputView extends QuestionView {
   }
 
 }
+
+TextInputView.template = 'textinput.jsx';
+
+export default TextInputView;
