@@ -1,8 +1,8 @@
-import Adapt from 'core/js/adapt';
+import components from 'core/js/components';
 import TextInputView from './textInputView';
 import TextInputModel from './textInputModel';
 
-export default Adapt.register('textinput', {
+export default components.register('textinput', {
   view: TextInputView,
   model: TextInputModel
 });
