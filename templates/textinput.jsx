@@ -1,16 +1,14 @@
-import Adapt from 'core/js/adapt';
 import React from 'react';
 import { compile, classes, templates, html } from 'core/js/reactHelpers';
 
 export default function TextInput (props) {
-  const ariaLabels = Adapt.course.get('_globals')._accessibility._ariaLabels;
-
   const {
     _isInteractionComplete,
     _id,
     _isEnabled,
     _isCorrect,
-    _shouldShowMarking
+    _shouldShowMarking,
+    _globals
   } = props;
 
   return (
@@ -60,10 +58,10 @@ export default function TextInput (props) {
                 disabled={!_isEnabled}
               />
               <div className="textinput-item__state">
-                <div className="textinput-item__icon textinput-item__correct-icon" aria-label={ariaLabels.correct}>
+                <div className="textinput-item__icon textinput-item__correct-icon" aria-label={_globals._accessibility._ariaLabels.correct}>
                   <div className="icon" />
                 </div>
-                <div className="textinput-item__icon textinput-item__incorrect-icon" aria-label={ariaLabels.incorrect}>
+                <div className="textinput-item__icon textinput-item__incorrect-icon" aria-label={_globals._accessibility._ariaLabels.incorrect}>
                   <div className="icon" />
                 </div>
               </div>
