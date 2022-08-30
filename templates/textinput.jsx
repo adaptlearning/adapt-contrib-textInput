@@ -7,7 +7,8 @@ export default function TextInput (props) {
     _id,
     _isEnabled,
     _isCorrect,
-    _shouldShowMarking
+    _shouldShowMarking,
+    _globals
   } = props;
 
   return (
@@ -57,10 +58,10 @@ export default function TextInput (props) {
                 disabled={!_isEnabled}
               />
               <div className="textinput-item__state">
-                <div className="textinput-item__icon textinput-item__correct-icon">
+                <div className="textinput-item__icon textinput-item__correct-icon" aria-label={_globals._accessibility._ariaLabels.correct}>
                   <div className="icon" />
                 </div>
-                <div className="textinput-item__icon textinput-item__incorrect-icon">
+                <div className="textinput-item__icon textinput-item__incorrect-icon" aria-label={_globals._accessibility._ariaLabels.incorrect}>
                   <div className="icon" />
                 </div>
               </div>
