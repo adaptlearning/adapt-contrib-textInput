@@ -27,7 +27,7 @@
         "instruction": {
           "type": "string",
           "title": "Instruction",
-          "default": "",
+          "default": "Input your answer and select Submit.",
           "_adapt": {
             "translatable": true
           }

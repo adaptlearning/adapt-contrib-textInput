@@ -24,7 +24,7 @@
     "instruction": {
       "type": "string",
       "required": false,
-      "default": "",
+      "default": "Input your answer and select Submit.",
       "inputType": "Text",
       "validators": [],
       "help": "This is the instruction text",

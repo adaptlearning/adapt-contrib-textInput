@@ -10,7 +10,7 @@
         "title": "Title of our text input component",
         "displayTitle": "Title of our text input component",
         "body": "If A is 1% and Z is 26%, what are B, C and D?",
-        "instruction": "",
+        "instruction": "Input your answer and select Submit.",
         "_attempts": 1,
         "_shouldDisplayAttempts": false,
         "_isRandom": false,
