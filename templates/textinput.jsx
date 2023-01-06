@@ -8,7 +8,11 @@ export default function TextInput (props) {
     _isEnabled,
     _isCorrect,
     _shouldShowMarking,
-    _globals
+    _globals,
+    displayTitle,
+    body,
+    instruction,
+    ariaQuestion
   } = props;
 
   return (
@@ -17,12 +21,16 @@ export default function TextInput (props) {
       <templates.header {...props} />
 
       {/* complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states */}
-      <div className={classes([
-        'component__widget textinput__widget',
-        !_isEnabled && 'is-disabled',
-        _isInteractionComplete && 'is-complete is-submitted show-user-answer',
-        _isCorrect && 'is-correct'
-      ])}>
+      <div
+        className={classes([
+          'component__widget textinput__widget',
+          !_isEnabled && 'is-disabled',
+          _isInteractionComplete && 'is-complete is-submitted show-user-answer',
+          _isCorrect && 'is-correct'
+        ])}
+        aria-labelledby={ariaQuestion ? null : (displayTitle || body || instruction) && `${_id}-header`}
+        aria-label={ariaQuestion || null}
+      >
 
         {props._items.map(({ prefix, _index, input, placeholder, userAnswer, suffix }, index) =>
 
