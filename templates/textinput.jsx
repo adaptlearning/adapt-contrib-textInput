@@ -1,5 +1,5 @@
 import React from 'react';
-import { compile, classes, templates, html } from 'core/js/reactHelpers';
+import { classes, templates } from 'core/js/reactHelpers';
 
 export default function TextInput (props) {
   const {
@@ -39,8 +39,9 @@ export default function TextInput (props) {
                   className="textinput-item__prefix"
                   id={`${_id}-${index}-aria`}
                   htmlFor={`${_id}-${index}`}
-                  aria-label={prefix}>
-                  {html(compile(prefix))}
+                  aria-label={prefix}
+                  dangerouslySetInnerHTML={{ __html: prefix }}
+                >
                 </label>
               </div>
             }
@@ -73,8 +74,9 @@ export default function TextInput (props) {
                   className="textinput-item__suffix"
                   id={`${_id}-${index}-aria`}
                   htmlFor={`${_id}-${index}`}
-                  aria-label={suffix}>
-                  {html(compile(suffix))}
+                  aria-label={suffix}
+                  dangerouslySetInnerHTML={{ __html: suffix }}
+                >
                 </label>
               </div>
             }
