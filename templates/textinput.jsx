@@ -68,10 +68,10 @@ export default function TextInput (props) {
               />
               <div className="textinput-item__state">
                 <div className="textinput-item__icon textinput-item__correct-icon" aria-label={_globals._accessibility._ariaLabels.correct}>
-                  <div className="icon" />
+                  <div className="icon" aria-hidden="true"/>
                 </div>
                 <div className="textinput-item__icon textinput-item__incorrect-icon" aria-label={_globals._accessibility._ariaLabels.incorrect}>
-                  <div className="icon" />
+                  <div className="icon" aria-hidden="true" />
                 </div>
               </div>
             </div>
