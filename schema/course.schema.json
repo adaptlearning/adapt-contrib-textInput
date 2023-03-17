@@ -12,16 +12,23 @@
           "type": "object",
           "default": {},
           "properties": {
-            "_textinput": {
+            "_components": {
               "type": "object",
               "default": {},
               "properties": {
-                "ariaRegion": {
-                  "type": "string",
-                  "title": "ARIA region",
-                  "default": "Text input. Type your answer and then submit.",
-                  "_adapt": {
-                    "translatable": true
+                "_textinput": {
+                  "type": "object",
+                  "title": "Text Input",
+                  "default": {},
+                  "properties": {
+                    "ariaRegion": {
+                      "type": "string",
+                      "title": "ARIA region",
+                      "default": "Text input. Type your answer and then submit.",
+                      "_adapt": {
+                        "translatable": true
+                      }
+                    }
                   }
                 }
               }
