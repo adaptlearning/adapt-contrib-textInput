@@ -11,7 +11,7 @@
         "displayTitle": "Title of our text input component",
         "body": "If A is 1% and Z is 26%, what are B, C and D?",
         "instruction": "Input your answer and select Submit.",
-        "ariaQuestion": "Question text specifically for screen readers.",
+        "ariaQuestion": "",
         "_attempts": 1,
         "_shouldDisplayAttempts": false,
         "_isRandom": false,
