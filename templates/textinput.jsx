@@ -1,5 +1,5 @@
 import React from 'react';
-import { classes, templates } from 'core/js/reactHelpers';
+import { classes, templates, compile } from 'core/js/reactHelpers';
 
 export default function TextInput (props) {
   const {
@@ -48,7 +48,7 @@ export default function TextInput (props) {
                   id={`${_id}-${index}-aria`}
                   htmlFor={`${_id}-${index}`}
                   aria-label={prefix}
-                  dangerouslySetInnerHTML={{ __html: prefix }}
+                  dangerouslySetInnerHTML={{ __html: compile(prefix, props) }}
                 >
                 </label>
               </div>
@@ -83,7 +83,7 @@ export default function TextInput (props) {
                   id={`${_id}-${index}-aria`}
                   htmlFor={`${_id}-${index}`}
                   aria-label={suffix}
-                  dangerouslySetInnerHTML={{ __html: suffix }}
+                  dangerouslySetInnerHTML={{ __html: compile(suffix, props) }}
                 >
                 </label>
               </div>
