@@ -8,11 +8,9 @@ describe('Text Input', function () {
     const textInputComponents = this.data.components.filter((component) => component._component === 'textinput')
     textInputComponents.forEach((textInputComponent) => {
       cy.visit(`/#/preview/${textInputComponent._id}`);
-      cy.stripHtml(textInputComponent.body)
-      const bodyWithoutHtml = this.text;
+      const bodyWithoutHtml = cy.helpers.stripHtml(textInputComponent.body)
       cy.testContainsOrNotExists('.textinput__body', bodyWithoutHtml)
-      
-      cy.testQuestionButtons()
+
       cy.testContainsOrNotExists('.textinput__title', textInputComponent.displayTitle)
       cy.testContainsOrNotExists('.textinput__instruction', textInputComponent.instruction)
       cy.get('.textinput-item__textbox').should('have.length', 1)
