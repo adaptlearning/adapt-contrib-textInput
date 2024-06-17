@@ -6,9 +6,9 @@ describe('Text Input', function () {
 
   it('should display the text input component', function () {
     const textInputComponents = this.data.components.filter(component => component._component === 'textinput');
+    const stripHtml = cy.helpers.stripHtml;
     textInputComponents.forEach(textInputComponent => {
       cy.visit(`/#/preview/${textInputComponent._id}`);
-      const stripHtml = cy.helpers.stripHtml;
       cy.testContainsOrNotExists('.textinput__body', stripHtml(textInputComponent.body));
       cy.testContainsOrNotExists('.textinput__title', stripHtml(textInputComponent.displayTitle));
       cy.testContainsOrNotExists('.textinput__instruction', stripHtml(textInputComponent.instruction));
