@@ -61,7 +61,7 @@ export default function TextInput (props) {
                 placeholder={placeholder}
                 data-id={`${input}-${index}`}
                 id={`${_id}-${index}`}
-                aria-labelledby={(prefix || suffix) && `${_id}-${index}-aria-prefix ${_id}-${index} ${_id}-${index}-aria-suffix`}
+                aria-labelledby={(prefix || suffix) && `${_id}-${index}-aria-prefix ${_id}-${index}-aria-suffix`}
                 aria-label={placeholder}
                 defaultValue={userAnswer}
                 disabled={!_isEnabled}
