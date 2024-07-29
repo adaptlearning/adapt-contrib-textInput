@@ -30,6 +30,7 @@ export default function TextInput (props) {
         ])}
         aria-labelledby={ariaQuestion ? null : (displayTitle || body || instruction) && `${_id}-header`}
         aria-label={ariaQuestion || null}
+        role='group'
       >
 
         {props._items.map(({ prefix, _index, input, placeholder, userAnswer, suffix }, index) =>
