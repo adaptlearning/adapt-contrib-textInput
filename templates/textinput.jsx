@@ -8,12 +8,16 @@ export default function TextInput (props) {
     _isEnabled,
     _isCorrect,
     _shouldShowMarking,
+    _canShowCorrectness,
     _globals,
     displayTitle,
     body,
     instruction,
-    ariaQuestion
+    ariaQuestion,
+    _answers
   } = props;
+
+  const correctAnswers = _answers.join(', ');
 
   return (
     <div className="component__inner textinput__inner">
@@ -26,6 +30,7 @@ export default function TextInput (props) {
           'component__widget textinput__widget',
           !_isEnabled && 'is-disabled',
           _isInteractionComplete && 'is-complete is-submitted show-user-answer',
+          _isInteractionComplete && _canShowCorrectness && 'show-correctness',
           _isCorrect && 'is-correct'
         ])}
         aria-labelledby={ariaQuestion ? null : (displayTitle || body || instruction) && `${_id}-header`}
@@ -92,6 +97,10 @@ export default function TextInput (props) {
 
           </div>
         )}
+
+        {_isInteractionComplete && _canShowCorrectness &&
+          <div className="textinput__answer-container" dangerouslySetInnerHTML={{ __html: correctAnswers }}></div>
+        }
 
       </div>
       <div className="btn__container" />
