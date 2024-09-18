@@ -13,11 +13,8 @@ export default function TextInput (props) {
     displayTitle,
     body,
     instruction,
-    ariaQuestion,
-    _answers
+    ariaQuestion
   } = props;
-
-  const correctAnswers = _answers.join(', ');
 
   return (
     <div className="component__inner textinput__inner">
@@ -96,11 +93,8 @@ export default function TextInput (props) {
             }
 
           </div>
-        )}
 
-        {_isInteractionComplete && _canShowCorrectness &&
-          <div className="textinput__answer-container" dangerouslySetInnerHTML={{ __html: correctAnswers }}></div>
-        }
+        )}
 
       </div>
       <div className="btn__container" />
