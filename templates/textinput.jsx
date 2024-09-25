@@ -44,7 +44,7 @@ export default function TextInput (props) {
                 _shouldShowMarking && _isCorrect && 'is-correct',
                 _shouldShowMarking && !_isCorrect && 'is-incorrect'
               ])}
-              key={_index}>
+              key={`item-${_index}`}>
               {prefix &&
                 <div className="textinput-item__prefix-container">
                   <label
@@ -96,7 +96,7 @@ export default function TextInput (props) {
             </div>
             {_isInteractionComplete && _canShowCorrectness &&
             <div
-              key={_index}
+              key={`answer-${_index}`}
               className="textinput-item__answer-container"
               dangerouslySetInnerHTML={{ __html: _correctAnswers }}>
             </div>
