@@ -33,7 +33,7 @@ export default function TextInput (props) {
         role='group'
       >
 
-        {props._items.map(({ prefix, _index, input, placeholder, userAnswer, suffix }, index) =>
+        {props._items.map(({ prefix, _index, input, placeholder, userAnswer, suffix, _isCorrect }, index) =>
 
           <div
             className={classes([
