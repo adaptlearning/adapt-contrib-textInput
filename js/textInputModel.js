@@ -102,11 +102,8 @@ class TextInputModel extends QuestionModel {
   }
 
   isCorrect() {
-    if (this.get('_answers')) {
-      this.markGenericAnswers();
-    } else {
-      this.markSpecificAnswers();
-    }
+    this.markGenericAnswers();
+    this.markSpecificAnswers();
     return this.get('_items').every(({ _isCorrect }) => _isCorrect);
   }
 
@@ -122,6 +119,8 @@ class TextInputModel extends QuestionModel {
     const usedAnswerIndexes = [];
 
     this.get('_items').forEach(item => {
+      const hasItemAnswers = Boolean(item._answers?.length);
+      if (hasItemAnswers) return;
       correctAnswers.forEach((answerGroup, answerIndex) => {
         if (usedAnswerIndexes.includes(answerIndex)) return;
 
@@ -146,8 +145,9 @@ class TextInputModel extends QuestionModel {
   markSpecificAnswers() {
     let numberOfCorrectAnswers = 0;
     this.get('_items').forEach(item => {
+      const hasItemAnswers = Boolean(item._answers?.length);
+      if (!hasItemAnswers) return;
       const answers = item._answers;
-      if (!answers) return;
       const userAnswer = item.userAnswer || '';
       const isCorrect = this.checkAnswerIsCorrect(answers, userAnswer);
       item._isCorrect = isCorrect;
