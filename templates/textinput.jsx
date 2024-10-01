@@ -37,14 +37,17 @@ export default function TextInput (props) {
 
         {props._items.map(({ prefix, _index, input, placeholder, userAnswer, suffix, _correctAnswers, _isCorrect }, index) =>
 
-          <>
+          <div
+            key={index}
+            className='textinput-item__container'
+          >
             <div
               className={classes([
                 'textinput-item js-textinput-item',
                 _shouldShowMarking && _isCorrect && 'is-correct',
                 _shouldShowMarking && !_isCorrect && 'is-incorrect'
               ])}
-              key={`item-${_index}`}>
+            >
               {prefix &&
                 <div className="textinput-item__prefix-container">
                   <label
@@ -94,14 +97,17 @@ export default function TextInput (props) {
               }
 
             </div>
-            {_isInteractionComplete && _canShowCorrectness &&
+
+            {_canShowCorrectness &&
             <div
-              key={`answer-${_index}`}
               className="textinput-item__answer-container"
-              dangerouslySetInnerHTML={{ __html: _correctAnswers }}>
+              dangerouslySetInnerHTML={{
+                __html: (_isInteractionComplete && _canShowCorrectness && _correctAnswers) || '&nbsp;'
+              }}>
             </div>
             }
-          </>
+
+          </div>
 
         )}
 

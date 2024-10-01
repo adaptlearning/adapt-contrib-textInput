@@ -42,7 +42,11 @@ class TextInputModel extends QuestionModel {
       const answers = hasItemAnswers
         ? itemAnswers.flatMap(items => items || [])
         : genericAnswers.flatMap(items => items || []);
-      item._correctAnswers = answers.filter(Boolean).map(item => item.trim()).filter(Boolean);
+      item._correctAnswers = answers
+        .filter(Boolean)
+        .map(item => item.trim())
+        .filter(Boolean)
+        .join(', ');
     });
   }
 
