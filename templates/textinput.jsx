@@ -61,12 +61,18 @@ export default function TextInput (props) {
                 placeholder={placeholder}
                 data-id={`${input}-${index}`}
                 id={`${_id}-${index}`}
-                aria-labelledby={(prefix) ? `${_id}-${index}-aria-prefix ${placeholder}` : null}
+                aria-labelledby={(prefix) ? `${_id}-${index}-aria-prefix ${_id}-${index}-aria-placeholder` : null}
                 aria-describedby={(suffix) ? `${_id}-${index}-aria-suffix` : null}
                 aria-label={placeholder}
                 defaultValue={userAnswer}
                 disabled={!_isEnabled}
               />
+              <div
+                className='textinput-item__placeholder aria-label'
+                id={`${_id}-${index}-aria-placeholder`}
+                aria-hidden='true'>
+                {placeholder}
+              </div>
               <div className="textinput-item__state">
                 <div className="textinput-item__icon textinput-item__correct-icon" aria-label={_globals._accessibility._ariaLabels.correct}>
                   <div className="icon" aria-hidden="true"/>
