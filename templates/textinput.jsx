@@ -102,7 +102,7 @@ export default function TextInput (props) {
             <div
               className="textinput-item__answer-container"
               dangerouslySetInnerHTML={{
-                __html: (_isInteractionComplete && _canShowCorrectness && _correctAnswers) || '&nbsp;'
+                __html: (_isInteractionComplete && _correctAnswers) || '&nbsp;'
               }}>
             </div>
             }
