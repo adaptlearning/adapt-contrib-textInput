@@ -52,7 +52,7 @@ export default function TextInput (props) {
                 <div className="textinput-item__prefix-container">
                   <label
                     className="textinput-item__prefix"
-                    id={`${_id}-${index}-aria`}
+                    id={`${_id}-${index}-aria-prefix`}
                     htmlFor={`${_id}-${index}`}
                     aria-label={prefix}
                     dangerouslySetInnerHTML={{ __html: compile(prefix, props) }}
@@ -68,11 +68,18 @@ export default function TextInput (props) {
                   placeholder={placeholder}
                   data-id={`${input}-${index}`}
                   id={`${_id}-${index}`}
-                  aria-labelledby={prefix && `${_id}-${index}-aria`}
+                  aria-labelledby={(prefix) ? `${_id}-${index}-aria-prefix ${_id}-${index}-aria-placeholder` : null}
+                  aria-describedby={(suffix) ? `${_id}-${index}-aria-suffix` : null}
                   aria-label={placeholder}
                   defaultValue={userAnswer}
                   disabled={!_isEnabled}
                 />
+                <div
+                  className='textinput-item__placeholder aria-label'
+                  id={`${_id}-${index}-aria-placeholder`}
+                  aria-hidden='true'>
+                  {placeholder}
+                </div>
                 <div className="textinput-item__state">
                   <div className="textinput-item__icon textinput-item__correct-icon" aria-label={_globals._accessibility._ariaLabels.correct}>
                     <div className="icon" aria-hidden="true"/>
@@ -87,7 +94,7 @@ export default function TextInput (props) {
                 <div className="textinput-item__suffix-container">
                   <label
                     className="textinput-item__suffix"
-                    id={`${_id}-${index}-aria`}
+                    id={`${_id}-${index}-aria-suffix`}
                     htmlFor={`${_id}-${index}`}
                     aria-label={suffix}
                     dangerouslySetInnerHTML={{ __html: compile(suffix, props) }}
@@ -97,7 +104,6 @@ export default function TextInput (props) {
               }
 
             </div>
-
             {_canShowCorrectness &&
             <div
               className="textinput-item__answer-container"
