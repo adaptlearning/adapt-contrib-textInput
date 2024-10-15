@@ -13,8 +13,12 @@ export default function TextInput (props) {
     displayTitle,
     body,
     instruction,
-    ariaQuestion
+    ariaQuestion,
+    _items
   } = props;
+
+  const correctAnswerPrefix = _globals?._components?._textinput?.correctAnswerPrefix + ' ' || '';
+  const correctAnswersPrefix = _globals?._components?._textinput?.correctAnswersPrefix + ' ' || '';
 
   return (
     <div className="component__inner textinput__inner">
@@ -35,12 +39,23 @@ export default function TextInput (props) {
         role='group'
       >
 
-        {props._items.map(({ prefix, _index, input, placeholder, userAnswer, suffix, _correctAnswers, _isCorrect }, index) =>
+        {_items.map(({
+          prefix,
+          _index,
+          input,
+          placeholder,
+          userAnswer,
+          suffix,
+          _correctAnswers,
+          _isCorrect
+        }, index) => {
+          const hasMultipleCorrectAnswers = _correctAnswers.length > 1;
 
-          <div
-            key={index}
-            className='textinput-item__container'
-          >
+          return (
+            <div
+              key={index}
+              className='textinput-item__container'
+            >
             <div
               className={classes([
                 'textinput-item js-textinput-item',
@@ -108,14 +123,15 @@ export default function TextInput (props) {
             <div
               className="textinput-item__answer-container"
               dangerouslySetInnerHTML={{
-                __html: (_isInteractionComplete && _correctAnswers) || '&nbsp;'
+                __html: (_isInteractionComplete && (hasMultipleCorrectAnswers ? correctAnswersPrefix : correctAnswerPrefix) + (hasMultipleCorrectAnswers ? _correctAnswers.join(', ') : _correctAnswers)) || '&nbsp;'
               }}>
             </div>
             }
 
-          </div>
+            </div>
+          );
 
-        )}
+        })}
 
       </div>
       <div className="btn__container" />

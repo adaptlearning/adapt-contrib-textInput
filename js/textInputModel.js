@@ -45,8 +45,7 @@ class TextInputModel extends QuestionModel {
       item._correctAnswers = answers
         .filter(Boolean)
         .map(item => item.trim())
-        .filter(Boolean)
-        .join(', ');
+        .filter(Boolean);
     });
   }
 
