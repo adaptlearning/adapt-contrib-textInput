@@ -11,6 +11,24 @@
       "inputType": "Text",
       "validators": [],
       "translatable": true
+    },
+    "correctAnswerPrefix": {
+      "type": "string",
+      "required": false,
+      "default": "The correct answer is",
+      "inputType": "Text",
+      "validators": [],
+      "help": "If _canShowCorrectness is enabled, this text provides a prefix for the correct option displayed below the submitted input",
+      "translatable": true
+    },
+    "correctAnswersPrefix": {
+      "type": "string",
+      "required": false,
+      "default": "Accepted correct answers include",
+      "inputType": "Text",
+      "validators": [],
+      "help": "If _canShowCorrectness is enabled, this text provides a prefix for the comma separated list of correct options displayed below the submitted input",
+      "translatable": true
     }
   },
   "properties": {
