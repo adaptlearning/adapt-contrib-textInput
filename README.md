@@ -68,14 +68,14 @@ guide the learner’s interaction with the component.
 
 **\_answers**  (object array):  An optional two-dimensional array of answers that, if provided, eliminates a required ordering. Used with questions of this model: "List the names of seven continents" where order among the seven responses is irrelevant. May be used in combination with **\_items** in order to provide **prefixes**, **suffixes**, and **placeholders**, but **\_answers** should not be provided a second time.   Example:
 ````
-    “_answers”: [
-       [“Asia”],
-       [“Africa”],
-       [“North America”,"N America", "N. America"],
-       [“South America”,"S America", "S. America"],
-       [Europe],
-       [Antartica],
-       [Australia]
+    "_answers": [
+      ["Asia"],
+      ["Africa"],
+      ["North America","N America", "N. America"],
+      ["South America","S America", "S. America"],
+      ["Europe"],
+      ["Antartica"],
+      ["Australia"]
     ]
 ````
 
