@@ -11,6 +11,24 @@
       "inputType": "Text",
       "validators": [],
       "translatable": true
+    },
+    "correctAnswerPrefix": {
+      "type": "string",
+      "required": false,
+      "default": "The correct answer is",
+      "inputType": "Text",
+      "validators": [],
+      "help": "If _canShowCorrectness is enabled, this text provides a prefix for the correct option displayed below the submitted input",
+      "translatable": true
+    },
+    "correctAnswersPrefix": {
+      "type": "string",
+      "required": false,
+      "default": "Accepted correct answers include",
+      "inputType": "Text",
+      "validators": [],
+      "help": "If _canShowCorrectness is enabled, this text provides a prefix for the comma separated list of correct options displayed below the submitted input",
+      "translatable": true
     }
   },
   "properties": {
@@ -112,6 +130,15 @@
       "inputType": "Checkbox",
       "validators": [],
       "help": "Allow the user to view the 'model answer' if they answer the question incorrectly?"
+    },
+    "_canShowCorrectness": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "title": "Display correct answers after submit",
+      "inputType": "Checkbox",
+      "validators": [],
+      "help": "If enabled, this replaces the associated 'model answer' toggle button and a comma separated list of correct options is displayed below the submitted text input."
     },
     "_canShowFeedback": {
       "type": "boolean",

@@ -8,6 +8,7 @@ class TextInputModel extends QuestionModel {
     this.set('_genericAnswerIndexOffset', TextInputModel.genericAnswerIndexOffset);
 
     this.setupQuestionItemIndexes();
+    this.setupCorrectAnswers();
     this.checkCanSubmit();
   }
 
@@ -30,6 +31,21 @@ class TextInputModel extends QuestionModel {
     this.get('_items').forEach((item, index) => {
       if (item._index === undefined) item._index = index;
       if (item._answerIndex === undefined) item._answerIndex = -1;
+    });
+  }
+
+  setupCorrectAnswers() {
+    const genericAnswers = this.get('_answers') || [];
+    this.get('_items').forEach(item => {
+      const hasItemAnswers = Boolean(item._answers?.length);
+      const itemAnswers = item._answers || [];
+      const answers = hasItemAnswers
+        ? itemAnswers.flatMap(items => items || [])
+        : genericAnswers.flatMap(items => items || []);
+      item._correctAnswers = answers
+        .filter(Boolean)
+        .map(item => item.trim())
+        .filter(Boolean);
     });
   }
 
