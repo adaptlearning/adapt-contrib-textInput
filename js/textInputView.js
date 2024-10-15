@@ -84,7 +84,7 @@ class TextInputView extends QuestionView {
 
   onInputChanged(e) {
     const $input = $(e.target);
-    this.model.setItemUserAnswer($input.parents('.js-textinput-item').index(), $input.val());
+    this.model.setItemUserAnswer(parseInt($input.attr('data-adapt-index')), $input.val());
   }
 
 }

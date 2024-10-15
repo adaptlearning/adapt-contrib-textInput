@@ -66,7 +66,7 @@ export default function TextInput (props) {
                   className="textinput-item__textbox js-textinput-textbox"
                   type="text"
                   placeholder={placeholder}
-                  data-id={`${input}-${index}`}
+                  data-adapt-index={_index}
                   id={`${_id}-${index}`}
                   aria-labelledby={(prefix) ? `${_id}-${index}-aria-prefix ${_id}-${index}-aria-placeholder` : null}
                   aria-describedby={(suffix) ? `${_id}-${index}-aria-suffix` : null}
