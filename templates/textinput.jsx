@@ -56,14 +56,14 @@ export default function TextInput (props) {
               key={index}
               className='textinput-item__container'
             >
-            <div
-              className={classes([
-                'textinput-item js-textinput-item',
-                _shouldShowMarking && _isCorrect && 'is-correct',
-                _shouldShowMarking && !_isCorrect && 'is-incorrect'
-              ])}
-            >
-              {prefix &&
+              <div
+                className={classes([
+                  'textinput-item js-textinput-item',
+                  _shouldShowMarking && _isCorrect && 'is-correct',
+                  _shouldShowMarking && !_isCorrect && 'is-incorrect'
+                ])}
+              >
+                {prefix &&
                 <div className="textinput-item__prefix-container">
                   <label
                     className="textinput-item__prefix"
@@ -74,38 +74,38 @@ export default function TextInput (props) {
                   >
                   </label>
                 </div>
-              }
+                }
 
-              <div className="textinput-item__textbox-container">
-                <input
-                  className="textinput-item__textbox js-textinput-textbox"
-                  type="text"
-                  placeholder={placeholder}
-                  data-adapt-index={_index}
-                  id={`${_id}-${index}`}
-                  aria-labelledby={(prefix) ? `${_id}-${index}-aria-prefix ${_id}-${index}-aria-placeholder` : null}
-                  aria-describedby={(suffix) ? `${_id}-${index}-aria-suffix` : null}
-                  aria-label={placeholder}
-                  defaultValue={userAnswer}
-                  disabled={!_isEnabled}
-                />
-                <div
-                  className='textinput-item__placeholder aria-label'
-                  id={`${_id}-${index}-aria-placeholder`}
-                  aria-hidden='true'>
-                  {placeholder}
-                </div>
-                <div className="textinput-item__state">
-                  <div className="textinput-item__icon textinput-item__correct-icon" aria-label={_globals._accessibility._ariaLabels.correct}>
-                    <div className="icon" aria-hidden="true"/>
+                <div className="textinput-item__textbox-container">
+                  <input
+                    className="textinput-item__textbox js-textinput-textbox"
+                    type="text"
+                    placeholder={placeholder}
+                    data-adapt-index={_index}
+                    id={`${_id}-${index}`}
+                    aria-labelledby={(prefix) ? `${_id}-${index}-aria-prefix ${_id}-${index}-aria-placeholder` : null}
+                    aria-describedby={(suffix) ? `${_id}-${index}-aria-suffix` : null}
+                    aria-label={placeholder}
+                    defaultValue={userAnswer}
+                    disabled={!_isEnabled}
+                  />
+                  <div
+                    className='textinput-item__placeholder aria-label'
+                    id={`${_id}-${index}-aria-placeholder`}
+                    aria-hidden='true'>
+                    {placeholder}
                   </div>
-                  <div className="textinput-item__icon textinput-item__incorrect-icon" aria-label={_globals._accessibility._ariaLabels.incorrect}>
-                    <div className="icon" aria-hidden="true" />
+                  <div className="textinput-item__state">
+                    <div className="textinput-item__icon textinput-item__correct-icon" aria-label={_globals._accessibility._ariaLabels.correct}>
+                      <div className="icon" aria-hidden="true"/>
+                    </div>
+                    <div className="textinput-item__icon textinput-item__incorrect-icon" aria-label={_globals._accessibility._ariaLabels.incorrect}>
+                      <div className="icon" aria-hidden="true" />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {suffix &&
+                {suffix &&
                 <div className="textinput-item__suffix-container">
                   <label
                     className="textinput-item__suffix"
@@ -116,17 +116,17 @@ export default function TextInput (props) {
                   >
                   </label>
                 </div>
-              }
+                }
+              </div>
 
-            </div>
-            {_canShowCorrectness &&
-            <div
-              className="textinput-item__answer-container"
-              dangerouslySetInnerHTML={{
-                __html: (_isInteractionComplete && (hasMultipleCorrectAnswers ? correctAnswersPrefix : correctAnswerPrefix) + (hasMultipleCorrectAnswers ? _correctAnswers.join(', ') : _correctAnswers)) || '&nbsp;'
-              }}>
-            </div>
-            }
+              {_canShowCorrectness &&
+              <div
+                className="textinput-item__answer-container"
+                dangerouslySetInnerHTML={{
+                  __html: (_isInteractionComplete && (hasMultipleCorrectAnswers ? correctAnswersPrefix : correctAnswerPrefix) + (hasMultipleCorrectAnswers ? _correctAnswers.join(', ') : _correctAnswers)) || '&nbsp;'
+                }}>
+              </div>
+              }
 
             </div>
           );
