@@ -37,7 +37,7 @@ class TextInputModel extends QuestionModel {
     if (!this.get('_isSubmitted')) return;
 
     const userAnswer = this.get('_userAnswer');
-    const genericAnswers = this.get('_answers');
+    const genericAnswers = this?.attributes?._items[0]._answers;
     this.get('_items').forEach(item => {
       const answerIndex = userAnswer[item._index];
       if (answerIndex >= TextInputModel.genericAnswerIndexOffset) {
@@ -102,7 +102,7 @@ class TextInputModel extends QuestionModel {
   // (this excludes any inputs which have their own specific answers).
   markGenericAnswers() {
     let numberOfCorrectAnswers = 0;
-    const correctAnswers = this.get('_answers').slice();
+    const correctAnswers = this?.attributes?._items[0]._answers.slice();
     const usedAnswerIndexes = [];
 
     this.get('_items').forEach(item => {
@@ -134,7 +134,7 @@ class TextInputModel extends QuestionModel {
     this.get('_items').forEach(item => {
       const hasItemAnswers = Boolean(item._answers?.length);
       if (!hasItemAnswers) return;
-      const answers = item._answers;
+      const answers = item._answers.map(answer => this.cleanupUserAnswer(answer));
       const userAnswer = item.userAnswer || '';
       const isCorrect = this.checkAnswerIsCorrect(answers, userAnswer);
       item._isCorrect = isCorrect;
