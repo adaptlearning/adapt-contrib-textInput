@@ -432,22 +432,22 @@
           "validators": [],
           "help": "Shown when there is one attempt left",
           "translatable": true
-        },
-        "_answers": {
-          "type": "array",
-          "required": false,
-          "title": "Answers",
-          "items": {
-            "type": "string",
-            "required": true,
-            "default": "",
-            "title": "Item",
-            "inputType": "Text",
-            "validators": ["required"],
-            "help": "",
-            "translatable": true
-          }
         }
+      }
+    },
+    "_answers": {
+      "type": "array",
+      "required": false,
+      "title": "Answers",
+      "items": {
+        "type": "string",
+        "required": true,
+        "default": "",
+        "title": "Item",
+        "inputType": "Text",
+        "validators": ["required"],
+        "help": "",
+        "translatable": true
       }
     }
   }

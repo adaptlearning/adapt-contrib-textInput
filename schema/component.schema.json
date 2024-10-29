@@ -367,14 +367,14 @@
               "_adapt": {
                 "translatable": true
               }
-            },
-            "_answers": {
-              "type": "array",
-              "title": "Answers",
-              "items": {
-                "type": "string"
-              }
             }
+          }
+        },
+        "_answers": {
+          "type": "array",
+          "title": "Answers",
+          "items": {
+            "type": "string"
           }
         }
       }
