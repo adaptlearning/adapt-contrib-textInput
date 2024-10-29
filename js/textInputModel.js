@@ -151,9 +151,9 @@ class TextInputModel extends QuestionModel {
       const hasItemAnswers = Boolean(item._answers?.length);
       if (!hasItemAnswers) return;
 
-      const answers = item._answers.map(answer => this.cleanupUserAnswer(answer));
+      const answers = item._answers.map(answer => this.cleanupAnswer(answer));
       const userAnswer = item.userAnswer || '';
-      item._answerIndex = answers.indexOf(this.cleanupUserAnswer(userAnswer));
+      item._answerIndex = answers.indexOf(this.cleanupAnswer(userAnswer));
       item._isCorrect = (item._answerIndex !== -1);
       if (!item._isCorrect) return;
 
@@ -165,14 +165,14 @@ class TextInputModel extends QuestionModel {
   }
 
   checkAnswerIsCorrect(possibleAnswers, userAnswer) {
-    const uAnswer = this.cleanupUserAnswer(userAnswer);
+    const uAnswer = this.cleanupAnswer(userAnswer);
 
     return possibleAnswers.some(cAnswer => {
-      return this.cleanupUserAnswer(cAnswer) === uAnswer;
+      return this.cleanupAnswer(cAnswer) === uAnswer;
     });
   }
 
-  cleanupUserAnswer(userAnswer) {
+  cleanupAnswer(userAnswer) {
     if (this.get('_allowsAnyCase')) {
       userAnswer = userAnswer.toLowerCase();
     }
