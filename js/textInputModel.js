@@ -150,12 +150,13 @@ class TextInputModel extends QuestionModel {
     this.get('_items').forEach(item => {
       const hasItemAnswers = Boolean(item._answers?.length);
       if (!hasItemAnswers) return;
-      const answers = item._answers;
+
+      const answers = item._answers.map(answer => this.cleanupUserAnswer(answer));
       const userAnswer = item.userAnswer || '';
-      const isCorrect = this.checkAnswerIsCorrect(answers, userAnswer);
-      item._isCorrect = isCorrect;
-      item._answerIndex = this.getAnswerIndex(answers, userAnswer);
-      if (!isCorrect) return;
+      item._answerIndex = answers.indexOf(this.cleanupUserAnswer(userAnswer));
+      item._isCorrect = (item._answerIndex !== -1);
+      if (!item._isCorrect) return;
+
       this.set({
         _numberOfCorrectAnswers: ++numberOfCorrectAnswers,
         _isAtLeastOneCorrectSelection: true
@@ -182,20 +183,6 @@ class TextInputModel extends QuestionModel {
     }
     // removes whitespace from beginning/end (leave any in the middle)
     return userAnswer.trim();
-  }
-
-  getAnswerIndex(answers, userAnswer) {
-    const cleanUserAnswer = this.cleanupUserAnswer(userAnswer);
-
-    if (!this.get('_allowsAnyCase')) {
-      return answers.indexOf(cleanUserAnswer);
-    }
-
-    const matches = answers.find(answer => {
-      return this.cleanupUserAnswer(answer) === cleanUserAnswer;
-    });
-
-    return answers.indexOf(matches);
   }
 
   // Used to set the score based upon the _questionWeight
