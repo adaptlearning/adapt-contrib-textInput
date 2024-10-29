@@ -118,7 +118,7 @@ class TextInputModel extends QuestionModel {
   // (this excludes any inputs which have their own specific answers).
   markGenericAnswers() {
     let numberOfCorrectAnswers = 0;
-    const correctAnswers = this.get('_answers').slice();
+    const correctAnswers = this.get('_answers')?.slice() ?? [];
     const usedAnswerIndexes = [];
 
     this.get('_items').forEach(item => {
