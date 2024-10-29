@@ -41,6 +41,13 @@
             "translatable": true
           }
         },
+        "_answers": {
+          "type": "array",
+          "title": "Answers",
+          "items": {
+            "type": "string"
+          }
+        },
         "_items": {
           "type": "array",
           "title": "Items",
@@ -368,13 +375,6 @@
                 "translatable": true
               }
             }
-          }
-        },
-        "_answers": {
-          "type": "array",
-          "title": "Answers",
-          "items": {
-            "type": "string"
           }
         }
       }

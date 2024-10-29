@@ -51,8 +51,6 @@ export default function TextInput (props) {
         }, index) => {
           const hasMultipleCorrectAnswers = _correctAnswers.length > 1;
 
-          console.log(_correctAnswers)
-
           return (
             <div
               key={index}
