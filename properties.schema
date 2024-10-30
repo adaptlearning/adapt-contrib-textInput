@@ -60,8 +60,11 @@
     "_answers": {
       "type": "array",
       "required": false,
-      "title": "Answers",
+      "title": "Generic Answers",
+      "inputType": "Text",
+      "validators": [],
       "help": "These are generic answers that apply to every item in the component",
+      "translatable": true,
       "items": {
         "type": "array",
         "required": true,
@@ -70,8 +73,7 @@
         "items": {
           "type": "string",
           "default": "",
-          "inputType": "Text",
-          "translatable": true
+          "inputType": "Text"
         }
       }
     },
