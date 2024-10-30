@@ -43,7 +43,7 @@
         },
         "_answers": {
           "type": "array",
-          "title": "Answers",
+          "title": "Generic Answers",
           "description": "These are generic answers that apply to every item in the component",
           "items": {
             "type": "array",
