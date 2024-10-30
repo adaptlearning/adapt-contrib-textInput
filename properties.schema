@@ -61,6 +61,7 @@
       "type": "array",
       "required": false,
       "title": "Answers",
+      "help": "These are generic answers that apply to every item in the component",
       "items": {
         "type": "array",
         "required": true,
@@ -68,12 +69,8 @@
         "title": "Item",
         "items": {
           "type": "string",
-          "required": true,
           "default": "",
-          "title": "Item",
           "inputType": "Text",
-          "validators": ["required"],
-          "help": "",
           "translatable": true
         }
       }
