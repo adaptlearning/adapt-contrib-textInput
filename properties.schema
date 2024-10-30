@@ -61,14 +61,12 @@
       "type": "array",
       "required": false,
       "title": "Generic Answers",
-      "validators": [],
       "help": "These are generic answers that apply to every item in the component",
       "translatable": true,
       "items": {
         "type": "array",
         "required": true,
         "default": [],
-        "title": "Item",
         "items": {
           "type": "string",
           "default": "",
