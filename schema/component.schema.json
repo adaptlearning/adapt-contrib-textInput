@@ -45,7 +45,10 @@
           "type": "array",
           "title": "Answers",
           "items": {
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "_items": {

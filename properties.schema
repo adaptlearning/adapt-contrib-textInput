@@ -62,14 +62,20 @@
       "required": false,
       "title": "Answers",
       "items": {
-        "type": "string",
+        "type": "array",
         "required": true,
-        "default": "",
+        "default": [],
         "title": "Item",
-        "inputType": "Text",
-        "validators": ["required"],
-        "help": "",
-        "translatable": true
+        "items": {
+          "type": "string",
+          "required": true,
+          "default": "",
+          "title": "Item",
+          "inputType": "Text",
+          "validators": ["required"],
+          "help": "",
+          "translatable": true
+        }
       }
     },
     "_items": {
