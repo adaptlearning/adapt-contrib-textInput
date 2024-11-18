@@ -41,6 +41,17 @@
             "translatable": true
           }
         },
+        "_answers": {
+          "type": "array",
+          "title": "Answers",
+          "description": "These are generic answers that apply to every item in the component",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
         "_items": {
           "type": "array",
           "title": "Items",
