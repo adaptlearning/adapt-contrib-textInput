@@ -150,12 +150,13 @@ class TextInputModel extends QuestionModel {
     this.get('_items').forEach(item => {
       const hasItemAnswers = Boolean(item._answers?.length);
       if (!hasItemAnswers) return;
-      const answers = item._answers;
+
+      const answers = item._answers.map(answer => this.cleanupAnswer(answer));
       const userAnswer = item.userAnswer || '';
-      const isCorrect = this.checkAnswerIsCorrect(answers, userAnswer);
-      item._isCorrect = isCorrect;
-      item._answerIndex = answers.indexOf(this.cleanupUserAnswer(userAnswer));
-      if (!isCorrect) return;
+      item._answerIndex = answers.indexOf(this.cleanupAnswer(userAnswer));
+      item._isCorrect = (item._answerIndex !== -1);
+      if (!item._isCorrect) return;
+
       this.set({
         _numberOfCorrectAnswers: ++numberOfCorrectAnswers,
         _isAtLeastOneCorrectSelection: true
@@ -164,15 +165,14 @@ class TextInputModel extends QuestionModel {
   }
 
   checkAnswerIsCorrect(possibleAnswers, userAnswer) {
-    const uAnswer = this.cleanupUserAnswer(userAnswer);
+    const uAnswer = this.cleanupAnswer(userAnswer);
 
-    const answerIsCorrect = possibleAnswers.some(cAnswer => {
-      return this.cleanupUserAnswer(cAnswer) === uAnswer;
+    return possibleAnswers.some(cAnswer => {
+      return this.cleanupAnswer(cAnswer) === uAnswer;
     });
-    return answerIsCorrect;
   }
 
-  cleanupUserAnswer(userAnswer) {
+  cleanupAnswer(userAnswer) {
     if (this.get('_allowsAnyCase')) {
       userAnswer = userAnswer.toLowerCase();
     }
