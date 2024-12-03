@@ -202,6 +202,34 @@ class TextInputModel extends QuestionModel {
     });
   }
 
+  getInteractionObject() {
+    return {
+      correctResponsesPattern: this.getCorrectResponsesPattern()
+    }
+  }
+
+  getCorrectResponsesPattern() {
+    const caseMatters = !this.get('_allowsAnyCase');
+    const items = this.get('_items');
+    const cartesianProductOf = (...a) => a.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())));
+    const genericAnswers = this.get('_answers') ?? [];
+    const correctAnswers = items.map(item => item._correctAnswers);
+    const patterns = cartesianProductOf(...correctAnswers);
+    const correctPatterns = (items.length === 1)
+      ? patterns
+      : patterns.filter(pattern => {
+        const hasDuplicates = new Set(pattern).size !== pattern.length;
+        if (hasDuplicates) return false;
+        const answerVariations = genericAnswers.filter(answers => answers.length > 1);
+        if (!answerVariations.length) return true;
+        return !answerVariations.some(answers => answers.every(entry => pattern.includes(entry)));
+      });
+    return correctPatterns.map(pattern => {
+      const answers = Array.isArray(pattern) ? pattern.join('[,]') : pattern;
+      return `{case_matters=${caseMatters}}${answers}`;
+    });
+  }
+
   /**
   * used by adapt-contrib-spoor to get the user's answers in the format required by the cmi.interactions.n.student_response data field
   * returns the user's answers as a string in the format 'answer1[,]answer2[,]answer3'
