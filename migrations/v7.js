@@ -9,6 +9,18 @@ function hasKey(object, key) {
   return Object.hasOwn(object, key);
 }
 
+function setObjectPathValue(object, path, value, force = false) {
+  if (!object) return;
+  const paths = path.split('.');
+  const key = paths.pop();
+  const target = paths.reduce((o, p) => {
+    if (!hasKey(o, p)) o[p] = {};
+    return o?.[p];
+  }, object);
+  if (!force && hasKey(target, key)) return;
+  target[key] = value;
+}
+
 /**
  * @todo Should we assume that a missing `instruction` should be added?
  */
@@ -52,7 +64,7 @@ describe('adapt-contrib-textInput - v1.0.0 to v7.2.2', async () => {
 });
 
 /**
- * correct v1 schemas - legacy schema correct in v2.0.0
+ * correct v1 schemas - legacy schema correct in v2.0.0 and updated in v3.0.0
  */
 describe('adapt-contrib-textInput - v4.2.0 to v7.2.6', async () => {
   whereFromPlugin('adapt-contrib-textInput - from v4.2.0 to v7.2.6', { name: 'adapt-contrib-textInput', version: '<7.2.6'});
@@ -61,17 +73,15 @@ describe('adapt-contrib-textInput - v4.2.0 to v7.2.6', async () => {
     course = content.find(({ _type }) => _type === 'course');
     return hasKey(course?._globals, '_textInput');
   });
+  const newAriaRegion = 'Text input. Type your answer and then submit.';
   mutateContent('adapt-contrib-textInput - update _globals ariaRegion', async () => {
-    if (!course._globals) course._globals = {};
-    if (!course._globals._components) course._globals._components = {};
-    if (!course._globals._components._textInput) course._globals._components._textInput = {};
-    course._globals._components._textInput.ariaRegion = course?._globals?._textInput?.ariaRegion ?? '';
-    delete course._globals._textInput;
+    setObjectPathValue(course, '_globals._components._textInput.ariaRegion', course?._globals?._textInput?.ariaRegion ?? newAriaRegion);
+    delete course?._globals?._textInput;
     return true;
   });
   checkContent('adapt-contrib-textInput - check _globals ariaRegion updated', async () => {
-    const isValid = !hasKey(course._globals, '_textInput') && hasKey(course._globals._components._textInput, 'ariaRegion');
-    if (!isValid) throw new Error('_globals ariaRegion not updated');
+    const isValid = !hasKey(course._globals, '_textInput') && course._globals._components._textInput.ariaRegion === newAriaRegion;
+    if (!isValid) throw new Error('_globals ariaRegion default not updated');
     return true;
   });
   updatePlugin('adapt-contrib-textInput - update to v7.2.6', {name: 'adapt-contrib-text', version: '7.2.6', framework: '>=5.19.1'})
@@ -81,36 +91,31 @@ describe('adapt-contrib-textInput - v1.0.0 to v7.2.7', async () => {
   whereFromPlugin('adapt-contrib-textInput - from v1.0.0 to v7.2.7', { name: 'adapt-contrib-textInput', version: '<7.2.7'});
   let components;
   whereContent('adapt-contrib-textInput - where missing altTitle', async content => {
-    components = getTextInputComponents(content).filter(component => !hasKey(component, 'altTitle'));
+    components = getTextInputComponents(content).filter(component => !hasKey(component._feedback, 'altTitle'));
     return Boolean(components.length);
   });
   mutateContent('adapt-contrib-textInput - add altTitle', async () => {
-    components.forEach(component => component.altTitle = '');
+    components.forEach(component => setObjectPathValue(component, '_feedback.altTitle', ''));
     return true;
   });
   checkContent('adapt-contrib-textInput - check altTitle added', async () => {
-    const isValid = components.every(component => hasKey(component, 'altTitle'));
+    const isValid = components.every(component => hasKey(component._feedback, 'altTitle'));
     if (!isValid) throw new Error('altTitle not added');
     return true;
   });
   updatePlugin('adapt-contrib-textInput - update to v7.2.7', {name: 'adapt-contrib-textInput', version: '7.2.7', framework: '>=5.19.1'})
 });
 
-/**
- * @todo Can we assume that these don't need to be run independantly and that if the first `whereContent` fails, the other attributes won't need to be added either? Should always be the case for AAT but not necessarily for framework.
- */
 describe('adapt-contrib-textInput - v1.0.0 to v7.3.0', async () => {
   whereFromPlugin('adapt-contrib-textInput - from v1.0.0 to v7.3.0', { name: 'adapt-contrib-textInput', version: '<7.3.0'});
   let course, components;
-  whereContent('adapt-contrib-textInput - where missing correctAnswerPrefix', async content => {
+  whereContent('adapt-contrib-textInput - where has textInput plugin', async content => {
     course = content.find(({ _type }) => _type === 'course');
-    return !hasKey(course?._globals?._components?._textInput, 'correctAnswerPrefix');
+    components = getTextInputComponents(content);
+    return true;
   });
   mutateContent('adapt-contrib-textInput - add correctAnswerPrefix', async () => {
-    if (!course._globals) course._globals = {};
-    if (!course._globals._components) course._globals._components = {};
-    if (!course._globals._components._textInput) course._globals._components._textInput = {};
-    course._globals._components._textInput.correctAnswerPrefix = 'The correct answer is';
+    setObjectPathValue(course, '_globals._components._textInput.correctAnswerPrefix', 'The correct answer is');
     return true;
   });
   checkContent('adapt-contrib-textInput - check correctAnswerPrefix added', async () => {
@@ -118,11 +123,8 @@ describe('adapt-contrib-textInput - v1.0.0 to v7.3.0', async () => {
     if (!isValid) throw new Error('correctAnswerPrefix not added');
     return true;
   });
-  whereContent('adapt-contrib-textInput - where missing correctAnswersPrefix', async () => {
-    return !hasKey(course?._globals?._components?._textInput, 'correctAnswersPrefix');
-  });
   mutateContent('adapt-contrib-textInput - add correctAnswersPrefix', async () => {
-    course._globals._components._textInput.correctAnswersPrefix = 'Accepted correct answers include';
+    setObjectPathValue(course, '_globals._components._textInput.correctAnswersPrefix', 'Accepted correct answers include');
     return true;
   });
   checkContent('adapt-contrib-textInput - check correctAnswersPrefix added', async () => {
@@ -130,12 +132,8 @@ describe('adapt-contrib-textInput - v1.0.0 to v7.3.0', async () => {
     if (!isValid) throw new Error('correctAnswersPrefix not added');
     return true;
   });
-  whereContent('adapt-contrib-textInput - where missing _canShowCorrectness', async content => {
-    components = getTextInputComponents(content).filter(component => !hasKey(component, '_canShowCorrectness'));
-    return Boolean(components.length);
-  });
   mutateContent('adapt-contrib-textInput - add _canShowCorrectness', async () => {
-    components.forEach(component => component._canShowCorrectness = false);
+    components.forEach(component => setObjectPathValue(component, '_canShowCorrectness', false));
     return true;
   });
   checkContent('adapt-contrib-textInput - check _canShowCorrectness added', async () => {

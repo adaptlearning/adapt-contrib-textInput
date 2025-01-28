@@ -9,6 +9,18 @@ function hasKey(object, key) {
   return Object.hasOwn(object, key);
 }
 
+function setObjectPathValue(object, path, value) {
+  if (!object) return;
+  const paths = path.split('.');
+  const key = paths.pop();
+  const target = paths.reduce((o, p) => {
+    if (!hasKey(o, p)) o[p] = {};
+    return o?.[p];
+  }, object);
+  if (hasKey(target, key)) return;
+  target[key] = value;
+}
+
 describe('adapt-contrib-textInput - v1.0.0 to v2.0.2', async () => {
   whereFromPlugin('adapt-contrib-textInput - from v1.0.0 to v2.0.2', { name: 'adapt-contrib-textInput', version: '<2.0.2'});
   let components;
@@ -47,18 +59,15 @@ describe('adapt-contrib-textInput - v1.0.0 to v2.0.4', async () => {
   updatePlugin('adapt-contrib-textInput - update to v2.0.4', {name: 'adapt-contrib-textInput', version: '2.0.4', framework: '>=2.0.0'})
 });
 
-/**
- * @todo Can we assume that these don't need to be run independantly and that if the first `whereContent` fails, the other attributes won't need to be added either? Should always be the case for AAT but not necessarily for framework.
- */
 describe('adapt-contrib-textInput - v1.0.0 to v2.0.5', async () => {
   whereFromPlugin('adapt-contrib-textInput - from v1.0.0 to v2.0.5', { name: 'adapt-contrib-textInput', version: '<2.0.5'});
   let components;
-  whereContent('adapt-contrib-textInput - where missing _canShowModelAnswer', async content => {
-    components = getTextInputComponents(content).filter(component => !hasKey(component, '_canShowFeedback'));
+  whereContent('adapt-contrib-textInput - where has textInput components', async content => {
+    components = getTextInputComponents(content);
     return Boolean(components.length);
   });
   mutateContent('adapt-contrib-textInput - add _canShowFeedback', async () => {
-    components.forEach(component => component._canShowFeedback = true);
+    components.forEach(component => setObjectPathValue(component, '_canShowFeedback', true));
     return true;
   });
   checkContent('adapt-contrib-textInput - check _canShowFeedback added', async () => {
@@ -66,12 +75,8 @@ describe('adapt-contrib-textInput - v1.0.0 to v2.0.5', async () => {
     if (!isValid) throw new Error('_canShowFeedback not added');
     return true;
   });
-  whereContent('adapt-contrib-textInput - where missing _canShowMarking', async content => {
-    components = getTextInputComponents(content).filter(component => !hasKey(component, '_canShowMarking'));
-    return Boolean(components.length);
-  });
   mutateContent('adapt-contrib-textInput - add _canShowMarking', async () => {
-    components.forEach(component => component._canShowFeedback = true);
+    components.forEach(component => setObjectPathValue(component, '_canShowMarking', true));
     return true;
   });
   checkContent('adapt-contrib-textInput - check _canShowMarking added', async () => {
@@ -92,10 +97,7 @@ describe('adapt-contrib-textInput - v1.0.0 to v2.1.0', async () => {
   });
   const newAriaRegion = 'This question requires you to input your answer in the textbox provided. When you have done so, select the submit button below.';
   mutateContent('adapt-contrib-textInput - update _globals ariaRegion default', async () => {
-    if (!course._globals) course._globals = {};
-    if (!course._globals._components) course._globals._components = {};
-    if (!course._globals._components._textInput) course._globals._components._textInput = {};
-    course._globals._components._textInput.ariaRegion = newAriaRegion;
+    setObjectPathValue(course, '_globals._components._textInput.ariaRegion', newAriaRegion);
     return true;
   });
   checkContent('adapt-contrib-textInput - check _globals ariaRegion default updated', async () => {
@@ -114,7 +116,7 @@ describe('adapt-contrib-textInput - v1.0.0 to v2.2.0', async () => {
     return Boolean(components.length);
   });
   mutateContent('adapt-contrib-textInput - add _feedback.title', async () => {
-    components.forEach(component => component._feedback.title = 'Feedback title');
+    components.forEach(component => setObjectPathValue(component, '_feedback.title', ''));
     return true;
   });
   checkContent('adapt-contrib-textInput - check _feedback.title added', async () => {

@@ -5,6 +5,18 @@ function hasKey(object, key) {
   return Object.hasOwn(object, key);
 }
 
+function setObjectPathValue(object, path, value, force = false) {
+  if (!object) return;
+  const paths = path.split('.');
+  const key = paths.pop();
+  const target = paths.reduce((o, p) => {
+    if (!hasKey(o, p)) o[p] = {};
+    return o?.[p];
+  }, object);
+  if (!force && hasKey(target, key)) return;
+  target[key] = value;
+}
+
 describe('adapt-contrib-textInput - v2.1.0 to v3.0.0', async () => {
   whereFromPlugin('adapt-contrib-textInput - from v2.1.0 to v3.0.0', { name: 'adapt-contrib-textInput', version: '<3.0.0'});
   let course;
@@ -15,10 +27,7 @@ describe('adapt-contrib-textInput - v2.1.0 to v3.0.0', async () => {
   });
   const newAriaRegion = 'Text input. Type your answer and then submit.';
   mutateContent('adapt-contrib-textInput - update _globals ariaRegion default', async () => {
-    if (!course._globals) course._globals = {};
-    if (!course._globals._components) course._globals._components = {};
-    if (!course._globals._components._textInput) course._globals._components._textInput = {};
-    course._globals._components._textInput.ariaRegion = newAriaRegion;
+    setObjectPathValue(course, '_globals._components._textInput.ariaRegion', newAriaRegion, true);
     return true;
   });
   checkContent('adapt-contrib-textInput - check _globals ariaRegion default updated', async () => {
