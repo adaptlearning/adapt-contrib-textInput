@@ -1,19 +1,26 @@
-import { describe, whereContent, whereFromPlugin, mutateContent, checkContent, updatePlugin } from 'adapt-migrations';
+import {
+  describe,
+  whereFromPlugin,
+  whereContent,
+  mutateContent,
+  checkContent,
+  updatePlugin,
+  getCourse,
+  getComponents
+} from 'adapt-migrations';
 import _ from 'lodash';
 
-function getTextInputComponents(content) {
-  return content.filter(({ _component }) => _component === 'textinput');
-}
-
 describe('adapt-contrib-textInput - v2.0.0 to v2.0.2', async () => {
-  whereFromPlugin('adapt-contrib-textInput - from v2.0.0 to v2.0.2', { name: 'adapt-contrib-textInput', version: '<2.0.2' });
   let components;
-  whereContent('adapt-contrib-textInput - where missing _recordInteraction', async content => {
-    components = getTextInputComponents(content).filter(component => !_.has(component, '_recordInteraction'));
+  whereFromPlugin('adapt-contrib-textInput - from v2.0.0 to v2.0.2', { name: 'adapt-contrib-textInput', version: '<2.0.2' });
+  whereContent('adapt-contrib-textInput - where missing _recordInteraction', async () => {
+    components = getComponents('textinput').filter(component => !_.has(component, '_recordInteraction'));
     return Boolean(components.length);
   });
   mutateContent('adapt-contrib-textInput - add _recordInteraction', async () => {
-    components.forEach(component => component._recordInteraction = true);
+    components.forEach(component => {
+      component._recordInteraction = true;
+    });
     return true;
   });
   checkContent('adapt-contrib-textInput - check _recordInteraction added', async () => {
@@ -25,14 +32,16 @@ describe('adapt-contrib-textInput - v2.0.0 to v2.0.2', async () => {
 });
 
 describe('adapt-contrib-textInput - v2.0.0 to v2.0.4', async () => {
-  whereFromPlugin('adapt-contrib-textInput - from v2.0.0 to v2.0.4', { name: 'adapt-contrib-textInput', version: '<2.0.4' });
   let components;
-  whereContent('adapt-contrib-textInput - where missing _canShowModelAnswer', async content => {
-    components = getTextInputComponents(content).filter(component => !_.has(component, '_canShowModelAnswer'));
+  whereFromPlugin('adapt-contrib-textInput - from v2.0.0 to v2.0.4', { name: 'adapt-contrib-textInput', version: '<2.0.4' });
+  whereContent('adapt-contrib-textInput - where missing _canShowModelAnswer', async () => {
+    components = getComponents('textinput').filter(component => !_.has(component, '_canShowModelAnswer'));
     return Boolean(components.length);
   });
   mutateContent('adapt-contrib-textInput - add _canShowModelAnswer', async () => {
-    components.forEach(component => component._canShowModelAnswer = true);
+    components.forEach(component => {
+      component._canShowModelAnswer = true;
+    });
     return true;
   });
   checkContent('adapt-contrib-textInput - check _canShowModelAnswer added', async () => {
@@ -44,10 +53,10 @@ describe('adapt-contrib-textInput - v2.0.0 to v2.0.4', async () => {
 });
 
 describe('adapt-contrib-textInput - v2.0.0 to v2.0.5', async () => {
-  whereFromPlugin('adapt-contrib-textInput - from v2.0.0 to v2.0.5', { name: 'adapt-contrib-textInput', version: '<2.0.5' });
   let components;
-  whereContent('adapt-contrib-textInput - where has textInput components', async content => {
-    components = getTextInputComponents(content);
+  whereFromPlugin('adapt-contrib-textInput - from v2.0.0 to v2.0.5', { name: 'adapt-contrib-textInput', version: '<2.0.5' });
+  whereContent('adapt-contrib-textInput - where has textInput components', async () => {
+    components = getComponents('textinput');
     return Boolean(components.length);
   });
   mutateContent('adapt-contrib-textInput - add _canShowFeedback', async () => {
@@ -78,11 +87,11 @@ describe('adapt-contrib-textInput - v2.0.0 to v2.0.5', async () => {
 });
 
 describe('adapt-contrib-textInput - v2.0.0 to v2.1.0', async () => {
-  whereFromPlugin('adapt-contrib-textInput - from v2.0.0 to v2.1.0', { name: 'adapt-contrib-textInput', version: '<2.1.0' });
   let course;
   const ariaRegionPath = '_globals._components._textInput.ariaRegion';
-  whereContent('adapt-contrib-textInput - where using old _globals ariaRegion default', async content => {
-    course = content.find(({ _type }) => _type === 'course');
+  whereFromPlugin('adapt-contrib-textInput - from v2.0.0 to v2.1.0', { name: 'adapt-contrib-textInput', version: '<2.1.0' });
+  whereContent('adapt-contrib-textInput - where using old _globals ariaRegion default', async () => {
+    course = getCourse();
     const oldAriaRegion = 'This question component requires you to input your answer in the textbox provided. When you have answered the question select the submit button below.';
     return !_.has(course, ariaRegionPath) || _.get(course, ariaRegionPath) === oldAriaRegion;
   });
@@ -100,15 +109,17 @@ describe('adapt-contrib-textInput - v2.0.0 to v2.1.0', async () => {
 });
 
 describe('adapt-contrib-textInput - v2.0.0 to v2.2.0', async () => {
-  whereFromPlugin('adapt-contrib-textInput - from v2.0.0 to v2.2.0', { name: 'adapt-contrib-textInput', version: '<2.2.0' });
   let components;
   const feedbackTitlePath = '_feedback.title';
-  whereContent('adapt-contrib-textInput - where missing _feedback.title', async content => {
-    components = getTextInputComponents(content).filter(component => !_.has(component, feedbackTitlePath));
+  whereFromPlugin('adapt-contrib-textInput - from v2.0.0 to v2.2.0', { name: 'adapt-contrib-textInput', version: '<2.2.0' });
+  whereContent('adapt-contrib-textInput - where missing _feedback.title', async () => {
+    components = getComponents('textinput').filter(component => !_.has(component, feedbackTitlePath));
     return Boolean(components.length);
   });
   mutateContent('adapt-contrib-textInput - add _feedback.title', async () => {
-    components.forEach(component => _.set(component, feedbackTitlePath, ''));
+    components.forEach(component => {
+      _.set(component, feedbackTitlePath, '');
+    });
     return true;
   });
   checkContent('adapt-contrib-textInput - check _feedback.title added', async () => {

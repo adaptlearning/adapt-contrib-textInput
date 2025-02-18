@@ -1,12 +1,20 @@
-import { describe, whereContent, whereFromPlugin, whereToPlugin, mutateContent, checkContent, updatePlugin } from 'adapt-migrations';
+import {
+  describe,
+  whereFromPlugin,
+  whereContent,
+  mutateContent,
+  checkContent,
+  updatePlugin,
+  getCourse
+} from 'adapt-migrations';
 import _ from 'lodash';
 
 describe('adapt-contrib-textInput - v2.1.0 to v3.0.0', async () => {
-  whereFromPlugin('adapt-contrib-textInput - from v2.1.0 to v3.0.0', { name: 'adapt-contrib-textInput', version: '<3.0.0' });
   let course;
   const ariaRegionPath = '_globals._components._textInput.ariaRegion';
-  whereContent('adapt-contrib-textInput - where using old _globals ariaRegion default', async content => {
-    course = content.find(({ _type }) => _type === 'course');
+  whereFromPlugin('adapt-contrib-textInput - from v2.1.0 to v3.0.0', { name: 'adapt-contrib-textInput', version: '<3.0.0' });
+  whereContent('adapt-contrib-textInput - where using old _globals ariaRegion default', async () => {
+    course = getCourse();
     const oldAriaRegions = [
       'This question component requires you to input your answer in the textbox provided. When you have answered the question select the submit button below.',
       'This question requires you to input your answer in the textbox provided. When you have done so, select the submit button below.'
