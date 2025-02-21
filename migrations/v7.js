@@ -13,10 +13,10 @@ import _ from 'lodash';
 /**
  * @todo Should we assume that a missing `instruction` should be added?
  */
-describe('adapt-contrib-textInput - v2.0.0 to v7.2.0', async () => {
+describe('adapt-contrib-textInput - to v7.2.0', async () => {
   let components;
   const newInstruction = 'Input your answer and select Submit.';
-  whereFromPlugin('adapt-contrib-textInput - from v2.0.0 to v7.2.0', { name: 'adapt-contrib-textInput', version: '<7.2.0' });
+  whereFromPlugin('adapt-contrib-textInput - from <v7.2.0', { name: 'adapt-contrib-textInput', version: '<7.2.0' });
   whereContent('adapt-contrib-textInput - where instruction default is empty', async () => {
     components = getComponents('textinput').filter(component => !_.has(component, 'instruction') || component.instruction === '');
     return Boolean(components.length);
@@ -35,9 +35,9 @@ describe('adapt-contrib-textInput - v2.0.0 to v7.2.0', async () => {
   updatePlugin('adapt-contrib-textInput - update to v7.2.0', { name: 'adapt-contrib-textInput', version: '7.2.0', framework: '>=5.19.1' });
 });
 
-describe('adapt-contrib-textInput - v2.0.0 to v7.2.2', async () => {
+describe('adapt-contrib-textInput - to v7.2.2', async () => {
   let components;
-  whereFromPlugin('adapt-contrib-textInput - from v2.0.0 to v7.2.2', { name: 'adapt-contrib-textInput', version: '<7.2.2' });
+  whereFromPlugin('adapt-contrib-textInput - from <v7.2.2', { name: 'adapt-contrib-textInput', version: '<7.2.2' });
   whereContent('adapt-contrib-textInput - where missing ariaQuestion', async () => {
     components = getComponents('textinput').filter(component => !_.has(component, 'ariaQuestion'));
     return Boolean(components.length);
@@ -63,7 +63,7 @@ describe('adapt-contrib-textInput - v4.2.0 to v7.2.6', async () => {
   let course;
   const incorrectGlobalsTextInputPath = '_globals._textInput';
   const ariaRegionPath = '_globals._components._textInput.ariaRegion';
-  whereFromPlugin('adapt-contrib-textInput - from v4.2.0 to v7.2.6', { name: 'adapt-contrib-textInput', version: '<7.2.6' });
+  whereFromPlugin('adapt-contrib-textInput - from v4.2.0 to v7.2.6', { name: 'adapt-contrib-textInput', version: '>=4.2.0 <7.2.6' });
   mutateContent('adapt-contrib-textInput - update _globals ariaRegion', async () => {
     course = getCourse();
     if (!_.has(course, ariaRegionPath)) _.set(course, ariaRegionPath, 'Text input. Type your answer and then submit.');
@@ -78,10 +78,10 @@ describe('adapt-contrib-textInput - v4.2.0 to v7.2.6', async () => {
   updatePlugin('adapt-contrib-textInput - update to v7.2.6', { name: 'adapt-contrib-text', version: '7.2.6', framework: '>=5.19.1' });
 });
 
-describe('adapt-contrib-textInput - v2.0.0 to v7.2.7', async () => {
+describe('adapt-contrib-textInput - to v7.2.7', async () => {
   let components;
   const feedbackAltTitlePath = '_feedback.altTitle';
-  whereFromPlugin('adapt-contrib-textInput - from v2.0.0 to v7.2.7', { name: 'adapt-contrib-textInput', version: '<7.2.7' });
+  whereFromPlugin('adapt-contrib-textInput - from <v7.2.7', { name: 'adapt-contrib-textInput', version: '<7.2.7' });
   whereContent('adapt-contrib-textInput - where missing altTitle', async () => {
     components = getComponents('textinput').filter(component => !_.has(component, feedbackAltTitlePath));
     return Boolean(components.length);
@@ -100,11 +100,11 @@ describe('adapt-contrib-textInput - v2.0.0 to v7.2.7', async () => {
   updatePlugin('adapt-contrib-textInput - update to v7.2.7', { name: 'adapt-contrib-textInput', version: '7.2.7', framework: '>=5.19.1' });
 });
 
-describe('adapt-contrib-textInput - v2.0.0 to v7.3.0', async () => {
+describe('adapt-contrib-textInput - to v7.3.0', async () => {
   let course, components;
   const correctAnswerPrefixPath = '_globals._components._textInput.correctAnswerPrefix';
   const correctAnswersPrefixPath = '_globals._components._textInput.correctAnswersPrefix';
-  whereFromPlugin('adapt-contrib-textInput - from v2.0.0 to v7.3.0', { name: 'adapt-contrib-textInput', version: '<7.3.0' });
+  whereFromPlugin('adapt-contrib-textInput - from <v7.3.0', { name: 'adapt-contrib-textInput', version: '<7.3.0' });
   whereContent('adapt-contrib-textInput - where has textInput plugin', async () => {
     course = getCourse();
     components = getComponents('textinput');
