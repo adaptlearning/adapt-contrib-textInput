@@ -1,4 +1,5 @@
 import QuestionModel from 'core/js/models/questionModel';
+import BUTTON_STATE from 'core/js/enums/buttonStateEnum';
 
 class TextInputModel extends QuestionModel {
 
@@ -73,6 +74,7 @@ class TextInputModel extends QuestionModel {
     this.markQuestion();
     this.setScore();
     this.setupFeedback();
+    this.updateButtons();
   }
 
   setupRandomisation() {
@@ -83,6 +85,9 @@ class TextInputModel extends QuestionModel {
 
   // Use to check if the user is allowed to submit the question
   canSubmit() {
+    if (this.get('_buttonState') === BUTTON_STATE.RESET) {
+      return true;
+    }
     // can submit if every item has user input
     return this.get('_items').every(({ userAnswer }) => userAnswer);
   }
@@ -200,6 +205,27 @@ class TextInputModel extends QuestionModel {
       item._isCorrect = false;
       item.userAnswer = '';
     });
+  }
+
+  checkIfResetOnRevisit() {
+    super.checkIfResetOnRevisit();
+    this.set('_buttonState', this.getButtonState());
+  }
+
+  updateButtons() {
+    super.updateButtons();
+    
+    const isInteractionComplete = this.get('_isInteractionComplete');
+    const isSubmitted = this.get('_isSubmitted');
+    const isEnabled = this.get('_isEnabled');
+    const attemptsLeft = this.get('_attemptsLeft');
+    
+    // Fix this specific state - isSubmitted but not isInteractionComplete and has attemptsLeft
+    if (!isInteractionComplete && isSubmitted && !isEnabled && attemptsLeft > 0) {
+      this.set('_buttonState', BUTTON_STATE.RESET);
+    }
+    
+    this.checkCanSubmit();
   }
 
   /**
