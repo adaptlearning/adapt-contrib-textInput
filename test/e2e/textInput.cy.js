@@ -13,10 +13,11 @@ describe('Text Input', function () {
       cy.testContainsOrNotExists('.textinput__title', stripHtml(textInputComponent.displayTitle));
       cy.testContainsOrNotExists('.textinput__instruction', stripHtml(textInputComponent.instruction));
 
-      cy.get('.textinput-item__textbox').should('have.length', 1);
-      if (textInputComponent._items[0].placeholder) {
-        cy.get('.textinput-item__textbox').should('have.attr', 'placeholder', textInputComponent._items[0].placeholder);
-      };
+      cy.get('.textinput-item__textbox').should('have.length', textInputComponent._items.length);
+      textInputComponent._items.forEach((item, index) => {
+        if (!item.placeholder) return;
+        cy.get('.textinput-item__textbox').eq(index).should('have.attr', 'placeholder', item.placeholder);
+      });
 
       // Make sure the current component is tested before moving to the next one
       // Custom cypress tests are async so we need to wait for them to pass first
